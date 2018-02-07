@@ -1,0 +1,27 @@
+{
+    "input": {
+        "FTP": 0.0136,
+        "cut_mix": 0.9,
+        "cut_period": 14,
+        "cut_treshold": 0.035,
+        "fia_dmax": 18,
+        "fia_dmin": 3,
+        "fia_treshold": 0.09,
+        "init_sl_k": 0.945,
+        "init_tp": 31,
+        "ptdj_mix": 0.02,
+        "ptf_mix": 0.9,
+        "pth_mix": 0.09,
+        "ptss_mix": 0.25,
+	"tp_koef": 1.4,
+        "rel_tp_k": 0.84,
+        "use_BREAKEVEN": true,
+        "use_CUT": false,
+        "use_FIA": true,
+        "use_FTP": true,
+        "use_PTDJ": false,
+        "use_PTH": false,
+        "use_PTSS": false,
+        "use_REL_TP": false
+    }
+}

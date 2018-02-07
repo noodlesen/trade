@@ -29,7 +29,7 @@ from reader import load_settings_from_report
 #         "use_PTSS": True
 # }
 
-initial_params = load_settings_from_report('evo.txt')#'results_abs_tp/_41K_in_2y_15sym.txt')
+initial_params = load_settings_from_report('_jpy_60.txt')#'results_abs_tp/_41K_in_2y_15sym.txt')
 # print(initial_params)
 
 CHANNEL = ['DIS', 'WFC', 'VZ','T', 'KO']
@@ -48,8 +48,8 @@ symbols.extend(FOREX)
 GENERATIONS_COUNT = 300
 
 MUTATIONS = 8
-OUTSIDERS = 5
-DEPTH = 12
+OUTSIDERS = 4
+DEPTH = 4
 STRATEGY = 'PROFIT_AND_WINRATE'
 
 # GENERATIONS_COUNT = 10
@@ -58,6 +58,6 @@ STRATEGY = 'PROFIT_AND_WINRATE'
 # DEPTH =7
 # STRATEGY = 'MAX_PROFIT'
 
-generate(symbols, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=750, initial_params=initial_params, timeframe=1440, report=True) # 
+generate(symbols, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=1000, initial_params=initial_params, timeframe=60, report=True) # 
 
 

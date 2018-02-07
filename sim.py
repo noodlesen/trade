@@ -1,6 +1,6 @@
 from evo import generate, get_random_params
 from tester import trading_system
-from reader import read_mt_csv
+from reader import read_mt_csv, load_settings_from_report
 from termcolor import colored, cprint
 from drawer import draw_candles
 
@@ -55,10 +55,10 @@ def simulate(symbol, data, initial_params, **kwargs):
 
     for d in data[test_per+1:-1]:
         print('I: ',i)
-        #if i%opt_per==0:
-            # print('OPTIMIZING')
-            # params = generate([symbol], 100, 3, 7, 12, 'EVERYTHING', slice_from=i-test_per, slice_to=i, initial_params=params)['input']
-            # print('PARAMETERS HAS CHANGED')
+        if i%opt_per==0:
+            print('OPTIMIZING')
+            params = generate([symbol], 100, 3, 7, 12, 'EVERYTHING', slice_from=i-test_per, slice_to=i, initial_params=params)['input']
+            print('PARAMETERS HAS CHANGED')
         trades, ot = trading_system(data, i, trades, params)
         open_trades_stats.append(ot)
         i += 1
@@ -176,9 +176,9 @@ def simulate(symbol, data, initial_params, **kwargs):
 
     return res
 
-symbol = 'ADBE'
-data = read_mt_csv(symbol, cut=2000, timeframe=1440)
+symbol = 'USDJPY'
+data = read_mt_csv(symbol, cut=2000, timeframe=60)
 
-res = simulate(symbol, data, get_random_params(), verbose=True, draw=True)
+res = simulate(symbol, data, load_settings_from_report('_jpy_60.txt'), verbose=True, draw=True)
 
 print (res)

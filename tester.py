@@ -268,7 +268,7 @@ def test(symbol, data, params, **kwargs):
     make_images = kwargs.get('draw', False)
     verbose = kwargs.get('verbose', False)
 
-    if verbose:
+    if  verbose:
         print('TESTER STARTED')
 
     i = 1
@@ -276,6 +276,7 @@ def test(symbol, data, params, **kwargs):
     open_trades_stats =[]
 
     for d in data[1:-1]:
+        #print(i)
         trades, ot = trading_system(data, i, trades, params)
         open_trades_stats.append(ot)
         i += 1

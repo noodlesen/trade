@@ -1,0 +1,98 @@
+{
+    "input": {
+        "FTP": 0.1428,
+        "cut_mix": 0.98,
+        "cut_period": 3,
+        "cut_treshold": 0.002,
+        "f_max_per": 301,
+        "f_max_th": 0.74,
+        "fia_dmax": 11,
+        "fia_dmin": 7,
+        "fia_treshold": 0.02,
+        "init_sl_k": 0.939,
+        "init_tp": 32,
+        "ptbf_mix": 0.14,
+        "ptdj_mix": 0.71,
+        "pth_mix": 0.13,
+        "ptss_mix": 0.89,
+        "pttf_mix": 0.31,
+        "rel_tp_k": 0.15,
+        "tp_koef": 1.1,
+        "use_BREAKEVEN": false,
+        "use_CUT": false,
+        "use_FIA": true,
+        "use_FILTERS": true,
+        "use_FTP": true,
+        "use_PTBF": false,
+        "use_PTDJ": true,
+        "use_PTH": true,
+        "use_PTSS": true,
+        "use_PTTF": false,
+        "use_REL_TP": false
+    },
+    "output": {
+        "ALL": {
+            "LOSES": 127,
+            "MAX_LOSES_IN_A_ROW": 24,
+            "MAX_LOSS_PER_TRADE": -6.81,
+            "MAX_PROFIT_PER_TRADE": 18.14,
+            "MAX_WINS_IN_A_ROW": 73,
+            "PROFIT": 615.7899999999988,
+            "TRADES": 383,
+            "WINRATE": 0.5483028720626631,
+            "WINS": 210,
+            "WINS_TO_LOSES": 1.6535433070866141
+        },
+        "PASSES": [
+            {
+                "AVG_LOSS": -2.8840944881889783,
+                "AVG_WIN": 4.676523809523806,
+                "CLOSE_REASONS": {
+                    "FIA": [
+                        30,
+                        3.0599999999999996
+                    ],
+                    "SL": [
+                        270,
+                        80.95999999999998
+                    ],
+                    "TP": [
+                        34,
+                        522.5600000000001
+                    ]
+                },
+                "DAYS_MAX": 125,
+                "DAYS_MIN": 4,
+                "LOSES": 127,
+                "MAX_LOSES_IN_A_ROW": 24,
+                "MAX_LOSS_PER_TRADE": -6.81,
+                "MAX_PROFIT_PER_TRADE": 18.14,
+                "MAX_WINS_IN_A_ROW": 73,
+                "OPEN_REASONS": {
+                    "B_UP": [
+                        39,
+                        51.15999999999999
+                    ],
+                    "FRAC": [
+                        54,
+                        87.36
+                    ],
+                    "HAM": [
+                        27,
+                        29.619999999999997
+                    ],
+                    "TAIL": [
+                        213,
+                        458.31
+                    ]
+                },
+                "PROFIT": 615.7899999999988,
+                "SYMBOL": "USDJPY",
+                "TRADES": 383,
+                "WINRATE": 0.5483028720626631,
+                "WINS": 210,
+                "WINS_TO_LOSES": 1.6535433070866141
+            }
+        ]
+    }
+}

@@ -9,15 +9,15 @@ from reader import read_mt_csv
 
 def get_random_params():
     return {
-        'tp_koef': randint(10,35)/10,
+        'tp_koef': randint(1,40)/10,
         'use_FIA': choice([True, False]),
         'use_CUT': choice([True, False]),
         'use_BREAKEVEN': choice([True, False]),
         'use_FTP': choice([True, False]),
-        'fia_dmin': randint(2,10),
-        'fia_dmax': randint(8,20),
-        'fia_treshold': randint(2,15)/100,
-        'init_tp': randint(5,60),
+        'fia_dmin': randint(2,12),
+        'fia_dmax': randint(12,50),
+        'fia_treshold': randint(2,20)/100,
+        'init_tp': randint(1,70),
         'init_sl_k': randint(930,999)/1000,
         'cut_mix': randint(1,100)/100,
         'cut_treshold': randint(1,100)/1000,
@@ -27,7 +27,7 @@ def get_random_params():
         'use_PTSS': choice([True, False]),
         'use_PTDJ': choice([True, False]),
         'use_REL_TP': choice([True, False]),
-        'rel_tp_k': randint(10,100)/100,
+        'rel_tp_k': randint(1,100)/100,
         'pth_mix': randint(5,90)/100,
         'ptss_mix': randint(5,90)/100,
         'ptdj_mix': randint(5,90)/100,
@@ -114,14 +114,18 @@ def generate(symbols, generations_count, mutations, outsiders, depth, strategy, 
 
         offs = []
         for d in range(0,depth):
+            #print('depth', d)
             m = mutate(survivor['input'], mutations)
             offs.append({'input': m, 'output': test_all(symbols, m, **kwargs)})
 
         for x in range(0, outsiders):
+            #print('outsider', x)
             m = get_random_params()
             offs.append({'input': m, 'output': test_all(symbols, m, **kwargs)})
 
         for off in offs:
+
+            #print('off')
 
             if off['output']['ALL']['TRADES']>0:
                 off_wr = (off['output']['ALL']['WINS'])/off['output']['ALL']['TRADES']
