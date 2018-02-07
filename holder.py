@@ -19,6 +19,7 @@ class Asset():
         self.data = pd.read_csv(path, names=names)
         self.data.set_index(['date', 'time'], drop=False)
         self.stock = StockDataFrame(self.data)
+        self.data['value']=self.data['open'] - self.data['close']
 
     def require(self, indis):
         for ind in indis:
@@ -34,7 +35,7 @@ class Asset():
         p = n if n>=0 else self.pointer
         return Candle(bar = dict(self.data.iloc[p]))
 
-    def ind(self, a, n=-1):
+    def alpha(self, a, n=-1):
         p = n if n>=0 else self.pointer
         try:
             res = self.data.iloc[p][a]
@@ -49,4 +50,4 @@ class Asset():
 usdjpy = Asset()
 usdjpy.load_mt4_history('MTDATA','USDJPY', 60)
 usdjpy.require(['cci_2', 'cci_20'])
-print(usdjpy.ind('cci_16', 688))
+print(usdjpy.data[usdjpy.data.value>0][['value']])
