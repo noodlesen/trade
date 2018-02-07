@@ -1,0 +1,305 @@
+{
+    "input": {
+        "FTP": 0.0064,
+        "cut_mix": 0.57,
+        "cut_period": 12,
+        "cut_treshold": 0.08,
+        "fia_dmax": 18,
+        "fia_dmin": 4,
+        "fia_treshold": 0.05,
+        "init_sl_k": 0.973,
+        "init_tp": 21,
+        "open_treshold": 3.62,
+        "ptdj_mix": 0.1,
+        "pth_mix": 0.61,
+        "ptss_mix": 0.13,
+        "tp_koef": 1.9,
+        "use_BREAK": true,
+        "use_BREAKEVEN": false,
+        "use_CUT": false,
+        "use_FIA": false,
+        "use_FTP": true,
+        "use_GAP": true,
+        "use_PTDJ": true,
+        "use_PTSS": true
+    },
+    "output": {
+        "ALL": {
+            "LOSES": 179,
+            "MAX LOSES NUMBER IN A ROW": 10,
+            "MAX LOSS PER TRADE": -1.56,
+            "MAX PROFIT PER TRADE": 177.12,
+            "MAX WINS NUMBER IN A ROW": 24,
+            "PROFIT": 3782.35,
+            "TRADES": 502,
+            "WINRATE": 0.5816733067729084,
+            "WINS": 292,
+            "WINS_TO_LOSES": 1.6312849162011174
+        },
+        "PASSES": [
+            {
+                "AVG LOSS": -6.034347826086957,
+                "AVG WIN": 13.297037037037036,
+                "CLOSE_REASONS": {
+                    "FTP": [
+                        17,
+                        69.96
+                    ],
+                    "SL": [
+                        58,
+                        465.51999999999987
+                    ]
+                },
+                "DAYS MAX": 167,
+                "DAYS MIN": 2,
+                "LOSES": 23,
+                "MAX LOSES NUMBER IN A ROW": 9,
+                "MAX LOSS PER TRADE": -9.89,
+                "MAX PROFIT PER TRADE": 38.84,
+                "MAX WINS NUMBER IN A ROW": 24,
+                "OPEN_REASONS": {
+                    "BREAK": [
+                        22,
+                        90.35000000000002
+                    ],
+                    "GAP": [
+                        53,
+                        445.37000000000006
+                    ]
+                },
+                "PROFIT": 579.25,
+                "SYMBOL": "ADBE",
+                "TRADES": 82,
+                "WINRATE": 0.6585365853658537,
+                "WINS": 54,
+                "WINS_TO_LOSES": 2.347826086956522
+            },
+            {
+                "AVG LOSS": -2.4015999999999997,
+                "AVG WIN": 6.392448979591836,
+                "CLOSE_REASONS": {
+                    "FTP": [
+                        28,
+                        230.98000000000005
+                    ],
+                    "SL": [
+                        44,
+                        22.1
+                    ]
+                },
+                "DAYS MAX": 51,
+                "DAYS MIN": 2,
+                "LOSES": 25,
+                "MAX LOSES NUMBER IN A ROW": 5,
+                "MAX LOSS PER TRADE": -5.17,
+                "MAX PROFIT PER TRADE": 29.12,
+                "MAX WINS NUMBER IN A ROW": 6,
+                "OPEN_REASONS": {
+                    "BREAK": [
+                        27,
+                        91.96
+                    ],
+                    "GAP": [
+                        45,
+                        161.12000000000003
+                    ]
+                },
+                "PROFIT": 253.18999999999997,
+                "SYMBOL": "CAT",
+                "TRADES": 82,
+                "WINRATE": 0.5975609756097561,
+                "WINS": 49,
+                "WINS_TO_LOSES": 1.96
+            },
+            {
+                "AVG LOSS": -1.2166666666666666,
+                "AVG WIN": 3.202307692307692,
+                "CLOSE_REASONS": {
+                    "FTP": [
+                        26,
+                        114.31
+                    ],
+                    "SL": [
+                        35,
+                        -18.949999999999996
+                    ]
+                },
+                "DAYS MAX": 48,
+                "DAYS MIN": 2,
+                "LOSES": 24,
+                "MAX LOSES NUMBER IN A ROW": 6,
+                "MAX LOSS PER TRADE": -2.35,
+                "MAX PROFIT PER TRADE": 10.78,
+                "MAX WINS NUMBER IN A ROW": 21,
+                "OPEN_REASONS": {
+                    "BREAK": [
+                        13,
+                        15.23
+                    ],
+                    "GAP": [
+                        48,
+                        83.60000000000001
+                    ]
+                },
+                "PROFIT": 95.68999999999998,
+                "SYMBOL": "INTC",
+                "TRADES": 64,
+                "WINRATE": 0.609375,
+                "WINS": 39,
+                "WINS_TO_LOSES": 1.625
+            },
+            {
+                "AVG LOSS": -3.92304347826087,
+                "AVG WIN": 10.127659574468083,
+                "CLOSE_REASONS": {
+                    "FTP": [
+                        15,
+                        57.02000000000001
+                    ],
+                    "SL": [
+                        53,
+                        307.7300000000001
+                    ]
+                },
+                "DAYS MAX": 142,
+                "DAYS MIN": 2,
+                "LOSES": 23,
+                "MAX LOSES NUMBER IN A ROW": 8,
+                "MAX LOSS PER TRADE": -6.58,
+                "MAX PROFIT PER TRADE": 29.55,
+                "MAX WINS NUMBER IN A ROW": 15,
+                "OPEN_REASONS": {
+                    "BREAK": [
+                        25,
+                        170.46999999999997
+                    ],
+                    "GAP": [
+                        43,
+                        206.7
+                    ]
+                },
+                "PROFIT": 385.7699999999999,
+                "SYMBOL": "AAPL",
+                "TRADES": 71,
+                "WINRATE": 0.6619718309859155,
+                "WINS": 47,
+                "WINS_TO_LOSES": 2.0434782608695654
+            },
+            {
+                "AVG LOSS": -32.860800000000005,
+                "AVG WIN": 66.70061224489797,
+                "CLOSE_REASONS": {
+                    "FTP": [
+                        23,
+                        1212.1100000000001
+                    ],
+                    "SL": [
+                        43,
+                        941.4800000000002
+                    ],
+                    "TP": [
+                        5,
+                        105.0
+                    ]
+                },
+                "DAYS MAX": 88,
+                "DAYS MIN": 2,
+                "LOSES": 25,
+                "MAX LOSES NUMBER IN A ROW": 10,
+                "MAX LOSS PER TRADE": -48.07,
+                "MAX PROFIT PER TRADE": 177.12,
+                "MAX WINS NUMBER IN A ROW": 13,
+                "OPEN_REASONS": {
+                    "BREAK": [
+                        24,
+                        734.13
+                    ],
+                    "GAP": [
+                        48,
+                        1541.3
+                    ]
+                },
+                "PROFIT": 2446.8100000000004,
+                "SYMBOL": "AMZN",
+                "TRADES": 82,
+                "WINRATE": 0.5975609756097561,
+                "WINS": 49,
+                "WINS_TO_LOSES": 1.96
+            },
+            {
+                "AVG LOSS": -0.7990625000000001,
+                "AVG WIN": 1.298965517241379,
+                "CLOSE_REASONS": {
+                    "FTP": [
+                        15,
+                        23.139999999999997
+                    ],
+                    "SL": [
+                        44,
+                        -11.290000000000001
+                    ]
+                },
+                "DAYS MAX": 53,
+                "DAYS MIN": 2,
+                "LOSES": 32,
+                "MAX LOSES NUMBER IN A ROW": 10,
+                "MAX LOSS PER TRADE": -1.67,
+                "MAX PROFIT PER TRADE": 4.58,
+                "MAX WINS NUMBER IN A ROW": 8,
+                "OPEN_REASONS": {
+                    "BREAK": [
+                        22,
+                        -5.949999999999999
+                    ],
+                    "GAP": [
+                        37,
+                        17.730000000000004
+                    ]
+                },
+                "PROFIT": 12.099999999999984,
+                "SYMBOL": "T",
+                "TRADES": 61,
+                "WINRATE": 0.47540983606557374,
+                "WINS": 29,
+                "WINS_TO_LOSES": 0.90625
+            },
+            {
+                "AVG LOSS": -0.6411111111111111,
+                "AVG WIN": 1.0739999999999996,
+                "CLOSE_REASONS": {
+                    "FTP": [
+                        3,
+                        2.23
+                    ],
+                    "SL": [
+                        47,
+                        5.609999999999999
+                    ]
+                },
+                "DAYS MAX": 60,
+                "DAYS MIN": 2,
+                "LOSES": 27,
+                "MAX LOSES NUMBER IN A ROW": 6,
+                "MAX LOSS PER TRADE": -1.56,
+                "MAX PROFIT PER TRADE": 2.91,
+                "MAX WINS NUMBER IN A ROW": 11,
+                "OPEN_REASONS": {
+                    "BREAK": [
+                        14,
+                        10.540000000000003
+                    ],
+                    "GAP": [
+                        36,
+                        -1.5499999999999994
+                    ]
+                },
+                "PROFIT": 9.539999999999992,
+                "SYMBOL": "KO",
+                "TRADES": 60,
+                "WINRATE": 0.4166666666666667,
+                "WINS": 25,
+                "WINS_TO_LOSES": 0.9259259259259259
+            }
+        ]
+    }
+}
