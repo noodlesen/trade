@@ -119,28 +119,19 @@ class Trade():
 
 def test(c, params, **kwargs):
 
-    # SET RANGE BEFORE !
-
     make_images = kwargs.get('draw', False)
     verbose = kwargs.get('verbose', False)
 
-    #if  verbose:
-    #print('TESTER STARTED')
-
-    #i = 1
     trades=[]
     open_trades_stats =[]
 
-    #print (c.range_from)
-
     c.reset()
-
-    #for d in data[1:-1]: # <- TESTER LOOP
+    
+    # <- TESTER LOOP
     for i in range(c.range_from, c.range_to):
 
         cc = c.get()
         open_trades = 0
-        #print('I:', i)
 
         # CHECK EXISTING
         for trade in trades:
@@ -286,7 +277,6 @@ def test(c, params, **kwargs):
                 trade.open_trade('SELL', cc, cc.close_price, cc.high_price*(2-params.get('init_sl_k',0.98)), cc.close_price -tp_value, open_reason) 
             trades.append(trade)
 
-        #trades, ot = trading_system(data, i, trades, params)
         open_trades_stats.append(open_trades)
         c.next()
 
