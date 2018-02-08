@@ -18,6 +18,8 @@ class Asset():
         
         names = ['date', 'time', 'open', 'high', 'low', 'close', 'volume']
         self.data = read_mt_csv(path, symbol, timeframe)
+        self.symbol = symbol
+        self.timeframe = timeframe
         #self.data = pd.read_csv(path, names=names, index_col=['date_time'], parse_dates=[['date','time']])
         # self.data = pd.read_csv(path, names=names)
         # self.data.set_index(['date', 'time'], drop=False)
