@@ -1,4 +1,5 @@
 from trading import Trade
+from random import randint, choice
 
 def TS_manage(cc, c, trades, params):
     for trade in trades:
@@ -115,5 +116,39 @@ def TS_open(cc, c, trades, params):
             trade.open_trade('SELL', cc, cc.close_price, cc.high_price*(2-params.get('init_sl_k',0.98)), cc.close_price -tp_value, open_reason) 
 
     return trade
+
+
+def get_random_params():
+    return {
+        'tp_koef': randint(1,40)/10,
+        'use_FIA': choice([True, False]),
+        'use_CUT': choice([True, False]),
+        'use_BREAKEVEN': choice([True, False]),
+        'use_FTP': choice([True, False]),
+        'fia_dmin': randint(2,12),
+        'fia_dmax': randint(12,50),
+        'fia_treshold': randint(2,20)/100,
+        'init_tp': randint(1,70),
+        'init_sl_k': randint(930,999)/1000,
+        'cut_mix': randint(1,100)/100,
+        'cut_treshold': randint(1,100)/1000,
+        'cut_period': randint(1,20),
+        'FTP': randint(1,3000)/10000,
+        'use_PTH': choice([True, False]),
+        'use_PTSS': choice([True, False]),
+        'use_PTDJ': choice([True, False]),
+        'use_REL_TP': choice([True, False]),
+        'rel_tp_k': randint(1,100)/100,
+        'pth_mix': randint(5,90)/100,
+        'ptss_mix': randint(5,90)/100,
+        'ptdj_mix': randint(5,90)/100,
+        'pttf_mix': randint(5,90)/100,
+        'ptbf_mix': randint(5,90)/100,
+        'use_PTTF': choice([True, False]),
+        'use_PTBF': choice([True, False]),
+        'use_FILTERS': choice([True, False]),
+        'f_max_per': randint(20,301),
+        'f_max_th': randint(60, 95)/100
+    }
 
 

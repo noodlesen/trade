@@ -5,7 +5,7 @@ from random import randint
 from candlesticks import Candle, Figure
 from trading import Trade, get_trades_stats
 
-from TS_follower import TS_manage, TS_open
+from ts_outlet import TS_manage, TS_open
 
 
 

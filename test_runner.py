@@ -1,5 +1,5 @@
 
-from evo import get_random_params
+from TS_follower import get_random_params
 from tester2 import test
 from reader import read_mt_csv, load_settings_from_report
 from holder import Asset
