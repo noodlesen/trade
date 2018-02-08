@@ -8,11 +8,26 @@ class Candle():
             self.low_price = bar['low']
             self.open_price = bar['open']
             self.close_price = bar['close']
+            self.volume = bar.get('volume', 0)
+            self.date = bar.get('date', None)
+            self.time = bar.get('time', None)
         else:
             self.high_price = kwargs['high']
             self.low_price = kwargs['low']
             self.open_price = kwargs['open']
             self.close_price = kwargs['close']
+            self.volume = kwargs.get('volume', 0)
+            self.date = kwargs.get('date', None)
+            self.time = kwargs.get('time', None)
+
+    def get_dict(self):
+        return {
+            'open': self.open_price,
+            'high': self.high_price,
+            'low': self.low_price,
+            'close': self.close_price,
+            'volume': self.volume,
+        }
 
     def is_bullish(self):
         return self.close_price > self.open_price

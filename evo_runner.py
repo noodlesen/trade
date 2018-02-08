@@ -45,6 +45,7 @@ symbols = []
 symbols.extend(FOREX)
 
 
+
 GENERATIONS_COUNT = 300
 
 MUTATIONS = 8
@@ -58,6 +59,6 @@ STRATEGY = 'PROFIT_AND_WINRATE'
 # DEPTH =7
 # STRATEGY = 'MAX_PROFIT'
 
-generate(symbols, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=1000, initial_params=initial_params, timeframe=60, report=True) # 
+generate(symbols, 60, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=500, report=True) #  initial_params=initial_params
 
 

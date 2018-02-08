@@ -3,7 +3,8 @@
 from random import randint, choice
 from copy import deepcopy
 import json
-from tester import test
+from tester2 import test
+from holder import Asset
 from reader import read_mt_csv
 
 
@@ -59,13 +60,12 @@ def mutate(p,n):
 
 
 
-def test_all(symbols, params, **kwargs):
+def test_all(assets, params, **kwargs):
     
     results = []
-    for s in symbols:
-
-            data = read_mt_csv(s, **kwargs)
-            results.append(test(s, data, params, **kwargs))
+    for an, a in assets.items():
+            #data = read_mt_csv(s, **kwargs)
+            results.append(test(a, params, **kwargs))
 
     wins = sum([r['WINS'] for r in results])
     loses = sum([r['LOSES'] for r in results])
@@ -90,7 +90,17 @@ def test_all(symbols, params, **kwargs):
     }
 
 
-def generate(symbols, generations_count, mutations, outsiders, depth, strategy, **kwargs):
+def generate(symbols, timeframe, generations_count, mutations, outsiders, depth, strategy, **kwargs):
+    cut = kwargs.get('cut', False)
+    assets = {}
+    for s in symbols:
+        a = Asset()
+        a.load_mt4_history('MTDATA', s, timeframe)
+        if cut:
+            
+            a.range_from_last(cut)
+        assets[s] = a
+
     results = []
     tr = 0
     tries = 0
@@ -100,14 +110,13 @@ def generate(symbols, generations_count, mutations, outsiders, depth, strategy, 
         else:
             initial = kwargs.get('initial_params', get_random_params())
         #
-        initial_result = test_all(symbols, initial, **kwargs)
+        initial_result = test_all(assets, initial, **kwargs)
         tr = initial_result['ALL']['TRADES']
         tries+=1
         #print(tries)
         #print('trades:', tr)
     survivor  = {'input': initial, 'output': initial_result}
     print(json.dumps(survivor['input'], sort_keys=True, indent=4))
-    print('>>>>')
 
     for n in range(0,generations_count):
         print('GEN', n)
@@ -116,12 +125,12 @@ def generate(symbols, generations_count, mutations, outsiders, depth, strategy, 
         for d in range(0,depth):
             #print('depth', d)
             m = mutate(survivor['input'], mutations)
-            offs.append({'input': m, 'output': test_all(symbols, m, **kwargs)})
+            offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
 
         for x in range(0, outsiders):
             #print('outsider', x)
             m = get_random_params()
-            offs.append({'input': m, 'output': test_all(symbols, m, **kwargs)})
+            offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
 
         for off in offs:
 
@@ -166,7 +175,7 @@ def generate(symbols, generations_count, mutations, outsiders, depth, strategy, 
 
         kwargs['draw'] = True
         kwargs['verbose'] = True
-        test_all(symbols, survivor['input'], **kwargs)
+        test_all(assets, survivor['input'], **kwargs)
 
         print(json.dumps(survivor['output']['ALL'], sort_keys=True, indent=4))
 

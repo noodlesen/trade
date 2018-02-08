@@ -51,18 +51,20 @@ class Trade():
         self.open_reason = open_reason
         self.stoploss = stoploss
         self.takeprofit = takeprofit
-        dd = dict(daydata)
+        dd = daydata.get_dict()
         dd['stoploss'] = stoploss
         dd['takeprofit'] = takeprofit
         self.data.append(dd)
-        self.low = daydata['close']
-        self.high = daydata['close']
-        self.open_date = daydata['date']
+        self.low = daydata.close_price
+        self.high = daydata.close_price
+        self.open_date = daydata.date
+        self.open_time = daydata.time
         report('OPEN: '+self.__str__()+' SL:'+str(self.stoploss))
 
     def close_trade(self, daydata, price, close_reason):
         self.close_price = price
-        self.close_date = daydata['date']
+        self.close_date = daydata.date
+        self.close_time = daydata.time
 
         delta = round(self.close_price - self.open_price, 2)
         if self.direction:
@@ -79,64 +81,72 @@ class Trade():
     def update_trade(self, daydata):
         self.days += 1
 
-        dd = dict(daydata)
+        dd = daydata.get_dict()
         dd['stoploss'] = self.stoploss
         dd['takeprofit'] = self.takeprofit
         self.data.append(dd)
 
-        if daydata['high'] > self.high:
-            self.high = daydata['high']
-        if daydata['low'] < self.low:
-            self.low = daydata['low']
+        if daydata.high_price > self.high:
+            self.high = daydata.high_price
+        if daydata.low_price < self.low:
+            self.low = daydata.low_price
 
         if self.direction == 'BUY':
 
-            if daydata['low'] <= self.stoploss:
+            if daydata.low_price <= self.stoploss:
                 self.close_trade(daydata, self.stoploss, 'SL')
-            if daydata['high'] >= self.takeprofit:
+            if daydata.high_price >= self.takeprofit:
                 self.close_trade(daydata, self.takeprofit, 'TP')
 
             if not self.is_closed:
-                self.profit = daydata['close'] - self.open_price
+                self.profit = daydata.close_price - self.open_price
 
 
         elif self.direction == 'SELL':
 
-            if daydata['high'] >= self.stoploss:
+            if daydata.high_price >= self.stoploss:
                 self.close_trade(daydata, self.stoploss, 'SL')
-            if daydata['low'] <= self.takeprofit:
+            if daydata.low_price <= self.takeprofit:
                 self.close_trade(daydata, self.takeprofit, 'TP')
 
             if not self.is_closed:
-                self.profit = self.open_price - daydata['close']
+                self.profit = self.open_price - daydata.close_price
 
 
 
 
 
 
-def test(symbol, data, params, **kwargs):
+def test(c, params, **kwargs):
+
+    # SET RANGE BEFORE !
 
     make_images = kwargs.get('draw', False)
     verbose = kwargs.get('verbose', False)
 
-    if  verbose:
-        print('TESTER STARTED')
+    #if  verbose:
+    #print('TESTER STARTED')
 
-    i = 1
+    #i = 1
     trades=[]
     open_trades_stats =[]
 
-    for d in data[1:-1]: # <- TESTER LOOP
-        #print(i)
-        #d = data[i]
+    #print (c.range_from)
+
+    c.reset()
+
+    #for d in data[1:-1]: # <- TESTER LOOP
+    for i in range(c.range_from, c.range_to):
+
+        cc = c.get()
         open_trades = 0
+        #print('I:', i)
 
         # CHECK EXISTING
         for trade in trades:
             if trade.is_open:
                 open_trades+=1
-                trade.update_trade(d)
+                trade.update_trade(cc)
 
                 if not trade.is_closed:
                     tp_base  = sum([d['high'] for d in trade.data])/len(trade.data)
@@ -147,8 +157,8 @@ def test(symbol, data, params, **kwargs):
                     fia_dmin = params.get('fia_dmin', 5)
                     fia_dmax = params.get('fia_dmax', 15)
                     fia_treshold = params.get('fia_treshold', 0.1)
-                    if trade.days>fia_dmin and trade.days<fia_dmax and (trade.profit/trade.days)/trade.open_price*100<fia_treshold and trade.profit>0:
-                        trade.close_trade(d, d['close'], 'FIA')
+                    if trade.days > fia_dmin and trade.days < fia_dmax and (trade.profit/trade.days)/trade.open_price*100 < fia_treshold and trade.profit > 0:
+                        trade.close_trade(cc, cc.close_price, 'FIA')
 
                 # #CUTTER
                 # if not trade.is_closed and params.get('use_CUT', False):
@@ -165,50 +175,50 @@ def test(symbol, data, params, **kwargs):
                 #                 trade.stoploss=nsl
 
                 #BREAKEVEN
-                if not trade.is_closed and trade.stoploss<trade.open_price and d['low']>trade.open_price:
+                if not trade.is_closed and trade.stoploss<trade.open_price and cc.low_price>trade.open_price:
                     if params.get('use_BREAKEVEN', False):
-                        trade.stoploss = d['low']
+                        trade.stoploss = cc.low_price
 
                 #FORCE TAKE PROFIT
                 if not trade.is_closed and (trade.profit/trade.days)/trade.open_price>params.get('FTP',0.01):
                     if params.get('use_FTP', False):
-                        trade.close_trade(d, d['close'], 'FTP')
+                        trade.close_trade(cc, cc.close_price, 'FTP')
 
                 # PULL TO HAMMER/DOJI/SHOOTING STAR
                 pull = False
                 if not trade.is_closed:
-                    c = Candle(**d)
+                    # c = Candle(**cc)
 
-                    if c.is_hammer():
+                    if cc.is_hammer():
                         if params.get('use_PTH', False):
                             pth = params.get('pth_mix', 0.25)
-                            nsl = trade.stoploss*pth+d['low']*(1-pth)
+                            nsl = trade.stoploss*pth+cc.low_price*(1-pth)
                             pull = True
 
-                    if c.is_shooting_star():
+                    if cc.is_shooting_star():
                         if params.get('use_PTSS', False):
                             ptss = params.get('ptss_mix', 0.25)
-                            nsl = trade.stoploss*ptss+d['low']*(1-ptss)
+                            nsl = trade.stoploss*ptss+cc.low_price*(1-ptss)
                             pull = True
 
-                    if c.is_doji():
+                    if cc.is_doji():
                         if params.get('use_PTDJ', False):
                             ptdj = params.get('ptdj_mix', 0.25)
-                            nsl = trade.stoploss*ptdj+d['low']*(1-ptdj)
+                            nsl = trade.stoploss*ptdj+cc.low_price*(1-ptdj)
                             pull = True
 
                 if i>5 and params.get('use_PTTF', False):
-                    f = Figure(raw=data[i-5:i+1])
+                    f = c.last(5) #Figure(raw=data[i-5:i+1])
                     if f.is_top_fractal():
                         ptf = params.get('pttf_mix', 0.25)
-                        nsl = trade.stoploss*ptf+d['low']*(1-ptf)
+                        nsl = trade.stoploss*ptf+cc.low_price*(1-ptf)
                         pull = True
 
                 if i>5 and params.get('use_PTBF', False):
-                    f = Figure(raw=data[i-5:i+1])
+                    f = c.last(5)#Figure(raw=data[i-5:i+1])
                     if f.is_bottom_fractal():
                         ptf = params.get('ptbf_mix', 0.25)
-                        nsl = trade.stoploss*ptf+d['low']*(1-ptf)
+                        nsl = trade.stoploss*ptf+cc.low_price*(1-ptf)
                         pull = True
 
 
@@ -226,57 +236,59 @@ def test(symbol, data, params, **kwargs):
         open_reason = None
 
         # TAIL
-        c = Candle(**d)
-        bs = 0.01 if c.body_size()==0 else c.body_size()
-        if c.low_tail()/bs>0.2:
+        #c = Candle(**d)
+        bs = 0.01 if cc.body_size()==0 else cc.body_size()
+        if cc.low_tail()/bs>0.2:
             has_buy_signal = True
             open_reason = 'TAIL'
 
         if i>5:
             # BREAKUP
-            f = Figure(raw=data[i-5:i+1])
+            f = c.last(5)
             if f.is_breakup():
                 has_buy_signal = True
                 open_reason = 'B_UP'
 
             #HAMMER
-            f = Figure(raw=data[i-3:i+1])
+            f = c.last(3)
             if f.summary().is_hammer() or f.summary(last=2).is_hammer():
                 has_buy_signal = True
                 open_reason = 'HAM'
 
             #FRACTAL
-            f=Figure(raw=data[i-5:i+1])
+            f = c.last(5)
             if f.is_bottom_fractal():
                 has_buy_signal = True
                 open_reason = 'FRAC'
 
         filter_passed = True
 
-        if params.get('use_FILTERS', False):
-            filter_passed = False
-            max_per = params.get('f_max_per', 250)
-            th = params.get('f_max_th', 0.8)
-            if i>max_per:
-                m = max([dd['high'] for dd in data[i-max_per:i+1]])
-                if d['close']>m*th:
-                    filter_passed = True
+        # if params.get('use_FILTERS', False):
+        #     filter_passed = False
+        #     max_per = params.get('f_max_per', 250)
+        #     th = params.get('f_max_th', 0.8)
+        #     if i>max_per:
+        #         #m = max([dd['high'] for dd in data[i-max_per:i+1]])
+        #         #m = c.alpha('high_%s~0_max' % str(max_per))
+        #         m = c.last(max_per).summary().high_price
+        #         if cc.close_price > m*th:
+        #             filter_passed = True
 
         if filter_passed and (has_buy_signal or has_sell_signal):
             trade = Trade()
             if params.get('use_REL_TP', False):
-                tp_value = d['close']*params.get('rel_tp_k', 0.2)
+                tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
             else:
                 tp_value = params.get('init_tp',50)
             if has_buy_signal:
-                trade.open_trade('BUY', d, d['close'], d['low']*params.get('init_sl_k',0.98), d['close']+tp_value, open_reason) 
+                trade.open_trade('BUY', cc, cc.close_price, cc.low_price*params.get('init_sl_k',0.98), cc.close_price +tp_value, open_reason) 
             if has_sell_signal:
-                trade.open_trade('SELL', d, d['close'], d['high']*(2-params.get('init_sl_k',0.98)), d['close']-tp_value, open_reason) 
+                trade.open_trade('SELL', cc, cc.close_price, cc.high_price*(2-params.get('init_sl_k',0.98)), cc.close_price -tp_value, open_reason) 
             trades.append(trade)
 
         #trades, ot = trading_system(data, i, trades, params)
         open_trades_stats.append(open_trades)
-        i += 1
+        c.next()
 
         # END OF TESTER LOOP
 
@@ -331,7 +343,7 @@ def test(symbol, data, params, **kwargs):
                     'height': 500,
                     'offset': 0
                 }
-                draw_candles(t.data, 'images/'+symbol+str(i)+'_'+t.direction+'_'+t.close_reason, context)
+                draw_candles(t.data, 'images/'+c.symbol+str(i)+'_'+t.direction+'_'+t.close_reason, context)
 
 
             if t.days>days_max:
@@ -378,7 +390,7 @@ def test(symbol, data, params, **kwargs):
         average_win = 0
 
     res = {}
-    res['SYMBOL'] = symbol
+    res['SYMBOL'] = c.symbol
     res['PROFIT'] = sum_of_wins+sum_of_loses
     res['TRADES'] = number_of_trades
     res['WINS'] = number_of_wins

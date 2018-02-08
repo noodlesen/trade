@@ -39,9 +39,9 @@ def read_nasdaq_csv(sym, cut=0):
 
 
 
-def read_mt_csv(sym, **kwargs):
+def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
 
-    timeframe = kwargs.get('timeframe', 1440)
+    # timeframe = kwargs.get('timeframe', 1440)
 
     slice_from = kwargs.get('slice_from',0)
     slice_to = kwargs.get('slice_to', 0)
@@ -52,7 +52,11 @@ def read_mt_csv(sym, **kwargs):
     if slice_from == 0 and slice_to == 0:
         cut = kwargs.get('cut', 0)
 
-    with open('MTDATA/'+sym+str(timeframe)+'.csv', 'r') as f:
+    if path[-1] != '/':
+        path += '/'
+    path += symbol + str(timeframe) + '.csv'
+
+    with open(path, 'r') as f:
         csv = f.read()
 
     lines = [l for l in csv.split('\n')][:-1]
