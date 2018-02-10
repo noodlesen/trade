@@ -58,4 +58,4 @@ def test(c, params, **kwargs):
         # END OF TESTER LOOP
 
     #print ('loop finished')
-    return get_trades_stats(trades, c, params)
+    return get_trades_stats(trades, c, params, **kwargs)

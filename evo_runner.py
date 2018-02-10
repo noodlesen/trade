@@ -49,9 +49,9 @@ symbols.extend(['USDJPY'])
 GENERATIONS_COUNT = 100
 
 
-MUTATIONS = 8
-OUTSIDERS = 4
-DEPTH = 10
+MUTATIONS = 10
+OUTSIDERS = 5
+DEPTH = 5
 STRATEGY = 'PROFIT_AND_WINRATE'
 
 # GENERATIONS_COUNT = 10
@@ -60,6 +60,6 @@ STRATEGY = 'PROFIT_AND_WINRATE'
 # DEPTH =7
 # STRATEGY = 'MAX_PROFIT'
 
-generate(symbols, 60, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=1500, report=True) #  initial_params=initial_params
+generate(symbols, 60, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=1100, report=True) #  initial_params=initial_params
 
 

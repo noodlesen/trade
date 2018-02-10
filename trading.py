@@ -1,5 +1,6 @@
 
 from drawer import draw_candles
+from termcolor import colored, cprint
 
 class Trade():
 
@@ -94,7 +95,11 @@ class Trade():
                 self.close_trade(daydata, self.takeprofit, 'TP')
 
             if not self.is_closed:
-                self.profit = self.open_price - daydata.close_price
+                if self.direction == 'BUY':
+                    self.profit = daydata.close_price - self.open_price
+                if self.direction == 'SELL':
+                    self.profit = self.open_price - daydata.close_price
+                
 
 
 def get_trades_stats(trades, asset, params, **kwargs):
