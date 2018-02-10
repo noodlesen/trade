@@ -60,22 +60,21 @@ class Asset():
     def prev(self):
         self.pointer -= 1
 
-    def last(self, n, **kwargs):
-        of = abs(kwargs.get('offset', 0))
+    def last(self, n, of=0, **kwargs):
+        of = abs(of)
         row = []
-        fr = -1*(n-1)-of
-        if self.range+fr>=0:
-            to = 1-of
-            for i in range(fr, to):
-                row.append(self.get(i))
-            if kwargs.get('figure', False):
-                
-                return Figure(candles=row)
-            else:
-                return row  
+        fr = -1*(n-1)-of+self.pointer
+        to = 1-of+self.pointer
+
+
+
+        row = self.data[fr:to]
+
+
+        if kwargs.get('figure', False):
+            return Figure(candles=row)
         else:
-            print('CHART INDEX ERROR')
-            return None
+            return row  
             
 
     # get bar by absoute index

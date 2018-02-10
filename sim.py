@@ -3,7 +3,8 @@ from tester import trading_system
 from reader import read_mt_csv, load_settings_from_report
 from termcolor import colored, cprint
 from drawer import draw_candles
-from ts_outlet import get_random_params
+#from ts_outlet import get_random_params
+from config import TS
 
 #generate(['BA'], 300, 4, 5, 10, 'MAX_PROFIT')
 

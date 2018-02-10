@@ -6,13 +6,13 @@ import json
 from tester2 import test
 from holder import Asset
 from reader import read_mt_csv
-from ts_outlet import get_random_params
+from config import TS #get_random_params
 
 
 
 
 def mutate(p,n):
-    new_params = get_random_params()
+    new_params = TS.get_random_params()
     numbers = []
     l = len(p.items())
     n = randint(1,n)
@@ -80,9 +80,9 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
     tries = 0
     while tr == 0:
         if tries:
-            initial = get_random_params()
+            initial = TS.get_random_params()
         else:
-            initial = kwargs.get('initial_params', get_random_params())
+            initial = kwargs.get('initial_params', TS.get_random_params())
         #
         initial_result = test_all(assets, initial, **kwargs)
         tr = initial_result['ALL']['TRADES']
@@ -105,7 +105,7 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         for x in range(0, outsiders):
             #print('outsider')
             #print('outsider', x)
-            m = get_random_params()
+            m = TS.get_random_params()
             offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
 
         for off in offs:

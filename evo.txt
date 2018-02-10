@@ -1,77 +1,88 @@
 {
     "input": {
-        "FTP": 0.2894,
-        "cut_mix": 0.64,
-        "cut_period": 11,
-        "cut_treshold": 0.006,
-        "f_max_per": 179,
-        "f_max_th": 0.77,
-        "fia_dmax": 39,
-        "fia_dmin": 9,
-        "fia_treshold": 0.15,
-        "init_sl_k": 0.934,
-        "init_tp": 58,
-        "ptbf_mix": 0.51,
-        "ptdj_mix": 0.8,
-        "pth_mix": 0.35,
-        "ptss_mix": 0.84,
-        "pttf_mix": 0.38,
-        "rel_tp_k": 0.5,
-        "tp_koef": 2.3,
-        "use_BREAKEVEN": false,
+        "FTP": 0.2764,
+        "cut_mix": 0.89,
+        "cut_period": 13,
+        "cut_treshold": 0.043,
+        "f_max_per": 36,
+        "f_max_th": 0.79,
+        "fia_dmax": 47,
+        "fia_dmin": 8,
+        "fia_treshold": 0.02,
+        "init_sl_k": 0.949,
+        "init_tp": 14,
+        "ptbf_mix": 0.65,
+        "ptc2_mix": 0.31,
+        "ptdj_mix": 0.77,
+        "pth_mix": 0.88,
+        "ptss_mix": 0.8,
+        "pttf_mix": 0.67,
+        "rel_tp_k": 0.29,
+        "tp_koef": 2.7,
+        "use_BREAKEVEN": true,
+        "use_C2": true,
         "use_CUT": false,
-        "use_FIA": false,
-        "use_FILTERS": true,
+        "use_FIA": true,
+        "use_FILTERS": false,
         "use_FTP": false,
         "use_PTBF": true,
+        "use_PTC2": false,
         "use_PTDJ": false,
-        "use_PTH": true,
+        "use_PTH": false,
         "use_PTSS": false,
         "use_PTTF": false,
-        "use_REL_TP": true
+        "use_REL_TP": false
     },
     "output": {
         "ALL": {
-            "LOSES": 120,
-            "MAX_LOSES_IN_A_ROW": 31,
-            "MAX_LOSS_PER_TRADE": -13.5,
-            "MAX_PROFIT_PER_TRADE": 32.95,
-            "MAX_WINS_IN_A_ROW": 74,
-            "PROFIT": 1992.6200000000003,
-            "TRADES": 384,
-            "WINRATE": 0.6067708333333334,
-            "WINS": 233,
-            "WINS_TO_LOSES": 1.9416666666666667
+            "LOSES": 5,
+            "MAX_LOSES_IN_A_ROW": 1,
+            "MAX_LOSS_PER_TRADE": -0.42,
+            "MAX_PROFIT_PER_TRADE": 0.69,
+            "MAX_WINS_IN_A_ROW": 143,
+            "PROFIT": 37.88000000000004,
+            "TRADES": 402,
+            "WINRATE": 0.8557213930348259,
+            "WINS": 344,
+            "WINS_TO_LOSES": 68.8
         },
         "PASSES": [
             {
-                "AVG_LOSS": -5.4783333333333335,
-                "AVG_WIN": 11.373476394849787,
+                "AVG_LOSS": -0.136,
+                "AVG_WIN": 0.11209302325581406,
                 "CLOSE_REASONS": {
+                    "FIA": [
+                        161,
+                        20.64
+                    ],
                     "SL": [
-                        352,
-                        1973.3999999999999
+                        186,
+                        17.209999999999987
                     ]
                 },
-                "DAYS_MAX": 144,
+                "DAYS_MAX": 190,
                 "DAYS_MIN": 3,
-                "LOSES": 120,
-                "MAX_LOSES_IN_A_ROW": 31,
-                "MAX_LOSS_PER_TRADE": -13.5,
-                "MAX_PROFIT_PER_TRADE": 32.95,
-                "MAX_WINS_IN_A_ROW": 74,
+                "LOSES": 5,
+                "MAX_LOSES_IN_A_ROW": 1,
+                "MAX_LOSS_PER_TRADE": -0.42,
+                "MAX_PROFIT_PER_TRADE": 0.69,
+                "MAX_WINS_IN_A_ROW": 143,
                 "OPEN_REASONS": {
+                    "C2": [
+                        87,
+                        10.379999999999999
+                    ],
                     "TAIL": [
-                        352,
-                        1973.3999999999999
+                        260,
+                        27.37000000000001
                     ]
                 },
-                "PROFIT": 1992.6200000000003,
-                "SYMBOL": "ADBE",
-                "TRADES": 384,
-                "WINRATE": 0.6067708333333334,
-                "WINS": 233,
-                "WINS_TO_LOSES": 1.9416666666666667
+                "PROFIT": 37.88000000000004,
+                "SYMBOL": "USDJPY",
+                "TRADES": 402,
+                "WINRATE": 0.8557213930348259,
+                "WINS": 344,
+                "WINS_TO_LOSES": 68.8
             }
         ]
     }

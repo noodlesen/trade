@@ -5,7 +5,8 @@ from random import randint
 from candlesticks import Candle, Figure
 from trading import Trade, get_trades_stats
 
-from ts_outlet import TS_manage, TS_open
+#from ts_outlet import TS.manage, TS.open
+from config import TS# TS.manage, TS.open
 
 
 
@@ -48,8 +49,8 @@ def test(c, params, **kwargs):
 
        
 
-        TS_manage(cc,c,trades, params)    
-        trade = TS_open(cc,c, trades, params)
+        TS.manage(cc,c,trades, params)    
+        trade = TS.open(cc,c, trades, params)
         if trade:
             trades.append(trade)
         c.next()

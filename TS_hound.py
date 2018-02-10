@@ -1,7 +1,8 @@
 from trading import Trade
 from random import randint, choice
+from indi import CCI
 
-def TS_manage(cc, c, trades, params):
+def manage(cc, c, trades, params):
     for trade in trades:
         if trade.is_open:
 
@@ -65,13 +66,18 @@ def TS_manage(cc, c, trades, params):
                     nsl = trade.stoploss*ptf+cc.low_price*(1-ptf)
                     pull = True
 
+            if params.get('use_PTC2', False) and CCI(c.last(2)) < CCI(c.last(2,-1)):
+                ptf = params.get('ptc2_mix', 0.25)
+                nsl = trade.stoploss*ptf+cc.low_price*(1-ptf)
+                pull = True
+
 
             if pull:
                 if nsl > trade.stoploss:
                     trade.stoploss = nsl
 
 
-def TS_open(cc, c, trades, params):
+def open(cc, c, trades, params):
     has_buy_signal = False
     has_sell_signal = False
     open_reason = None
@@ -104,7 +110,23 @@ def TS_open(cc, c, trades, params):
             open_reason = 'FRAC'
 
 
-    if has_buy_signal or has_sell_signal:
+    if params.get('use_C2', False) and CCI(c.last(2)) > CCI(c.last(2,-1)):
+        has_buy_signal = True
+        open_reason = 'C2'
+
+
+    filter_passed = True
+
+    if params.get('use_FILTERS', False):
+        filter_passed = False
+        max_per = params.get('f_max_per', 250)
+        th = params.get('f_max_th', 0.8)
+        if c.pointer>max_per:
+            m = max(c.last(max_per))
+            if cc.close_price>m*th:
+                filter_passed = True
+
+    if filter_passed and (has_buy_signal or has_sell_signal):
         trade = Trade()
         if params.get('use_REL_TP', False):
             tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
@@ -148,7 +170,10 @@ def get_random_params():
         'use_PTBF': choice([True, False]),
         'use_FILTERS': choice([True, False]),
         'f_max_per': randint(20,301),
-        'f_max_th': randint(60, 95)/100
+        'f_max_th': randint(60, 95)/100,
+        'use_C2': choice([True, False]),
+        'use_PTC2': choice([True, False]),
+        'ptc2_mix': randint(5,90)/100
     }
 
 
