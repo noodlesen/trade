@@ -222,10 +222,9 @@ def open(cc, c, trades, params):
 
         if filter_passed and (has_buy_signal or has_sell_signal):
             trade = Trade()
-            if params.get('use_REL_TP', False):
-                tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
-            else:
-                tp_value = params.get('init_tp',50)
+            
+            tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
+ 
 
 
             if has_buy_signal:
@@ -272,7 +271,6 @@ def get_random_params():
         'fia_dmin': randint(2,12),
         'fia_dmax': randint(12,50),
         'fia_treshold': randint(2,20)/100,
-        'init_tp': randint(1,70),
         'init_sl_k': randint(930,999)/1000,
         'cut_mix': randint(1,100)/100,
         'cut_treshold': randint(1,100)/1000,
@@ -281,8 +279,7 @@ def get_random_params():
         'use_PTH': choice([True, False]),
         'use_PTSS': choice([True, False]),
         'use_PTDJ': choice([True, False]),
-        'use_REL_TP': choice([True, False]),
-        'rel_tp_k': randint(1,100)/100,
+        'rel_tp_k': randint(5,1000)/1000,
         'pth_mix': randint(5,90)/100,
         'ptss_mix': randint(5,90)/100,
         'ptdj_mix': randint(5,90)/100,
