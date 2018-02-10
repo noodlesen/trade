@@ -49,8 +49,8 @@ symbols.extend(['ADBE'])
 GENERATIONS_COUNT = 10
 
 MUTATIONS = 8
-OUTSIDERS = 4
-DEPTH = 4
+OUTSIDERS = 2
+DEPTH = 2
 STRATEGY = 'PROFIT_AND_WINRATE'
 
 # GENERATIONS_COUNT = 10
@@ -59,6 +59,6 @@ STRATEGY = 'PROFIT_AND_WINRATE'
 # DEPTH =7
 # STRATEGY = 'MAX_PROFIT'
 
-generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=250, report=True) #  initial_params=initial_params
+generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=500, report=True) #  initial_params=initial_params
 
 

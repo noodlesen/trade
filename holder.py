@@ -42,6 +42,8 @@ class Asset():
 
     def range_from_last(self, n):
         self.range_from = self.range - n - 1
+        self.range_to = self.count - 1
+        self.range = self.range_to - self.range_from + 1
 
     def set(self, n):
         self.pointer = n

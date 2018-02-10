@@ -129,6 +129,8 @@ def get_trades_stats(trades, asset, params, **kwargs):
 
     i = 0
     for t in trades:
+        # if i%50 ==0:
+        #     print('t', i)
         if t.is_closed:
             i+=1
 

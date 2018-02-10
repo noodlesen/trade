@@ -31,10 +31,11 @@ def mutate(p,n):
 
 
 def test_all(assets, params, **kwargs):
-    
+    #print('testall')
     results = []
     for an, a in assets.items():
             #data = read_mt_csv(s, **kwargs)
+            #print (a.symbol)
             results.append(test(a, params, **kwargs))
 
     wins = sum([r['WINS'] for r in results])
@@ -61,6 +62,7 @@ def test_all(assets, params, **kwargs):
 
 
 def generate(symbols, timeframe, generations_count, mutations, outsiders, depth, strategy, **kwargs):
+
     cut = kwargs.get('cut', False)
     assets = {}
     for s in symbols:
@@ -69,6 +71,8 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         if cut:
             
             a.range_from_last(cut)
+            # #print(a.range)
+            # print (cut,a.range)
         assets[s] = a
 
     results = []
@@ -93,11 +97,13 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
 
         offs = []
         for d in range(0,depth):
+            #print('mutant')
             #print('depth', d)
             m = mutate(survivor['input'], mutations)
             offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
 
         for x in range(0, outsiders):
+            #print('outsider')
             #print('outsider', x)
             m = get_random_params()
             offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})

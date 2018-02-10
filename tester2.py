@@ -27,12 +27,14 @@ def test(c, params, **kwargs):
     #verbose = kwargs.get('verbose', False)
 
     trades=[]
-    open_trades_stats =[]
 
     c.reset()
     
     # <- TESTER LOOP
     for i in range(c.range_from, c.range_to):
+
+        # if i%50==0:
+        #     print(i)
 
         cc = c.get()
 
@@ -54,4 +56,5 @@ def test(c, params, **kwargs):
 
         # END OF TESTER LOOP
 
-    return get_trades_stats(trades, c, params, draw=True)
+    #print ('loop finished')
+    return get_trades_stats(trades, c, params)
