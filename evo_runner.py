@@ -38,11 +38,11 @@ OTHER1 = ['AA', 'AXP', 'C', 'CSCO', 'DIS']
 OTHER2 = ['EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
 FOREX = ['USDJPY']
 symbols = []
-#symbols.extend(TRENDY)
-# symbols.extend(CHANNEL)
+symbols.extend(TRENDY)
+symbols.extend(CHANNEL)
 symbols.extend(OTHER1)
 symbols.extend(OTHER2)
-#symbols.extend(['USDJPY'])
+#symbols.extend(['ADBE'])
 
 
 
@@ -52,7 +52,7 @@ GENERATIONS_COUNT = 100
 MUTATIONS = 20
 OUTSIDERS = 3
 DEPTH = 7
-STRATEGY = 'EVERYTHING'
+STRATEGY = 'PROFIT_AND_WINRATE'
 
 # GENERATIONS_COUNT = 10
 # MUTATIONS = 4

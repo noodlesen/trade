@@ -34,6 +34,12 @@ def trade_stats(trades):
     return (s)
 
 
+def close_all(trades, cc, reason):
+    for t in trades:
+        if t.is_open:
+            t.close_trade(cc, cc.close_price, reason)
+
+
 
 def manage(cc, c, trades, params):
     for trade in trades:
@@ -226,8 +232,9 @@ def open(cc, c, trades, params):
                 if ts['open_long'] > ts['open_short'] or ts['open']==0:
                     allowed_to_buy = True
                 else:
-                    if ts['open_profit']<0:
+                    if ts['open_profit']>-0.5:
                         pass
+                        close_all(trades, cc, 'FLIP')
                         #print('hAVE TO CLOS')
                         #allowed_to_sell = True
 
@@ -235,8 +242,9 @@ def open(cc, c, trades, params):
                 if ts['open_long'] < ts['open_short'] or ts['open']==0:
                     allowed_to_sell = True
                 else:
-                    if ts['open_profit']<0:
+                    if ts['open_profit']>-0.5:
                         pass
+                        close_all(trades, cc, 'FLIP')
                         #print('hAVE TO CLOS')
                         #allowed_to_buy = True
 
@@ -294,7 +302,7 @@ def get_random_params():
         'ptc2_mix': randint(5,90)/100
     }
     
-    params['max_pos'] = 50
+    params['max_pos'] = 25
     return params
 
 
