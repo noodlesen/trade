@@ -38,15 +38,15 @@ OTHER1 = ['AA', 'AXP', 'C', 'CSCO', 'DIS']
 OTHER2 = ['EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
 FOREX = ['USDJPY']
 symbols = []
-#symbols.extend(TRENDY)
-# symbols.extend(CHANNEL)
-# symbols.extend(OTHER1)
-# symbols.extend(OTHER2)
-symbols.extend(['USDJPY'])
+symbols.extend(TRENDY)
+symbols.extend(CHANNEL)
+symbols.extend(OTHER1)
+symbols.extend(OTHER2)
+#symbols.extend(['USDJPY'])
 
 
 
-GENERATIONS_COUNT = 100
+GENERATIONS_COUNT = 300
 
 
 MUTATIONS = 70
@@ -60,6 +60,6 @@ STRATEGY = 'PROFIT_AND_WINRATE'
 # DEPTH =7
 # STRATEGY = 'MAX_PROFIT'
 
-generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=250, report=True) #  initial_params=initial_params
+generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=500, report=True) #  initial_params=initial_params
 
 
