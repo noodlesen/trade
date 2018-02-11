@@ -80,15 +80,17 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
     tries = 0
     while tr == 0:
         if tries:
+            print ("RANDOM")
             initial = TS.get_random_params()
         else:
+            print ("INITIAL")
             initial = kwargs.get('initial_params', TS.get_random_params())
-        #
+        
         initial_result = test_all(assets, initial, **kwargs)
         tr = initial_result['ALL']['TRADES']
         tries+=1
-        #print(tries)
-        #print('trades:', tr)
+        print(tries)
+        print('trades:', tr)
     survivor  = {'input': initial, 'output': initial_result}
     print(json.dumps(survivor['input'], sort_keys=True, indent=4))
 

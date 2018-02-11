@@ -5,12 +5,12 @@ from reader import read_mt_csv, load_settings_from_report
 from holder import Asset
 from datetime import datetime
 
-RANDOM = True
+RANDOM = False
 
 if RANDOM:
     params = TS.get_random_params()
 else:
-    params = load_settings_from_report('_jpy_60.txt')
+    params = load_settings_from_report('_evo_mod.txt')
 
 #data = read_mt_csv('USDJPY', timeframe=60, cut=2000)
 

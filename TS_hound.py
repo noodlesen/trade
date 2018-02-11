@@ -106,7 +106,7 @@ def manage(cc, c, trades, params):
                         pull = True
 
             if c.pointer>5 and params.get('use_PTTF', False):
-                f = c.last(5)
+                f = c.last(5, figure =True)
                 if f.is_top_fractal():
                     ptf = params.get('pttf_mix', 0.25)
                     if trade.direction == 'BUY':
@@ -116,7 +116,7 @@ def manage(cc, c, trades, params):
                     pull = True
 
             if c.pointer>5 and params.get('use_PTBF', False):
-                f = c.last(5)
+                f = c.last(5, figure = True)
                 if f.is_bottom_fractal():
                     ptf = params.get('ptbf_mix', 0.25)
                     if trade.direction == 'BUY':
@@ -155,7 +155,7 @@ def open(cc, c, trades, params):
     has_sell_signal = False
     open_reason = None
 
-    if ts['open'] <= params['max_pos']:    
+    if ts['open'] <= params.get('max_pos',50):    
 
         # TAIL
         if params.get('open_TAIL', False):
@@ -172,7 +172,7 @@ def open(cc, c, trades, params):
 
             # BREAKUP
             if params.get('open_BREAK', False):
-                f = c.last(5)
+                f = c.last(5, figure=True)
                 if f.is_breakup():
                     has_buy_signal = True
                     open_reason = 'BREAKUP_BUY'
@@ -182,7 +182,7 @@ def open(cc, c, trades, params):
 
             #HAMMER
             if params.get('open_HAMMER', False):
-                f = c.last(3)
+                f = c.last(3, figure=True)
                 if f.summary().is_hammer() or f.summary(last=2).is_hammer():
                     has_buy_signal = True
                     open_reason = 'HAMMER_BUY'
@@ -192,7 +192,7 @@ def open(cc, c, trades, params):
 
             #FRACTAL
             if params.get('open_FRACTAL', False):
-                f = c.last(5)
+                f = c.last(5, figure=True)
                 if f.is_bottom_fractal():
                     has_buy_signal = True
                     open_reason = 'FRAC_BUY'
@@ -212,11 +212,12 @@ def open(cc, c, trades, params):
         filter_passed = True
 
         if params.get('use_FILTERS', False):
+
             filter_passed = False
             max_per = params.get('f_max_per', 250)
             th = params.get('f_max_th', 0.8)
-            if c.pointer>max_per:
-                m = max(c.last(max_per))
+            if c.pointer > max_per:
+                m = max(bar['high'] for bar in c.last(max_per))
                 if cc.close_price>m*th:
                     filter_passed = True
 
@@ -233,9 +234,9 @@ def open(cc, c, trades, params):
                 else:
                     if ts['open_profit']>-0.5:
                         pass
-                        close_all(trades, cc, 'FLIP')
-                        #print('hAVE TO CLOS')
-                        #allowed_to_sell = True
+                        if params.get('use_FLIP', False):
+                            close_all(trades, cc, 'FLIP')
+                            allowed_to_sell = True
 
             if has_sell_signal:
                 if ts['open_long'] < ts['open_short'] or ts['open']==0:
@@ -243,9 +244,9 @@ def open(cc, c, trades, params):
                 else:
                     if ts['open_profit']>-0.5:
                         pass
-                        close_all(trades, cc, 'FLIP')
-                        #print('hAVE TO CLOS')
-                        #allowed_to_buy = True
+                        if params.get('use_FLIP', False):
+                            close_all(trades, cc, 'FLIP')
+                            allowed_to_buy = True
 
             if allowed_to_buy and allowed_to_sell:
                 allowed_to_buy = False
@@ -289,17 +290,20 @@ def get_random_params():
         'use_PTBF': choice([True, False]),
         'use_FILTERS': choice([True, False]),
         'f_max_per': randint(20,301),
-        'f_max_th': randint(60, 95)/100,
+        'f_max_th': randint(50, 95)/100,
         'open_C2': choice([True, False]),
         'open_FRACTAL': choice([True, False]),
         'open_HAMMER': choice([True, False]),
         'open_TAIL': choice([True, False]),
         'open_BREAK': choice([True, False]),
         'use_PTC2': choice([True, False]),
-        'ptc2_mix': randint(5,90)/100
+        'ptc2_mix': randint(5,90)/100,
+        'use_FLIP': choice([True, False]),
+        'trade_short': choice([True, False])
     }
     
-    params['max_pos'] = 25
+    params['max_pos'] = 100
+    #params['trade_short'] = True
     return params
 
 

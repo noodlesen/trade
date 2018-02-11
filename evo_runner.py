@@ -29,7 +29,7 @@ from reader import load_settings_from_report
 #         "use_PTSS": True
 # }
 
-initial_params = load_settings_from_report('_jpy_60.txt')#'results_abs_tp/_41K_in_2y_15sym.txt')
+initial_params = load_settings_from_report('_evo_mod.txt')#'results_abs_tp/_41K_in_2y_15sym.txt')
 # print(initial_params)
 
 CHANNEL = ['DIS', 'WFC', 'VZ','T', 'KO']
@@ -38,15 +38,15 @@ OTHER1 = ['AA', 'AXP', 'C', 'CSCO', 'DIS']
 OTHER2 = ['EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
 FOREX = ['USDJPY']
 symbols = []
-# symbols.extend(TRENDY)
+symbols.extend(TRENDY)
 # symbols.extend(CHANNEL)
 # symbols.extend(OTHER1)
 # symbols.extend(OTHER2)
-symbols.extend(['USDJPY'])
+#symbols.extend(['USDJPY'])
 
 
 
-GENERATIONS_COUNT = 100
+GENERATIONS_COUNT = 10
 
 
 MUTATIONS = 20
@@ -60,6 +60,6 @@ STRATEGY = 'PROFIT_AND_WINRATE'
 # DEPTH =7
 # STRATEGY = 'MAX_PROFIT'
 
-generate(symbols, 60, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, cut=1650, report=True) #  initial_params=initial_params
+generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, initial_params=initial_params, cut=500, report=True) #  initial_params=initial_params
 
 

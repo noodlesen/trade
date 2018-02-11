@@ -26,6 +26,7 @@ class Asset():
         # self.stock = StockDataFrame(self.data)
         # self.data['value'] = self.data['open'] - self.data['close']
         # self.count = self.data.shape[0]
+        self.count = len(self.data)
         self.reset_range()
 
     # def require(self, alpha):
@@ -39,11 +40,13 @@ class Asset():
         self.range_from = 0
         self.range_to = self.count - 1
         self.range = self.range_to - self.range_from + 1
+        self.pointer = 0
 
     def range_from_last(self, n):
-        self.range_from = self.range - n - 1
+        self.range_from = self.count - n - 1
         self.range_to = self.count - 1
         self.range = self.range_to - self.range_from + 1
+        self.pointer = self.range_from
 
     def set(self, n):
         self.pointer = n
@@ -65,14 +68,9 @@ class Asset():
         row = []
         fr = -1*(n-1)-of+self.pointer
         to = 1-of+self.pointer
-
-
-
         row = self.data[fr:to]
-
-
         if kwargs.get('figure', False):
-            return Figure(candles=row)
+            return Figure(raw=row)
         else:
             return row  
             
