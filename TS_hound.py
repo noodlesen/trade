@@ -1,43 +1,6 @@
-from trading import Trade
+from trading import Trade, trade_stats, close_all
 from random import randint, choice
 from indi import CCI
-
-def trade_stats(trades):
-    s = {
-        "open":0,
-        "closed":0,
-        "open_long":0,
-        "open_short":0,
-        "open_profit":0,
-        "closed_long":0,
-        "closed_short":0,
-        "closed_profit":0,
-        "total_profit":0
-    }
-    for t in trades:
-        if t.is_open:
-            s['open']+=1
-            s['open_profit']+=t.profit
-            if t.direction =='BUY':
-                s['open_long']+=1
-            elif t.direction == 'SELL':
-                s['open_short'] +=1
-        elif t.is_closed:
-            s['closed']+=1
-            s['closed_profit']+=t.profit
-            if t.direction =='BUY':
-                s['closed_long']+=1
-            elif t.direction == 'SELL':
-                s['closed_short'] +=1
-        s['total_profit'] = s['open_profit'] + s['closed_profit']
-
-    return (s)
-
-
-def close_all(trades, cc, reason):
-    for t in trades:
-        if t.is_open:
-            t.close_trade(cc, cc.close_price, reason)
 
 
 

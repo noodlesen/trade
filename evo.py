@@ -11,21 +11,26 @@ from config import TS #get_random_params
 
 
 
-def mutate(p,n):
+def mutate(p,nm):
+    #print ('mutate')
     new_params = TS.get_random_params()
     numbers = []
     l = len(p.items())
-    n = randint(1,n)
+
+    n = randint(1,round(nm/100*l))
+    #print(n,l)
     while len(numbers)<n:
         nn = randint(1,l)
         if nn not in numbers:
             numbers.append(nn)
+    #print(numbers)
     np = deepcopy(p)
     x = 1
     for k,v in new_params.items():
         if x in numbers:
             np[k]=new_params[k]
         x+=1
+    #print ('mutate finished')
     return np
 
 
@@ -100,13 +105,11 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         offs = []
         for d in range(0,depth):
             #print('mutant')
-            #print('depth', d)
             m = mutate(survivor['input'], mutations)
             offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
 
         for x in range(0, outsiders):
             #print('outsider')
-            #print('outsider', x)
             m = TS.get_random_params()
             offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
 
