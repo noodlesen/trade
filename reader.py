@@ -131,4 +131,5 @@ def watcher(fname):
         d = n
 
 
-watcher('C:\Program Files (x86)\ForexClub MT4\MQL4\Files\mqtest.txt')
+#watcher('C:\Program Files (x86)\ForexClub MT4\MQL4\Files\mqtest.txt')
+#watcher('mqtest.txt')

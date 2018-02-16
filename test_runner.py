@@ -2,7 +2,7 @@
 from config import TS
 from tester2 import test
 from reader import read_mt_csv, load_settings_from_report
-from holder import Asset
+from assets import Asset
 from datetime import datetime
 
 RANDOM = True

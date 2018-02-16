@@ -5,7 +5,7 @@ from termcolor import colored, cprint
 class Trade():
 
     def __str__(self):
-        return '%s | %r > %r | = %r [%s]' % (self.direction, self.open_price, self.close_price, self.profit, self.close_reason)
+        return '%s | %r > %r | = %r [%s][%s]' % (self.direction, self.open_price, self.close_price, self.profit, self.open_reason, self.close_reason)
 
     def __init__(self):
         self.open_price = None

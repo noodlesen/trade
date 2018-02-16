@@ -4,7 +4,7 @@ from random import randint
 from copy import deepcopy
 import json
 from tester2 import test
-from holder import Asset
+from assets import Asset
 from reader import read_mt_csv
 from config import TS #get_random_params
 

@@ -185,7 +185,7 @@ def open(cc, c, trades, params):
                     filter_passed = True
 
         if filter_passed and (has_buy_signal or has_sell_signal):
-            trade = Trade()
+            
             
             tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
  
@@ -216,9 +216,11 @@ def open(cc, c, trades, params):
                 allowed_to_sell = False
                 
             if allowed_to_buy:
+                trade = Trade()
                 trade.open_trade('BUY', cc, cc.close_price, cc.low_price*params.get('init_sl_k',0.98), cc.close_price +tp_value, open_reason)
 
             if allowed_to_sell:
+                trade = Trade()
                 trade.open_trade('SELL', cc, cc.close_price, cc.high_price*(2-params.get('init_sl_k',0.98)), cc.close_price -tp_value, open_reason) 
 
 

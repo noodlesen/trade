@@ -1,18 +1,18 @@
 import pandas as pd
 from stockstats import StockDataFrame
 from candlesticks import Candle, Figure
-from reader import read_mt_csv
+from reader import read_mt_csv, read_multi_csv
 
 class Asset():
 
     def __init__(self, **kwargs):
-        self.data = []# pd.DataFrame()
+        self.data = kwargs.get('data',[])
         self.symbol = kwargs.get('symbol', None)
         self.timeframe = kwargs.get('timeframe', None)
         self.pointer = 0
-        self.count = 0
         self.range_from = 0
-        self.range_to = None # first that is not in range
+        self.count = len(self.data)
+        self.range_to = self.count-1 # first that is not in range
 
     def load_mt4_history(self, path, symbol, timeframe=1440):
         
@@ -35,6 +35,9 @@ class Asset():
 
     def reset(self):
         self.pointer = self.range_from
+
+    def set_to_last(self):
+        self.pointer = self.range_to
 
     def reset_range(self):
         self.range_from = 0
@@ -95,7 +98,17 @@ class Asset():
     #         res = self.data.iloc[p][a]
     #     return res
 
+class MultiAsset():
 
+    def __init__(self):
+        self.assets = {}
+
+    def load(self, filename, timeframe):
+        md = read_multi_csv(filename)
+        for k in md.keys():
+            a = Asset(data=md[k], symbol=k, timeframe=timeframe)
+            #a.set_to_last()
+            self.assets[k] = a
 
 
 # usdjpy = Asset()

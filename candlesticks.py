@@ -20,6 +20,9 @@ class Candle():
             self.date = kwargs.get('date', None)
             self.time = kwargs.get('time', None)
 
+    def __str__(self):
+        return ('%s %s O:%r H:%r L: %r C: %r V: %d' %(self.date, self.time, self.open_price, self.high_price, self.low_price, self.close_price, self.volume))
+
     def get_dict(self):
         return {
             'open': self.open_price,

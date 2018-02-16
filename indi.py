@@ -1,4 +1,4 @@
-from holder import Asset
+from assets import Asset
 
 
 def typical_price(bar):
