@@ -126,9 +126,9 @@ def watcher(fname):
         for k in d.keys():
             if d[k][-1] != n[k][-1]:
                 print (k, "HAS CHANGED!")
-                d = n
             else:
                 print('...')
+        d = n
 
 
 watcher('C:\Program Files (x86)\ForexClub MT4\MQL4\Files\mqtest.txt')
