@@ -1,5 +1,5 @@
 import json
-
+from time import sleep
 
 def load_settings_from_report(path):
     with open(path,'r') as f:
@@ -87,3 +87,48 @@ def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
         return data
     else:
         return data[-cut:]
+
+
+
+def read_multi_csv(fname):
+    with open(fname, 'r') as f:
+        csv = f.read()
+    lines = [l for l in csv.split('\n')][:-1]
+    res = {}
+    for l in lines:
+        sl = l.split(';')
+        if sl[0] not in res.keys():
+            res[sl[0]] = []
+        res[sl[0]].append(
+            {
+                "date": sl[1].split(' ')[0],
+                "time": sl[1].split(' ')[1],
+                "open": float(sl[2]),
+                "high": float(sl[3]),
+                "low": float(sl[4]),
+                "close": float(sl[5]),
+                "volume": float(sl[6])
+            }
+        )
+    for s in res.keys():
+        res[s].reverse()
+
+    return res
+
+
+def watcher(fname):
+    d = read_multi_csv(fname)
+    
+
+    while True:
+        sleep(5)
+        n = read_multi_csv(fname)
+        for k in d.keys():
+            if d[k][-1] != n[k][-1]:
+                print (k, "HAS CHANGED!")
+                d = n
+            else:
+                print('...')
+
+
+watcher('C:\Program Files (x86)\ForexClub MT4\MQL4\Files\mqtest.txt')
