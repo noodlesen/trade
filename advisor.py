@@ -7,7 +7,7 @@ mas = MultiAsset()
 mas.load('mqtest.txt', 1440)
 
 
-params = load_settings_from_report('_PROBLEM.txt')
+params = load_settings_from_report('_evo_mod_32k_2y.txt')
 
 for s in STOCKS:
 

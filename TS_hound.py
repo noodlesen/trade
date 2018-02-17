@@ -219,7 +219,7 @@ def open(cc, c, trades, params):
                 trade = Trade()
                 trade.open_trade('BUY', cc, cc.close_price, cc.low_price*params.get('init_sl_k',0.98), cc.close_price +tp_value, open_reason)
 
-            if allowed_to_sell:
+            if allowed_to_sell and params.get('trade_short', False):
                 trade = Trade()
                 trade.open_trade('SELL', cc, cc.close_price, cc.high_price*(2-params.get('init_sl_k',0.98)), cc.close_price -tp_value, open_reason) 
 
