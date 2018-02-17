@@ -1,37 +1,24 @@
-import pandas as pd
-from stockstats import StockDataFrame
 from candlesticks import Candle, Figure
 from reader import read_mt_csv, read_multi_csv
+
 
 class Asset():
 
     def __init__(self, **kwargs):
-        self.data = kwargs.get('data',[])
+        self.data = kwargs.get('data', [])
         self.symbol = kwargs.get('symbol', None)
         self.timeframe = kwargs.get('timeframe', None)
         self.pointer = 0
         self.range_from = 0
         self.count = len(self.data)
-        self.range_to = self.count-1 # first that is not in range
+        self.range_to = self.count-1
 
     def load_mt4_history(self, path, symbol, timeframe=1440):
-        
-        names = ['date', 'time', 'open', 'high', 'low', 'close', 'volume']
         self.data = read_mt_csv(path, symbol, timeframe)
         self.symbol = symbol
         self.timeframe = timeframe
-        #self.data = pd.read_csv(path, names=names, index_col=['date_time'], parse_dates=[['date','time']])
-        # self.data = pd.read_csv(path, names=names)
-        # self.data.set_index(['date', 'time'], drop=False)
-        # self.stock = StockDataFrame(self.data)
-        # self.data['value'] = self.data['open'] - self.data['close']
-        # self.count = self.data.shape[0]
         self.count = len(self.data)
         self.reset_range()
-
-    # def require(self, alpha):
-    #     for a in alpha:
-    #         x = self.stock[a]
 
     def reset(self):
         self.pointer = self.range_from
@@ -75,28 +62,17 @@ class Asset():
         if kwargs.get('figure', False):
             return Figure(raw=row)
         else:
-            return row  
-            
+            return row
 
     # get bar by absoute index
-    def bar(self, n=-1): 
+    def bar(self, n=-1):
         p = n if n >= 0 else self.pointer
-        #return Candle(bar = dict(self.data.iloc[p]))
         return Candle(bar=self.data[p])
 
     # get bar by pointer relative index
     def get(self, n=0):
-        #return Candle(bar = dict(self.data.iloc[self.pointer + n]))
         return Candle(bar=self.data[self.pointer + n])
 
-    # def alpha(self, a, n=-1):
-    #     p = n if n>=0 else self.pointer
-    #     try:
-    #         res = self.data.iloc[p][a]
-    #     except KeyError:
-    #         self.require([a])
-    #         res = self.data.iloc[p][a]
-    #     return res
 
 class MultiAsset():
 
@@ -107,11 +83,4 @@ class MultiAsset():
         md = read_multi_csv(filename)
         for k in md.keys():
             a = Asset(data=md[k], symbol=k, timeframe=timeframe)
-            #a.set_to_last()
             self.assets[k] = a
-
-
-# usdjpy = Asset()
-# usdjpy.load_mt4_history('MTDATA','USDJPY', 60)
-# usdjpy.require(['cci_2', 'cci_20'])
-# print(usdjpy.data[usdjpy.data.value>0][['value']])

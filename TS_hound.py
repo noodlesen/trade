@@ -3,7 +3,6 @@ from random import randint, choice
 from indi import CCI
 
 
-
 def manage(cc, c, trades, params):
     for trade in trades:
         if trade.is_open:
@@ -11,10 +10,10 @@ def manage(cc, c, trades, params):
 
             if not trade.is_closed:
                 if trade.direction == 'BUY':
-                    tp_base  = sum([d['high'] for d in trade.data])/len(trade.data)
+                    tp_base = sum([d['high'] for d in trade.data])/len(trade.data)
                     trade.takeprofit = tp_base*params.get('tp_koef', 2.1)
                 elif trade.direction == 'SELL':
-                    tp_base  = sum([d['low'] for d in trade.data])/len(trade.data)
+                    tp_base = sum([d['low'] for d in trade.data])/len(trade.data)
                     trade.takeprofit = tp_base*1/params.get('tp_koef', 2.1)
 
             # FIA — low profit - good winrate
@@ -27,14 +26,14 @@ def manage(cc, c, trades, params):
 
             #BREAKEVEN
             if not trade.is_closed and params.get('use_BREAKEVEN', False):
-                if trade.direction == 'BUY' and trade.stoploss<trade.open_price and cc.low_price>trade.open_price:
+                if trade.direction == 'BUY' and trade.stoploss < trade.open_price and cc.low_price > trade.open_price:
                     trade.stoploss = cc.low_price
-                if trade.direction == 'SELL' and trade.stoploss>trade.open_price and cc.high_price<trade.open_price:
+                if trade.direction == 'SELL' and trade.stoploss > trade.open_price and cc.high_price < trade.open_price:
                     trade.stoploss = cc.high_price
 
             #FORCE TAKE PROFIT
             if not trade.is_closed and params.get('use_FTP', False):
-                if (trade.profit/trade.days)/trade.open_price>params.get('FTP',0.01):
+                if (trade.profit/trade.days)/trade.open_price > params.get('FTP', 0.01):
                     trade.close_trade(cc, cc.close_price, 'FTP')
 
             # PULL TO HAMMER/DOJI/SHOOTING STAR
@@ -68,8 +67,8 @@ def manage(cc, c, trades, params):
                             nsl = trade.stoploss*ptdj+cc.high_price*(1-ptdj)
                         pull = True
 
-            if c.pointer>5 and params.get('use_PTTF', False):
-                f = c.last(5, figure =True)
+            if c.pointer > 5 and params.get('use_PTTF', False):
+                f = c.last(5, figure=True)
                 if f.is_top_fractal():
                     ptf = params.get('pttf_mix', 0.25)
                     if trade.direction == 'BUY':
@@ -78,8 +77,8 @@ def manage(cc, c, trades, params):
                         nsl = trade.stoploss*ptf+cc.high_price*(1-ptf)
                     pull = True
 
-            if c.pointer>5 and params.get('use_PTBF', False):
-                f = c.last(5, figure = True)
+            if c.pointer > 5 and params.get('use_PTBF', False):
+                f = c.last(5, figure=True)
                 if f.is_bottom_fractal():
                     ptf = params.get('ptbf_mix', 0.25)
                     if trade.direction == 'BUY':
@@ -90,11 +89,11 @@ def manage(cc, c, trades, params):
 
             if params.get('use_PTC2', False):
                 ptf = params.get('ptc2_mix', 0.25)
-                if CCI(c.last(2)) < CCI(c.last(2,-1)):
+                if CCI(c.last(2)) < CCI(c.last(2, -1)):
                     if trade.direction == 'BUY':
                         nsl = trade.stoploss*ptf+cc.low_price*(1-ptf)
                         pull = True
-                elif CCI(c.last(2)) > CCI(c.last(2,-1)):
+                elif CCI(c.last(2)) > CCI(c.last(2, -1)):
                     if trade.direction == 'SELL':
                         nsl = trade.stoploss*ptf+cc.high_price*(1-ptf)
                         pull = True
@@ -118,20 +117,19 @@ def open(cc, c, trades, params):
     has_sell_signal = False
     open_reason = None
 
-    if ts['open'] <= params.get('max_pos',50):    
+    if ts['open'] <= params.get('max_pos', 50):    
 
         # TAIL
         if params.get('open_TAIL', False):
-            bs = 0.01 if cc.body_size()==0 else cc.body_size()
-            if cc.low_tail()/bs>0.2:
+            bs = 0.01 if cc.body_size() == 0 else cc.body_size()
+            if cc.low_tail()/bs > 0.2:
                 has_buy_signal = True
                 open_reason = 'TAIL_BUY'
-            elif cc.high_tail()/bs>0.2:
+            elif cc.high_tail()/bs > 0.2:
                 has_sell_signal = True
                 open_reason = 'TAIL_SELL'
 
-
-        if c.pointer>5:
+        if c.pointer > 5:
 
             # BREAKUP
             if params.get('open_BREAK', False):
@@ -151,7 +149,7 @@ def open(cc, c, trades, params):
                     open_reason = 'HAMMER_BUY'
                 elif f.summary().is_shooting_star() or f.summary(last=2).is_shooting_star():
                     has_sell_signal = True
-                    open_reason ="S_STAR_SELL"
+                    open_reason = "S_STAR_SELL"
 
             #FRACTAL
             if params.get('open_FRACTAL', False):
@@ -164,13 +162,12 @@ def open(cc, c, trades, params):
                     open_reason = 'FRAC_SELL'
 
         if params.get('open_C2', False):
-            if CCI(c.last(2)) > CCI(c.last(2,-1)):
+            if CCI(c.last(2)) > CCI(c.last(2, -1)):
                 has_buy_signal = True
                 open_reason = 'C2_BUY'
-            elif CCI(c.last(2)) > CCI(c.last(2,-1)):
+            elif CCI(c.last(2)) > CCI(c.last(2, -1)):
                 has_buy_signal = True
                 open_reason = 'C2_SELL'
-
 
         filter_passed = True
 
@@ -181,32 +178,27 @@ def open(cc, c, trades, params):
             th = params.get('f_max_th', 0.8)
             if c.pointer > max_per:
                 m = max(bar['high'] for bar in c.last(max_per))
-                if cc.close_price>m*th:
+                if cc.close_price > m*th:
                     filter_passed = True
 
         if filter_passed and (has_buy_signal or has_sell_signal):
-            
-            
-            tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
- 
 
+            tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
 
             if has_buy_signal:
-                if ts['open_long'] > ts['open_short'] or ts['open']==0:
+                if ts['open_long'] > ts['open_short'] or ts['open'] == 0:
                     allowed_to_buy = True
                 else:
-                    if ts['open_profit']>-0.5:
-                        pass
+                    if ts['open_profit'] > -0.5: # PARAMS!
                         if params.get('use_FLIP', False):
                             close_all(trades, cc, 'FLIP')
                             allowed_to_sell = True
 
             if has_sell_signal:
-                if ts['open_long'] < ts['open_short'] or ts['open']==0:
+                if ts['open_long'] < ts['open_short'] or ts['open'] == 0:
                     allowed_to_sell = True
                 else:
-                    if ts['open_profit']>-0.5:
-                        pass
+                    if ts['open_profit'] > -0.5:
                         if params.get('use_FLIP', False):
                             close_all(trades, cc, 'FLIP')
                             allowed_to_buy = True
@@ -214,47 +206,46 @@ def open(cc, c, trades, params):
             if allowed_to_buy and allowed_to_sell:
                 allowed_to_buy = False
                 allowed_to_sell = False
-                
+
             if allowed_to_buy:
                 trade = Trade()
-                trade.open_trade('BUY', cc, cc.close_price, cc.low_price*params.get('init_sl_k',0.98), cc.close_price +tp_value, open_reason)
+                trade.open_trade('BUY', cc, cc.close_price, cc.low_price*params.get('init_sl_k', 0.98), cc.close_price + tp_value, open_reason)
 
             if allowed_to_sell and params.get('trade_short', False):
                 trade = Trade()
-                trade.open_trade('SELL', cc, cc.close_price, cc.high_price*(2-params.get('init_sl_k',0.98)), cc.close_price -tp_value, open_reason) 
-
+                trade.open_trade('SELL', cc, cc.close_price, cc.high_price*(2-params.get('init_sl_k', 0.98)), cc.close_price - tp_value, open_reason)
 
     return trade
 
 
 def get_random_params():
     params = {
-        'tp_koef': randint(1,40)/10,
+        'tp_koef': randint(1, 40)/10,
         'use_FIA': choice([True, False]),
         'use_CUT': choice([True, False]),
         'use_BREAKEVEN': choice([True, False]),
         'use_FTP': choice([True, False]),
-        'fia_dmin': randint(2,12),
-        'fia_dmax': randint(12,50),
-        'fia_treshold': randint(2,20)/100,
-        'init_sl_k': randint(930,999)/1000,
-        'cut_mix': randint(1,100)/100,
-        'cut_treshold': randint(1,100)/1000,
-        'cut_period': randint(1,20),
-        'FTP': randint(1,3000)/10000,
+        'fia_dmin': randint(2, 12),
+        'fia_dmax': randint(12, 50),
+        'fia_treshold': randint(2, 20)/100,
+        'init_sl_k': randint(930, 999)/1000,
+        'cut_mix': randint(1, 100)/100,
+        'cut_treshold': randint(1, 100)/1000,
+        'cut_period': randint(1, 20),
+        'FTP': randint(1, 3000)/10000,
         'use_PTH': choice([True, False]),
         'use_PTSS': choice([True, False]),
         'use_PTDJ': choice([True, False]),
-        'rel_tp_k': randint(5,1000)/1000,
-        'pth_mix': randint(5,90)/100,
-        'ptss_mix': randint(5,90)/100,
-        'ptdj_mix': randint(5,90)/100,
-        'pttf_mix': randint(5,90)/100,
-        'ptbf_mix': randint(5,90)/100,
+        'rel_tp_k': randint(5, 1000)/1000,
+        'pth_mix': randint(5, 90)/100,
+        'ptss_mix': randint(5, 90)/100,
+        'ptdj_mix': randint(5, 90)/100,
+        'pttf_mix': randint(5, 90)/100,
+        'ptbf_mix': randint(5, 90)/100,
         'use_PTTF': choice([True, False]),
         'use_PTBF': choice([True, False]),
         'use_FILTERS': choice([True, False]),
-        'f_max_per': randint(20,301),
+        'f_max_per': randint(20, 301),
         'f_max_th': randint(50, 95)/100,
         'open_C2': choice([True, False]),
         'open_FRACTAL': choice([True, False]),
@@ -262,14 +253,10 @@ def get_random_params():
         'open_TAIL': choice([True, False]),
         'open_BREAK': choice([True, False]),
         'use_PTC2': choice([True, False]),
-        'ptc2_mix': randint(5,90)/100,
+        'ptc2_mix': randint(5, 90)/100,
         'use_FLIP': choice([True, False]),
         'trade_short': choice([True, False])
     }
-    
+
     params['max_pos'] = 100
-    #params['trade_short'] = True
     return params
-
-
-

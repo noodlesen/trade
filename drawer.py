@@ -1,41 +1,28 @@
 # DRAWS CANDLESTICKS
 
-
 from PIL import Image, ImageDraw
 
-#from candlesticks import Candle
 
-
-
-
-BLACK = (0,0,0,0,)
-WHITE = (255,255,255,0)
-RED = (255,0,0,0)
-GREEN = (0,255,0,0)
-
+BLACK = (0, 0, 0, 0)
+WHITE = (255, 255, 255, 0)
+RED = (255, 0, 0, 0)
+GREEN = (0, 255, 0, 0)
 
 
 def get_coord(n, context):
     return (context['price_high'] - n)/(context['price_high']-context['price_low'])*context['height']
 
-def candle(o,h,l,c,p, context, draw, **kwargs):
+
+def candle(o, h, l, c, p, context, draw, **kwargs):
 
     w = context['width']/context['number']
     left = w*p-w*0.8
     right = w*p-w*0.2
     mid = w*p-w*0.5
 
-
-
     FILL_UP = WHITE
     FILL_DOWN = BLACK
     STROKE = BLACK
-
-    # candle = Candle(open = o, close = c, high = h, low = l)
-
-    # if p in context.get('selected',[]) or candle.is_hammer() or candle.is_shooting_star():
-    #     FILL_DOWN = RED
-    #     STROKE = RED
 
     if o < c:
         draw.rectangle([left, get_coord(o, context), right, get_coord(c, context)], FILL_UP, STROKE)
@@ -56,17 +43,15 @@ def candle(o,h,l,c,p, context, draw, **kwargs):
 
     if p in context['marked_positions']:
         for m in context['marks']:
-            if m[0]==p:
-                draw.ellipse([mid-5, get_coord(m[1], context)-5,mid+5, get_coord(m[1], context)+5],'green', 'green')
+            if m[0] == p:
+                draw.ellipse([mid-5, get_coord(m[1], context)-5, mid+5, get_coord(m[1], context)+5], 'green', 'green')
 
 
 def draw_candles(data, name, context):
 
-    
-
     context['marked_positions'] = [m[0] for m in context.get('marks', [])]
 
-    img = Image.new('RGB', (context['width'],context['height'],), (255,255,255,0))
+    img = Image.new('RGB', (context['width'], context['height'],), (255, 255, 255, 0))
 
     draw = ImageDraw.Draw(img)
 
@@ -80,22 +65,16 @@ def draw_candles(data, name, context):
 
     for d in data_slice:
         #print (d)
-        if d['high']>highest:
+        if d['high'] > highest:
             highest = d['high']
-        if d['low']<lowest:
+        if d['low'] < lowest:
             lowest = d['low']
 
     l = len(data)
-    context['price_high']= highest*1.0+l/10
+    context['price_high'] = highest*1.0+l/10
     context['price_low'] = lowest*1.0-l/10
 
-
     for i, d in enumerate(data_slice):
-        candle(d['open'], d['high'], d['low'], d['close'], i+1, context, draw, sl=d.get('stoploss',None), tp=d.get('takeprofit', None))
-
+        candle(d['open'], d['high'], d['low'], d['close'], i+1, context, draw, sl=d.get('stoploss', None), tp=d.get('takeprofit', None))
 
     img.save(name+'.jpg', "JPEG")
-
-
-
-

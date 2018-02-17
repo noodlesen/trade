@@ -21,7 +21,7 @@ class Candle():
             self.time = kwargs.get('time', None)
 
     def __str__(self):
-        return ('%s %s O:%r H:%r L: %r C: %r V: %d' %(self.date, self.time, self.open_price, self.high_price, self.low_price, self.close_price, self.volume))
+        return ('%s %s O:%r H:%r L: %r C: %r V: %d' % (self.date, self.time, self.open_price, self.high_price, self.low_price, self.close_price, self.volume))
 
     def get_dict(self):
         return {
@@ -119,7 +119,6 @@ class Figure():
         l = min([cn.low_price for cn in candles])
         return Candle(open=o, high=h, low=l, close=c)
 
-
     def is_harami(self):
         if self.candles[-1].body_high() < self.candles[-2].body_high() and self.candles[-1].body_low() > self.candles[-2].body_low():
             return True
@@ -128,7 +127,7 @@ class Figure():
 
     def is_harami_breakup(self):
         f = Figure(candles=self.candles[:-1])
-        if f.is_harami() and self.candles[-1].close_price >self.candles[-3].body_high():
+        if f.is_harami() and self.candles[-1].close_price > self.candles[-3].body_high():
             return True
         else:
             return False

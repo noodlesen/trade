@@ -1,11 +1,18 @@
-
 from drawer import draw_candles
-from termcolor import colored, cprint
+from termcolor import colored
+
 
 class Trade():
 
     def __str__(self):
-        return '%s | %r > %r | = %r [%s][%s]' % (self.direction, self.open_price, self.close_price, self.profit, self.open_reason, self.close_reason)
+        return '%s | %r > %r | = %r [%s][%s]' % (
+            self.direction,
+            self.open_price,
+            self.close_price,
+            self.profit,
+            self.open_reason,
+            self.close_reason
+        )
 
     def __init__(self):
         self.open_price = None
@@ -27,7 +34,6 @@ class Trade():
         self.is_open = False
         self.is_closed = False
 
-
     def open_trade(self, direction, daydata, price, stoploss, takeprofit, open_reason):
         self.direction = direction
         self.days += 1
@@ -44,7 +50,6 @@ class Trade():
         self.high = daydata.close_price
         self.open_date = daydata.date
         self.open_time = daydata.time
-        #report('OPEN: '+self.__str__()+' SL:'+str(self.stoploss))
 
     def close_trade(self, daydata, price, close_reason):
         self.close_price = price
@@ -61,7 +66,6 @@ class Trade():
         self.is_open = False
         self.is_closed = True
         self.close_reason = close_reason
-        #report('CLOSE: '+self.__str__()+' SL:'+str(self.stoploss))
 
     def update_trade(self, daydata):
         self.days += 1
@@ -86,7 +90,6 @@ class Trade():
             if not self.is_closed:
                 self.profit = daydata.close_price - self.open_price
 
-
         elif self.direction == 'SELL':
 
             if daydata.high_price >= self.stoploss:
@@ -99,22 +102,11 @@ class Trade():
                     self.profit = daydata.close_price - self.open_price
                 if self.direction == 'SELL':
                     self.profit = self.open_price - daydata.close_price
-                
 
 
 def get_trades_stats(trades, asset, params, **kwargs):
 
-    #=========================================#
-    #                                         #
-    #       STATS AND OUTPUT                  #
-    #                                         #
-    #=========================================#
-
-
     verbose = kwargs.get('verbose', False)
-
-    n = 1
-    s = 0
 
     days_max = 0
     days_min = 10000000
@@ -124,76 +116,69 @@ def get_trades_stats(trades, asset, params, **kwargs):
     max_wins_in_a_row = 0
     current_loses_in_a_row = 0
     current_wins_in_a_row = 0
-    sum_of_wins = 0 
+    sum_of_wins = 0
     sum_of_loses = 0
     max_profit_per_trade = 0
     max_loss_per_trade = 0
 
-
-    open_reasons ={}
-    close_reasons={}
+    open_reasons = {}
+    close_reasons = {}
 
     i = 0
     for t in trades:
-        # if i%50 ==0:
-        #     print('t', i)
+
         if t.is_closed:
-            i+=1
+            i += 1
 
             if t.open_reason in open_reasons.keys():
-                open_reasons[t.open_reason][0]+=1
-                open_reasons[t.open_reason][1]+=t.profit
+                open_reasons[t.open_reason][0] += 1
+                open_reasons[t.open_reason][1] += t.profit
             else:
-                open_reasons[t.open_reason]=[0,0]
-
+                open_reasons[t.open_reason] = [0, 0]
 
             if t.close_reason in close_reasons.keys():
-                close_reasons[t.close_reason][0]+=1
-                close_reasons[t.close_reason][1]+=t.profit
+                close_reasons[t.close_reason][0] += 1
+                close_reasons[t.close_reason][1] += t.profit
             else:
-                close_reasons[t.close_reason]=[0,0]
+                close_reasons[t.close_reason] = [0, 0]
 
-            if kwargs.get('draw',False):
+            if kwargs.get('draw', False):
                 context = {
-                    'number':len(t.data),
+                    'number': len(t.data),
                     'width': 1000,
                     'height': 500,
                     'offset': 0
                 }
                 draw_candles(t.data, 'images/'+asset.symbol+str(i)+'_'+t.direction+'_'+t.close_reason, context)
 
-
-            if t.days>days_max:
+            if t.days > days_max:
                 days_max = t.days
-            if t.days<days_min:
+            if t.days < days_min:
                 days_min = t.days
 
-            if t.profit<0:
+            if t.profit < 0:
                 if verbose:
                     print(colored(t, 'red'))
-                number_of_loses+=1
-                current_loses_in_a_row +=1
-                if current_wins_in_a_row>max_wins_in_a_row:
+                number_of_loses += 1
+                current_loses_in_a_row += 1
+                if current_wins_in_a_row > max_wins_in_a_row:
                     max_wins_in_a_row = current_wins_in_a_row
                 current_wins_in_a_row = 0
                 sum_of_loses += t.profit
-                if t.profit<max_loss_per_trade:
+                if t.profit < max_loss_per_trade:
                     max_loss_per_trade = t.profit
 
             else:
                 if verbose:
                     print(t)
-                number_of_wins+=1
-                current_wins_in_a_row +=1
-                if current_loses_in_a_row>max_loses_in_a_row:
+                number_of_wins += 1
+                current_wins_in_a_row += 1
+                if current_loses_in_a_row > max_loses_in_a_row:
                     max_loses_in_a_row = current_loses_in_a_row
                 current_loses_in_a_row = 0
                 sum_of_wins += t.profit
-                if t.profit>max_profit_per_trade:
+                if t.profit > max_profit_per_trade:
                     max_profit_per_trade = t.profit
-
-
-
 
     number_of_trades = len(trades)
     if number_of_loses:
@@ -225,37 +210,36 @@ def get_trades_stats(trades, asset, params, **kwargs):
     res['OPEN_REASONS'] = open_reasons
     res['CLOSE_REASONS'] = close_reasons
 
-
     return res
 
 
 def trade_stats(trades):
     s = {
-        "open":0,
-        "closed":0,
-        "open_long":0,
-        "open_short":0,
-        "open_profit":0,
-        "closed_long":0,
-        "closed_short":0,
-        "closed_profit":0,
-        "total_profit":0
+        "open": 0,
+        "closed": 0,
+        "open_long": 0,
+        "open_short": 0,
+        "open_profit": 0,
+        "closed_long": 0,
+        "closed_short": 0,
+        "closed_profit": 0,
+        "total_profit": 0
     }
     for t in trades:
         if t.is_open:
-            s['open']+=1
-            s['open_profit']+=t.profit
-            if t.direction =='BUY':
-                s['open_long']+=1
+            s['open'] += 1
+            s['open_profit'] += t.profit
+            if t.direction == 'BUY':
+                s['open_long'] += 1
             elif t.direction == 'SELL':
-                s['open_short'] +=1
+                s['open_short'] += 1
         elif t.is_closed:
-            s['closed']+=1
-            s['closed_profit']+=t.profit
-            if t.direction =='BUY':
-                s['closed_long']+=1
+            s['closed'] += 1
+            s['closed_profit'] += t.profit
+            if t.direction == 'BUY':
+                s['closed_long'] += 1
             elif t.direction == 'SELL':
-                s['closed_short'] +=1
+                s['closed_short'] += 1
         s['total_profit'] = s['open_profit'] + s['closed_profit']
 
     return (s)

@@ -1,8 +1,9 @@
 import json
 from time import sleep
 
+
 def load_settings_from_report(path):
-    with open(path,'r') as f:
+    with open(path, 'r') as f:
         return json.loads(f.read())['input']
 
 
@@ -16,8 +17,7 @@ def read_nasdaq_csv(sym, cut=0):
 
     lines.reverse()
 
-    data=[]
-
+    data = []
 
     for l in lines:
         nd = {}
@@ -25,29 +25,22 @@ def read_nasdaq_csv(sym, cut=0):
         for n in l.split(','):
             h = header[i]
             if h == 'date':
-                nd[h] = '/'.join(n[2:].split('-'))  # [::-1])
+                nd[h] = '/'.join(n[2:].split('-'))
             else:
                 nd[h] = int(float(n)*100)/100
             i += 1
         data.append(nd)
-        #print(nd)
 
-    if cut==0:
+    if cut == 0:
         return data
     else:
         return data[-cut:]
 
 
-
 def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
 
-    # timeframe = kwargs.get('timeframe', 1440)
-
-    slice_from = kwargs.get('slice_from',0)
+    slice_from = kwargs.get('slice_from', 0)
     slice_to = kwargs.get('slice_to', 0)
-
-    #print(slice_from, slice_to)
-    #input()
 
     if slice_from == 0 and slice_to == 0:
         cut = kwargs.get('cut', 0)
@@ -60,8 +53,7 @@ def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
         csv = f.read()
 
     lines = [l for l in csv.split('\n')][:-1]
-    
-    data=[]
+    data = []
     header = ['date', 'time', 'open', 'high', 'low', 'close', 'volume']
 
     for l in lines:
@@ -83,11 +75,10 @@ def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
     if slice_from or slice_to:
 
         return data[slice_from: slice_to]
-    elif cut==0:
+    elif cut == 0:
         return data
     else:
         return data[-cut:]
-
 
 
 def read_multi_csv(fname):
@@ -118,7 +109,6 @@ def read_multi_csv(fname):
 
 def watcher(fname):
     d = read_multi_csv(fname)
-    
 
     while True:
         sleep(5)
@@ -129,7 +119,3 @@ def watcher(fname):
             else:
                 print('...')
         d = n
-
-
-#watcher('C:\Program Files (x86)\ForexClub MT4\MQL4\Files\mqtest.txt')
-#watcher('mqtest.txt')

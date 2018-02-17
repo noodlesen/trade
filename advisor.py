@@ -1,4 +1,4 @@
-from reader import read_multi_csv, load_settings_from_report
+from reader import load_settings_from_report
 import TS_hound as TS
 from assets import MultiAsset
 from stocks_list import STOCKS

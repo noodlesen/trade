@@ -7,7 +7,7 @@ import time
 QUOTE_client = ddec.DDEClient('MT4', 'QUOTE')
 
 # Register desired symbols..
-symbols =  ['DIS', 'WFC', 'VZ','T', 'KO', 'BA','ADBE', 'CAT', 'INTC', 'AAPL']
+symbols = ['DIS', 'WFC', 'VZ','T', 'KO', 'BA','ADBE', 'CAT', 'INTC', 'AAPL']
 for i in symbols:
     QUOTE_client.advise(i)
 
@@ -23,10 +23,3 @@ while 1:
         print(item)
         print ([bytes.decode(c) for c in current_quote])
         print()
-        #current_quote.insert(0, item)
-        #to_display.append(current_quote)
-
-    #print ('\t'.join(columns))
-    for line in to_display:
-        pass
-        #print (' '.join([str(l) for l in line]))
