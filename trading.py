@@ -19,13 +19,18 @@ class Trade():
         self.close_price = None
         self.stoploss = None
         self.takeprofit = None
+
         self.days = 0
         self.data = []
+
         self.low = None
         self.high = None
+
         self.open_date = None
         self.close_date = None
+
         self.profit = None
+
         self.open_reason = None
         self.close_reason = None
 
@@ -33,6 +38,11 @@ class Trade():
 
         self.is_open = False
         self.is_closed = False
+
+        self.is_real = False
+        self.created_by = None
+        self.ticket = None
+        self.magic_number = None
 
     def open_trade(self, direction, daydata, price, stoploss, takeprofit, open_reason):
         self.direction = direction

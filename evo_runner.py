@@ -24,4 +24,4 @@ OUTSIDERS = 5
 DEPTH = 10
 STRATEGY = 'PROFIT_AND_WINRATE'
 
-generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, initital_params=initial_params, cut=500, report=True)
+generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, initial_params=initial_params, cut=500, report=True)

@@ -36,6 +36,9 @@ def read_nasdaq_csv(sym, cut=0):
     else:
         return data[-cut:]
 
+def read_orders_csv(path):
+    pass
+
 
 def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
 
