@@ -1,7 +1,7 @@
 # DRAWS CANDLESTICKS
 
 from PIL import Image, ImageDraw
-
+from random import randint
 
 BLACK = (0, 0, 0, 0)
 WHITE = (255, 255, 255, 0)
@@ -78,3 +78,47 @@ def draw_candles(data, name, context):
         candle(d['open'], d['high'], d['low'], d['close'], i+1, context, draw, sl=d.get('stoploss', None), tp=d.get('takeprofit', None))
 
     img.save(name+'.jpg', "JPEG")
+
+
+def draw_plot(data_list, name, **kwargs):
+
+    if kwargs.get('parallel', False):
+        new_data_list = []
+        width = len(data_list[0])
+        for i in range(0, width):
+            new_data_list.append([])
+
+        for w in range(0,width):
+            for i, d in enumerate(data_list):
+                new_data_list[w].append(d[w])
+
+        data_list = new_data_list
+        print('PARALLEL')
+
+    maximum = max([max(d) for d in data_list])
+    minimum = min([min(d) for d in data_list])
+    band = maximum-minimum
+    length = len(data_list[0])
+    plots = len(data_list)
+    print(maximum, minimum, band, length, plots)
+
+    img_width = 1200
+    img_height = 800
+
+    img = Image.new('RGB', (img_width, img_height,), (255, 255, 255, 0))
+
+    draw = ImageDraw.Draw(img)
+
+    for p in range(0,plots):
+        color = [BLACK, RED, GREEN][p%3]
+        for i,d in enumerate(data_list[p]):
+            if i>0:
+                startX = (i-1)/length*img_width
+                endX = i/length*img_width
+                startY = (maximum-data_list[p][i-1])/band*img_height
+                endY = (maximum-d)/band*img_height
+                draw.line((startX,startY,endX, endY), fill=color, width=1)
+
+    img.save(name+'.jpg', "JPEG")
+
+

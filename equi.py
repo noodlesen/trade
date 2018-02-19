@@ -1,4 +1,6 @@
 from reader import read_mt_csv
+from drawer import draw_plot
+import math
 
 symbols = ['USDJPY', 'USDCHF', 'EURUSD', 'CHFJPY', 'EURJPY', 'GBPJPY', 'GBPUSD']
 
@@ -9,14 +11,28 @@ for s in symbols:
     data[s] = d
 
 last = 0
-for i in range(0, 20000):
-    ty = data['USDJPY'][i]['close']+data['EURJPY'][i]['close']+data['CHFJPY'][i]['close']+data['GBPJPY'][i]['close']+1
-    td = data['EURUSD'][i]['close']+data['GBPUSD'][i]['close']+1/data['USDCHF'][i]['close']+1/data['USDJPY'][i]['close']+1
+rys=[]
+last_res = [0,0,0]
+deltas = [[],[],[]]
+for i in range(0, 500):
+    ty = round(data['USDJPY'][i]['close']+data['EURJPY'][i]['close']+data['CHFJPY'][i]['close']+data['GBPJPY'][i]['close']+1, 3)
+    td = round(data['EURUSD'][i]['close']+data['GBPUSD'][i]['close']+1/data['USDCHF'][i]['close']+1/data['USDJPY'][i]['close']+1, 5)
     ry = data['USDJPY'][i]['close']
     ny = round(ty/td, 3)
     yd = round(ty/td-ry, 3)
 
-    print(ry, ny, yd)
-    if last > 0.01:
-        input()
+    res = [ry, ty, td]
+    rys.append(ry)
+    print (res)
+    for x in range(0,3):
+        if i>0:
+            dt = round((res[x]-last_res[x])/last_res[x]*100, 6)
+        else:
+            dt=0
+        print(dt)
+        deltas[x].append(dt)
+    last_res = res
     last = yd
+
+#print (deltas[0][-300:])
+draw_plot(deltas, 'test')
