@@ -71,8 +71,8 @@ def draw_candles(data, name, context):
             lowest = d['low']
 
     l = len(data)
-    context['price_high'] = highest*1.0+l/10
-    context['price_low'] = lowest*1.0-l/10
+    context['price_high'] = highest#*(1.0+l/1000)
+    context['price_low'] = lowest#*(1.0-l/1000)
 
     for i, d in enumerate(data_slice):
         candle(d['open'], d['high'], d['low'], d['close'], i+1, context, draw, sl=d.get('stoploss', None), tp=d.get('takeprofit', None))
@@ -102,7 +102,7 @@ def draw_plot(data_list, name, **kwargs):
     plots = len(data_list)
     print(maximum, minimum, band, length, plots)
 
-    img_width = 1200
+    img_width = 1920    
     img_height = 800
 
     img = Image.new('RGB', (img_width, img_height,), (255, 255, 255, 0))

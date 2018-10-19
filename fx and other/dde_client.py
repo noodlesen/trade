@@ -211,7 +211,9 @@ class DDEClient(object):
         dwSize = DWORD(0)
         pData = DDE.AccessData(hDdeData, byref(dwSize))
         if pData:
+            
             item = create_string_buffer('\000' * 128)
+    
             DDE.QueryString(self._idInst, hsz2, item, 128, 1004)
             self.callback(pData, item.value)
             DDE.UnaccessData(hDdeData)

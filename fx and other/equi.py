@@ -1,8 +1,8 @@
 from reader import read_mt_csv
-from drawer import draw_plot
+from drawer import draw_plot, draw_candles
 import math
 
-symbols = ['USDJPY', 'USDCHF', 'EURUSD', 'CHFJPY', 'EURJPY', 'GBPJPY', 'GBPUSD']
+symbols = ["USDJPY", "USDCHF", "EURUSD", "CHFJPY", "EURJPY", "GBPJPY", "GBPUSD"]
 
 data = {}
 
@@ -14,7 +14,7 @@ last = 0
 rys=[]
 last_res = [0,0,0]
 deltas = [[],[],[]]
-for i in range(0, 500):
+for i in range(0, 50):
     ty = round(data['USDJPY'][i]['close']+data['EURJPY'][i]['close']+data['CHFJPY'][i]['close']+data['GBPJPY'][i]['close']+1, 3)
     td = round(data['EURUSD'][i]['close']+data['GBPUSD'][i]['close']+1/data['USDCHF'][i]['close']+1/data['USDJPY'][i]['close']+1, 5)
     ry = data['USDJPY'][i]['close']
@@ -36,3 +36,4 @@ for i in range(0, 500):
 
 #print (deltas[0][-300:])
 draw_plot(deltas, 'test')
+draw_candles(data['USDJPY'][0:50], 'candles', {'width':1920, 'height':800, "number":50, "offset": 0})

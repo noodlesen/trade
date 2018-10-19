@@ -12,7 +12,7 @@ else:
     params = load_settings_from_report('_evo_mod.txt')
 
 chart = Asset()
-chart.load_mt4_history('MTDATA', 'USDJPY', 60)
+chart.load_mt4_history('MTDATA', 'ADBE', 1440)
 chart.range_from_last(550)
 
 t1 = datetime.now()

@@ -11,14 +11,14 @@ TRENDY = ['BA', 'ADBE', 'CAT', 'INTC', 'AAPL']
 OTHER1 = ['AA', 'AXP', 'C', 'CSCO', 'DIS']
 OTHER2 = ['EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
 FOREX = ['USDJPY']
-symbols = []
-symbols.extend(TRENDY)
+symbols = ['AAPL', 'DIS']
+#symbols.extend(TRENDY)
 # symbols.extend(CHANNEL)
 # symbols.extend(OTHER1)
 # symbols.extend(OTHER2)
 #symbols.extend(['USDJPY'])
 
-GENERATIONS_COUNT = 2
+GENERATIONS_COUNT = 20
 MUTATIONS = 70
 OUTSIDERS = 5
 DEPTH = 10

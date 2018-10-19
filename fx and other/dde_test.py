@@ -7,7 +7,7 @@ import time
 QUOTE_client = ddec.DDEClient('MT4', 'QUOTE')
 
 # Register desired symbols..
-symbols = ['DIS', 'WFC', 'VZ','T', 'KO', 'BA','ADBE', 'CAT', 'INTC', 'AAPL']
+symbols = ["USDJPY", "USDCHF", "EURUSD", "CHFJPY", "EURJPY", "GBPJPY", "GBPUSD"]
 for i in symbols:
     QUOTE_client.advise(i)
 
@@ -16,7 +16,7 @@ columns = ['Symbol', 'DATE', 'TIME', 'BID', 'ASK']
 
 
 while 1:
-    time.sleep(1)
+    time.sleep(2)
     to_display = []
     for item in symbols:
         current_quote = QUOTE_client.request(item).split()
