@@ -43,11 +43,13 @@ class Trade():
         self.created_by = None
         self.ticket = None
         self.magic_number = None
+        self.symbol = None
 
-    def open_trade(self, direction, daydata, price, stoploss, takeprofit, open_reason):
+    def open_trade(self, symbol, direction, daydata, price, stoploss, takeprofit, open_reason):
         self.direction = direction
         self.days += 1
         self.is_open = True
+        self.symbol = symbol
         self.open_price = price
         self.open_reason = open_reason
         self.stoploss = stoploss
@@ -114,7 +116,8 @@ class Trade():
                     self.profit = self.open_price - daydata.close_price
 
 
-def get_trades_stats(trades, asset, params, **kwargs):
+#def get_trades_stats(trades, asset, params, **kwargs):
+def get_trades_stats(trades, params, **kwargs):
 
     verbose = kwargs.get('verbose', False)
 
@@ -159,7 +162,7 @@ def get_trades_stats(trades, asset, params, **kwargs):
                     'height': 500,
                     'offset': 0
                 }
-                draw_candles(t.data, 'images/'+asset.symbol+str(i)+'_'+t.direction+'_'+t.close_reason, context)
+                draw_candles(t.data, 'images/'+t.symbol+str(i)+'_'+t.direction+'_'+t.close_reason, context)
 
             if t.days > days_max:
                 days_max = t.days
@@ -202,7 +205,7 @@ def get_trades_stats(trades, asset, params, **kwargs):
         average_win = 0
 
     res = {}
-    res['SYMBOL'] = asset.symbol
+    res['SYMBOL'] = t.symbol
     res['PROFIT'] = sum_of_wins+sum_of_loses
     res['TRADES'] = number_of_trades
     res['WINS'] = number_of_wins

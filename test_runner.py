@@ -4,12 +4,12 @@ from reader import load_settings_from_report
 from assets import Asset
 from datetime import datetime
 
-RANDOM = True
+RANDOM = False
 
 if RANDOM:
     params = TS.get_random_params()
 else:
-    params = load_settings_from_report('_evo_mod.txt')
+    params = load_settings_from_report('results/_22k_2y_trendy.txt')
 
 chart = Asset()
 chart.load_mt4_history('MTDATA', 'ADBE', 1440)

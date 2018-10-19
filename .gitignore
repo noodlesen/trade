@@ -1,2 +1,3 @@
 images/
 atlas/atlas/settings.py
+atlas/db.sqlite3

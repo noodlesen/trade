@@ -1,5 +1,5 @@
 from candlesticks import Candle, Figure
-from reader import read_mt_csv, read_multi_csv
+from reader import read_mt_csv
 
 
 class Asset():
@@ -79,8 +79,14 @@ class MultiAsset():
     def __init__(self):
         self.assets = {}
 
-    def load(self, filename, timeframe):
-        md = read_multi_csv(filename)
-        for k in md.keys():
-            a = Asset(data=md[k], symbol=k, timeframe=timeframe)
-            self.assets[k] = a
+    def load(self, symbol, timeframe):
+        a = Asset()
+        a.load_mt4_history('MTDATA', symbol, timeframe)
+        self.assets[symbol] = a
+
+    def show(self):
+        for k, v in self.assets.items():
+            print(v.symbol, v.count)
+
+
+

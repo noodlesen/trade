@@ -1,3 +1,5 @@
+# TA INDICATORS LIBRARY
+
 def typical_price(bar):
     return (bar['high']+bar['low']+bar['close'])/3
 

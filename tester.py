@@ -16,4 +16,19 @@ def test(c, params, **kwargs):
             trades.append(trade)
         c.next()
 
-    return get_trades_stats(trades, c, params, **kwargs)
+    return get_trades_stats(trades, params, **kwargs)
+
+def multitest(cs, params, **kwargs):
+    for c in cs:
+        trades = []
+        c.reset()
+
+        for i in range(c.range_from, c.range_to):
+            cc = c.get()
+            TS.manage(cc, c, trades, params)
+            trade = TS.open(cc, c, trades, params)
+            if trade:
+                trades.append(trade)
+            c.next()
+
+    return get_trades_stats(trades, params, **kwargs)

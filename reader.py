@@ -1,3 +1,5 @@
+# DATA READING LIBRARY
+
 import json
 from time import sleep
 
@@ -84,30 +86,30 @@ def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
         return data[-cut:]
 
 
-def read_multi_csv(fname):
-    with open(fname, 'r') as f:
-        csv = f.read()
-    lines = [l for l in csv.split('\n')][:-1]
-    res = {}
-    for l in lines:
-        sl = l.split(';')
-        if sl[0] not in res.keys():
-            res[sl[0]] = []
-        res[sl[0]].append(
-            {
-                "date": sl[1].split(' ')[0],
-                "time": sl[1].split(' ')[1],
-                "open": float(sl[2]),
-                "high": float(sl[3]),
-                "low": float(sl[4]),
-                "close": float(sl[5]),
-                "volume": float(sl[6])
-            }
-        )
-    for s in res.keys():
-        res[s].reverse()
+# def read_multi_csv(fname):
+#     with open(fname, 'r') as f:
+#         csv = f.read()
+#     lines = [l for l in csv.split('\n')][:-1]
+#     res = {}
+#     for l in lines:
+#         sl = l.split(';')
+#         if sl[0] not in res.keys():
+#             res[sl[0]] = []
+#         res[sl[0]].append(
+#             {
+#                 "date": sl[1].split(' ')[0],
+#                 "time": sl[1].split(' ')[1],
+#                 "open": float(sl[2]),
+#                 "high": float(sl[3]),
+#                 "low": float(sl[4]),
+#                 "close": float(sl[5]),
+#                 "volume": float(sl[6])
+#             }
+#         )
+#     for s in res.keys():
+#         res[s].reverse()
 
-    return res
+#     return res
 
 
 def watcher(fname):
