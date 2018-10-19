@@ -1,6 +1,8 @@
 from assets import MultiAsset
 
 m = MultiAsset()
-m.load('ADBE', 1440)
-m.load('AAPL', 1440)
+TRENDY = ['BA', 'ADBE', 'CAT', 'INTC', 'AAPL']
+for t in TRENDY:
+    m.load_mt4_history('MTDATA',t, 1440)
 m.show()
+m.reset()
