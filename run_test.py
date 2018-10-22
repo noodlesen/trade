@@ -13,10 +13,10 @@ else:
 
 chart = Asset()
 chart.load_mt4_history('MTDATA', 'ADBE', 1440)
-chart.range_from_last(250)
+chart.range_from_last(500)
 
 
-res = test(chart, params, verbose=True, draw=True)
+res = test(chart, params, verbose=True, draw=False)
 
 for k,v in res.items():
     print(k, v)

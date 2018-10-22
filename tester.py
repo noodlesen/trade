@@ -11,6 +11,8 @@ def test(c, params, **kwargs):
 
     last_cc = None
 
+    total_inv = 0
+    max_dd = 0
     for i in range(c.range_from, c.range_to):
         cc = c.get()
         last_cc = cc
@@ -18,6 +20,11 @@ def test(c, params, **kwargs):
         trade = TS.open(cc, c, trades, params)
         if trade:
             trades.append(trade)
+            total_inv+=trade.open_price
+
+        cdd = sum([t.profit for t in trades if t.profit])
+        if cdd<max_dd:
+            max_dd =cdd
 
         c.next()
 
@@ -27,4 +34,8 @@ def test(c, params, **kwargs):
 
 
 
-    return get_trades_stats(trades, **kwargs)
+    ts = get_trades_stats(trades, **kwargs)
+    ts['TOTAL_INV'] = total_inv
+    ts['ROI'] = ts['PROFIT']/total_inv
+    ts['DD'] = max_dd
+    return ts
