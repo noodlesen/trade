@@ -4,7 +4,7 @@ from evo import generate
 from reader import load_settings_from_report
 
 
-initial_params = load_settings_from_report('results/_22k_2y_trendy.txt')
+initial_params = load_settings_from_report('_no_loses.txt')
 
 CHANNEL = ['DIS', 'WFC', 'VZ', 'T', 'KO']
 TRENDY = ['BA', 'ADBE', 'CAT', 'INTC', 'AAPL']
@@ -13,12 +13,12 @@ OTHER2 = ['EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
 FOREX = ['USDJPY']
 symbols = []
 symbols.extend(TRENDY)
-# symbols.extend(CHANNEL)
-# symbols.extend(OTHER1)
-# symbols.extend(OTHER2)
+symbols.extend(CHANNEL)
+symbols.extend(OTHER1)
+symbols.extend(OTHER2)
 #symbols.extend(['USDJPY'])
 
-GENERATIONS_COUNT = 10
+GENERATIONS_COUNT = 20
 MUTATIONS = 70
 OUTSIDERS = 5
 DEPTH = 10

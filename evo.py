@@ -34,27 +34,30 @@ def test_all(assets, params, **kwargs):
             if test_res:
                 results.append(test_res)
 
-    wins = sum([r['WINS'] for r in results])
-    loses = sum([r['LOSES'] for r in results])
-    trades = sum([r['TRADES'] for r in results])
-    winrate = wins/trades if trades > 0 else None
-    wins_to_loses = wins/loses if loses > 0 else None
-    output = {
-        'PROFIT': sum([r['PROFIT'] for r in results]),
-        'TRADES': trades,
-        'WINS': wins,
-        'LOSES': loses,
-        'WINS_TO_LOSES': wins_to_loses,
-        'WINRATE': winrate,
-        'MAX_PROFIT_PER_TRADE': max([r['MAX_PROFIT_PER_TRADE'] for r in results]),
-        'MAX_LOSS_PER_TRADE': max([r['MAX_LOSS_PER_TRADE'] for r in results]),
-        'MAX_WINS_IN_A_ROW': max([r['MAX_WINS_IN_A_ROW'] for r in results]),
-        'MAX_LOSES_IN_A_ROW': max([r['MAX_LOSES_IN_A_ROW'] for r in results]),
-    }
-    return {
-        'ALL': output,
-        'PASSES': results
-    }
+    if results:
+        wins = sum([r['WINS'] for r in results])
+        loses = sum([r['LOSES'] for r in results])
+        trades = sum([r['TRADES'] for r in results])
+        winrate = wins/trades if trades > 0 else None
+        wins_to_loses = wins/loses if loses > 0 else None
+        output = {
+            'PROFIT': sum([r['PROFIT'] for r in results]),
+            'TRADES': trades,
+            'WINS': wins,
+            'LOSES': loses,
+            'WINS_TO_LOSES': wins_to_loses,
+            'WINRATE': winrate,
+            'MAX_PROFIT_PER_TRADE': max([r['MAX_PROFIT_PER_TRADE'] for r in results]),
+            'MAX_LOSS_PER_TRADE': max([r['MAX_LOSS_PER_TRADE'] for r in results]),
+            'MAX_WINS_IN_A_ROW': max([r['MAX_WINS_IN_A_ROW'] for r in results]),
+            'MAX_LOSES_IN_A_ROW': max([r['MAX_LOSES_IN_A_ROW'] for r in results]),
+        }
+        return {
+            'ALL': output,
+            'PASSES': results
+        }
+    else:
+        return None
 
 
 def generate(symbols, timeframe, generations_count, mutations, outsiders, depth, strategy, **kwargs):
@@ -93,11 +96,15 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         offs = []
         for d in range(0, depth):
             m = mutate(survivor['input'], mutations)
-            offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
+            ta = test_all(assets, m, **kwargs)
+            if ta:
+                offs.append({'input': m, 'output': ta})
 
         for x in range(0, outsiders):
             m = TS.get_random_params()
-            offs.append({'input': m, 'output': test_all(assets, m, **kwargs)})
+            ta = test_all(assets, m, **kwargs)
+            if ta:
+                offs.append({'input': m, 'output': ta})
 
         for off in offs:
 

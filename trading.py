@@ -137,6 +137,9 @@ def get_trades_stats(trades, params, **kwargs):
     open_reasons = {}
     close_reasons = {}
 
+    open_trades = 0
+    open_profit = 0
+
     if trades:
         i = 0
         for t in trades:
@@ -194,6 +197,12 @@ def get_trades_stats(trades, params, **kwargs):
                     if t.profit > max_profit_per_trade:
                         max_profit_per_trade = t.profit
 
+            else: # if trade is open
+                
+                if t.profit:
+                    open_trades += 1
+                    open_profit += t.profit
+
         number_of_trades = len(trades)
         if number_of_loses:
             average_loss = sum_of_loses/number_of_loses
@@ -224,6 +233,8 @@ def get_trades_stats(trades, params, **kwargs):
         res['DAYS_MIN'] = days_min
         res['OPEN_REASONS'] = open_reasons
         res['CLOSE_REASONS'] = close_reasons
+        res['OPEN_TRADES'] = open_trades
+        res['OPEN_PROFIT'] = open_profit
 
         return res
 
