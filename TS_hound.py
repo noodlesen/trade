@@ -1,4 +1,4 @@
-from trading import Trade, trade_stats, close_all
+from trading import Trade #, close_all
 from random import randint, choice
 from indi import CCI
 
@@ -82,7 +82,7 @@ def open(cc, c, trades, params):
 
     trade = None
 
-    ts = trade_stats(trades)
+    #ts = trade_stats(trades)
 
     allowed_to_buy = False
 
@@ -90,7 +90,7 @@ def open(cc, c, trades, params):
 
     open_reason = None
 
-    if ts['open'] <= params.get('max_pos', 50):    
+    if True:  #ts['open'] <= params.get('max_pos', 50):    
 
         # TAIL
         if params.get('open_TAIL', False):
@@ -145,8 +145,8 @@ def open(cc, c, trades, params):
             tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
 
             if has_buy_signal:
-                if ts['open_long'] > ts['open_short'] or ts['open'] == 0:
-                    allowed_to_buy = True
+                #if ts['open_long'] > ts['open_short'] or ts['open'] == 0:
+                allowed_to_buy = True
 
             if allowed_to_buy:
                 trade = Trade()

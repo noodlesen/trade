@@ -5,13 +5,15 @@ from termcolor import colored
 class Trade():
 
     def __str__(self):
-        return '%s | %r > %r | = %r [%s][%s]' % (
+        return '%s | %r > %r | = %r [%s][%s] %r %r' % (
             self.direction,
             self.open_price,
             self.close_price,
             self.profit,
             self.open_reason,
-            self.close_reason
+            self.close_reason,
+            self.is_open,
+            self.is_closed
         )
 
     def __init__(self):
@@ -45,6 +47,7 @@ class Trade():
         self.magic_number = None
         self.symbol = None
 
+
     def open_trade(self, symbol, direction, daydata, price, stoploss, takeprofit, open_reason):
         self.direction = direction
         self.days += 1
@@ -63,6 +66,7 @@ class Trade():
         self.open_date = daydata.date
         self.open_time = daydata.time
 
+
     def close_trade(self, daydata, price, close_reason):
         self.close_price = price
         self.close_date = daydata.date
@@ -79,6 +83,7 @@ class Trade():
         self.is_closed = True
         self.close_reason = close_reason
 
+
     def update_trade(self, daydata):
         self.days += 1
 
@@ -92,32 +97,16 @@ class Trade():
         if daydata.low_price < self.low:
             self.low = daydata.low_price
 
-        if self.direction == 'BUY':
+        if daydata.low_price <= self.stoploss:
+            self.close_trade(daydata, self.stoploss, 'SL')
+        if daydata.high_price >= self.takeprofit:
+            self.close_trade(daydata, self.takeprofit, 'TP')
 
-            if daydata.low_price <= self.stoploss:
-                self.close_trade(daydata, self.stoploss, 'SL')
-            if daydata.high_price >= self.takeprofit:
-                self.close_trade(daydata, self.takeprofit, 'TP')
-
-            if not self.is_closed:
-                self.profit = daydata.close_price - self.open_price
-
-        elif self.direction == 'SELL':
-
-            if daydata.high_price >= self.stoploss:
-                self.close_trade(daydata, self.stoploss, 'SL')
-            if daydata.low_price <= self.takeprofit:
-                self.close_trade(daydata, self.takeprofit, 'TP')
-
-            if not self.is_closed:
-                if self.direction == 'BUY':
-                    self.profit = daydata.close_price - self.open_price
-                if self.direction == 'SELL':
-                    self.profit = self.open_price - daydata.close_price
+        if not self.is_closed:
+            self.profit = daydata.close_price - self.open_price
 
 
-#def get_trades_stats(trades, asset, params, **kwargs):
-def get_trades_stats(trades, params, **kwargs):
+def get_trades_stats(trades, **kwargs):
 
     verbose = kwargs.get('verbose', False)
 
@@ -137,8 +126,6 @@ def get_trades_stats(trades, params, **kwargs):
     open_reasons = {}
     close_reasons = {}
 
-    open_trades = 0
-    open_profit = 0
 
     if trades:
         i = 0
@@ -197,11 +184,6 @@ def get_trades_stats(trades, params, **kwargs):
                     if t.profit > max_profit_per_trade:
                         max_profit_per_trade = t.profit
 
-            else: # if trade is open
-                
-                if t.profit:
-                    open_trades += 1
-                    open_profit += t.profit
 
         number_of_trades = len(trades)
         if number_of_loses:
@@ -233,48 +215,10 @@ def get_trades_stats(trades, params, **kwargs):
         res['DAYS_MIN'] = days_min
         res['OPEN_REASONS'] = open_reasons
         res['CLOSE_REASONS'] = close_reasons
-        res['OPEN_TRADES'] = open_trades
-        res['OPEN_PROFIT'] = open_profit
+        #res['TRADES_LIST'] = trades
 
         return res
 
     else:
         return None
 
-
-def trade_stats(trades):
-    s = {
-        "open": 0,
-        "closed": 0,
-        "open_long": 0,
-        "open_short": 0,
-        "open_profit": 0,
-        "closed_long": 0,
-        "closed_short": 0,
-        "closed_profit": 0,
-        "total_profit": 0
-    }
-    for t in trades:
-        if t.is_open:
-            s['open'] += 1
-            s['open_profit'] += t.profit
-            if t.direction == 'BUY':
-                s['open_long'] += 1
-            elif t.direction == 'SELL':
-                s['open_short'] += 1
-        elif t.is_closed:
-            s['closed'] += 1
-            s['closed_profit'] += t.profit
-            if t.direction == 'BUY':
-                s['closed_long'] += 1
-            elif t.direction == 'SELL':
-                s['closed_short'] += 1
-        s['total_profit'] = s['open_profit'] + s['closed_profit']
-
-    return (s)
-
-
-def close_all(trades, cc, reason):
-    for t in trades:
-        if t.is_open:
-            t.close_trade(cc, cc.close_price, reason)
