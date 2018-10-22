@@ -9,10 +9,10 @@ RANDOM = False
 if RANDOM:
     params = TS.get_random_params()
 else:
-    params = load_settings_from_report('results/_22k_2y_trendy.txt')
+    params = load_settings_from_report('_evo.txt')
 
 chart = Asset()
-chart.load_mt4_history('MTDATA', 'ADBE', 1440)
+chart.load_mt4_history('MTDATA', 'T', 1440)
 chart.range_from_last(550)
 
 t1 = datetime.now()

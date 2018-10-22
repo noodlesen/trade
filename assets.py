@@ -127,3 +127,5 @@ class MultiAsset(Asset):
         for k,v in self.raw_data.items():
             print(k, len(v))
 
+    def trim(self):
+        self.reset_range()

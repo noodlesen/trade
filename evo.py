@@ -30,7 +30,9 @@ def mutate(p, nm):
 def test_all(assets, params, **kwargs):
     results = []
     for an, a in assets.items():
-            results.append(test(a, params, **kwargs))
+            test_res = test(a, params, **kwargs)
+            if test_res:
+                results.append(test_res)
 
     wins = sum([r['WINS'] for r in results])
     loses = sum([r['LOSES'] for r in results])
@@ -108,6 +110,9 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
 
                 elif strategy == 'MAX_PROFIT':
                     cond = off['output']['ALL']['PROFIT'] > survivor['output']['ALL']['PROFIT'] and off_wr > 0.5
+
+                elif strategy == 'MIN_TRADES_MAX_PROFIT':
+                    cond = off['output']['ALL']['PROFIT']/off['output']['ALL']['TRADES'] > survivor['output']['ALL']['PROFIT']/survivor['output']['ALL']['TRADES']
 
                 elif strategy == 'EVERYTHING':
                     off_max_loses = off['output']['ALL']['MAX_LOSES_IN_A_ROW']
