@@ -4,7 +4,7 @@ from evo import generate
 from reader import load_settings_from_report
 
 
-initial_params = load_settings_from_report('_no_loses.txt')
+initial_params = load_settings_from_report('grow.txt')
 
 CHANNEL = ['DIS', 'WFC', 'VZ', 'T', 'KO']
 TRENDY = ['BA', 'ADBE', 'CAT', 'INTC', 'AAPL']
