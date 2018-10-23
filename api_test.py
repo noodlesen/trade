@@ -4,7 +4,8 @@ from time import sleep
 
 API_URL='https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=%s&outputsize=full&apikey='+AV_API_KEY
 
-BASE_STOCKS = ['DIS', 'WFC', 'VZ', 'T', 'KO', 'BA', 'ADBE', 'CAT', 'INTC', 'AAPL', 'AA', 'AXP', 'C', 'CSCO', 'DIS', 'EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
+#BASE_STOCKS = ['DIS', 'WFC', 'VZ', 'T', 'KO', 'BA', 'ADBE', 'CAT', 'INTC', 'AAPL', 'AA', 'AXP', 'C', 'CSCO', 'DIS', 'EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
+BASE_STOCKS = ['AA', 'FE', 'SCI', 'GTN', 'MSGN', 'USM', 'DISCA', 'OGE', 'AROW', 'EXPO', 'TLP', 'MMT', 'LION', 'ATI', 'MYGN']
 
 def ask(symbol):
     print ('requesting '+symbol)
@@ -20,11 +21,11 @@ def ask(symbol):
         sleep(10)
 
 
-# for s in BASE_STOCKS:
-#     ask(s)
+for s in BASE_STOCKS:
+    ask(s)
 
-#
 
-from reader import read_av_json
 
-read_av_json('AVHD','AAPL')
+# from reader import read_av_json
+
+# read_av_json('AVHD','AAPL')
