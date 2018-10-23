@@ -70,7 +70,7 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
     assets = {}
     for s in symbols:
         a = Asset()
-        a.load_mt4_history('MTDATA', s, timeframe)
+        a.load_av_history('AVHD', s)
         if cut:
             a.range_from_last(cut)
 
