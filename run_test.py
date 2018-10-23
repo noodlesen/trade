@@ -7,7 +7,7 @@ from datetime import datetime
 RANDOM = False
 
 if RANDOM:
-    params = TS.get_random_params()
+    params = TS.get_random_ts_params()
 else:
     params = load_settings_from_report('supergrow.txt')
 

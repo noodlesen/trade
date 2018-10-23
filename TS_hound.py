@@ -155,7 +155,7 @@ def open(cc, c, trades, params):
     return trade
 
 
-def get_random_params():
+def get_random_ts_params():
     params = {
         'tp_koef': randint(1, 40)/10,
         'use_FIA': choice([True, False]),

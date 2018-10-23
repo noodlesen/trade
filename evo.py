@@ -9,7 +9,7 @@ from config import TS
 
 
 def mutate(p, nm):
-    new_params = TS.get_random_params()
+    new_params = TS.get_random_ts_params()
     numbers = []
     l = len(p.items())
 
@@ -83,10 +83,10 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
     while tr == 0:
         if tries:
             print ("RANDOM")
-            initial = TS.get_random_params()
+            initial = TS.get_random_ts_params()
         else:
             print ("INITIAL")
-            initial = kwargs.get('initial_params', TS.get_random_params())
+            initial = kwargs.get('initial_params', TS.get_random_ts_params())
 
         initial_result = test_all(assets, initial, **kwargs)
         tr = initial_result['ALL']['TRADES']
@@ -107,7 +107,7 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
                 offs.append({'input': m, 'output': ta})
 
         for x in range(0, outsiders):
-            m = TS.get_random_params()
+            m = TS.get_random_ts_params()
             ta = test_all(assets, m, **kwargs)
             if ta:
                 offs.append({'input': m, 'output': ta})
