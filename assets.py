@@ -1,5 +1,5 @@
 from candlesticks import Candle, Figure
-from reader import read_mt_csv
+from reader import read_mt_csv, read_av_json
 import datetime
 
 class Timeline():
@@ -60,7 +60,13 @@ class Asset(Timeline):
         self.count = len(self.data)
         self.reset_range()
 
-    
+    def load_av_history(self, path, symbol):
+        self.data = read_av_json(path, symbol)
+        self.symbol = symbol
+        self.timeframe = 1440
+        self.count = len(self.data)
+        self.reset_range()
+
 
     def last(self, n, of=0, **kwargs):
         of = abs(of)

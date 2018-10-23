@@ -23,4 +23,8 @@ def ask(symbol):
 # for s in BASE_STOCKS:
 #     ask(s)
 
-ask('SPY')
+#
+
+from reader import read_av_json
+
+read_av_json('AVHD','AAPL')

@@ -43,11 +43,9 @@ def test_all(assets, params, **kwargs):
         wins_to_loses = wins/loses if loses > 0 else None
         profit = sum([r['PROFIT'] for r in results])
         roi = profit/total_inv*100
-        avmdd = sum([r['DD'] for r in results])/len(results)
         output = {
             'PROFIT': profit,
             'ROI': roi,
-            'AVERAGE_MAX_DRAWDOWN': avmdd,
             'TRADES': trades,
             'WINS': wins,
             'LOSES': loses,
@@ -127,8 +125,8 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
                 elif strategy == 'MIN_TRADES_MAX_PROFIT':
                     cond = off['output']['ALL']['PROFIT']/off['output']['ALL']['TRADES'] > survivor['output']['ALL']['PROFIT']/survivor['output']['ALL']['TRADES']
 
-                elif strategy == 'MAX_ROI_MIN_DD':
-                    cond = off['output']['ALL']['ROI'] >= survivor['output']['ALL']['ROI'] and off['output']['ALL']['AVERAGE_MAX_DRAWDOWN']>survivor['output']['ALL']['AVERAGE_MAX_DRAWDOWN']
+                elif strategy == 'MAX_ROI':
+                    cond = off['output']['ALL']['ROI'] >= survivor['output']['ALL']['ROI']
 
                 elif strategy == 'EVERYTHING':
                     off_max_loses = off['output']['ALL']['MAX_LOSES_IN_A_ROW']
@@ -146,7 +144,7 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         print('>>>>')
         print(survivor['output']['ALL']['WINS']/survivor['output']['ALL']['TRADES'])
         print(survivor['output']['ALL']['PROFIT'])
-        print(survivor['output']['ALL']['ROI'], survivor['output']['ALL']['AVERAGE_MAX_DRAWDOWN'])
+        print(survivor['output']['ALL']['ROI'])
         print()
 
     if kwargs.get('report', False):
