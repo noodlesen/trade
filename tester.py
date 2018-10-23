@@ -35,7 +35,8 @@ def test(c, params, **kwargs):
 
 
     ts = get_trades_stats(trades, **kwargs)
-    ts['TOTAL_INV'] = total_inv
-    ts['ROI'] = ts['PROFIT']/total_inv
-    ts['DD'] = max_dd
+    if ts:
+        ts['TOTAL_INV'] = total_inv
+        ts['ROI'] = ts['PROFIT']/total_inv
+        ts['DD'] = max_dd
     return ts

@@ -12,7 +12,7 @@ else:
     params = load_settings_from_report('supergrow.txt')
 
 chart = Asset()
-chart.load_mt4_history('MTDATA', 'ADBE', 1440)
+chart.load_mt4_history('MTDATA', 'BA', 1440)
 chart.range_from_last(500)
 
 
