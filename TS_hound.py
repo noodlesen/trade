@@ -128,19 +128,25 @@ def open(cc, c, trades, params):
                 has_buy_signal = True
                 open_reason = 'C2_BUY'
 
-        filter_passed = True
+        passed_filters = []
 
-        if params.get('use_FILTERS', False):
+        if params.get('use_HIGH_FILTER', False):
 
-            filter_passed = False
-            max_per = params.get('f_max_per', 250)
-            th = params.get('f_max_th', 0.8)
+            high_filter_passed = 0
+            max_per = params.get('hf_max_per', 250)
+            th = params.get('hf_max_th', 0.8)
             if c.pointer > max_per:
                 m = max(bar['high'] for bar in c.last(max_per))
                 if cc.close_price > m*th:
-                    filter_passed = True
+                    high_filter_passed = 1
+            passed_filters.append(high_filter_passed)
 
-        if filter_passed and has_buy_signal:
+
+
+        all_filters_passed = sum(passed_filters) == len(passed_filters)
+
+
+        if all_filters_passed and has_buy_signal:
 
             tp_value = cc.close_price*params.get('rel_tp_k', 0.2)
 
@@ -181,9 +187,9 @@ def get_random_ts_params():
         'ptbf_mix': randint(5, 90)/100,
         'use_PTTF': choice([True, False]),
         'use_PTBF': choice([True, False]),
-        'use_FILTERS': choice([True, False]),
-        'f_max_per': randint(20, 301),
-        'f_max_th': randint(50, 95)/100,
+        'use_HIGH_FILTER': choice([True, False]),
+        'hf_max_per': randint(20, 301),
+        'hf_max_th': randint(50, 95)/100,
         'open_C2': choice([True, False]),
         'open_FRACTAL': choice([True, False]),
         'open_HAMMER': choice([True, False]),

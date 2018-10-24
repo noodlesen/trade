@@ -4,7 +4,7 @@ from evo import generate
 from reader import load_settings_from_report
 
 
-initial_params = load_settings_from_report('adb23y_R176.txt')
+initial_params = load_settings_from_report('R122.txt')
 
 CHANNEL = ['DIS', 'WFC', 'VZ', 'T', 'KO']
 TRENDY = ['BA', 'ADBE', 'CAT', 'INTC', 'AAPL']
@@ -13,13 +13,13 @@ OTHER2 = ['EBAY', 'F', 'FB', 'GS', 'HD', 'HOG', 'HPQ', 'IBM', 'ITX', 'JNJ']
 NEW = ['FE', 'SCI', 'GTN', 'MSGN', 'USM', 'DISCA', 'OGE', 'AROW', 'EXPO', 'TLP', 'MMT', 'LION', 'ATI', 'MYGN']
 
 symbols = []
-symbols.extend(TRENDY)
+#symbols.extend(TRENDY)
 # symbols.extend(CHANNEL)
 # symbols.extend(OTHER1)
 # symbols.extend(OTHER2)
-# symbols.extend(NEW)
+symbols.extend(NEW)
 
-GENERATIONS_COUNT = 50
+GENERATIONS_COUNT = 10
 MUTATIONS = 70
 OUTSIDERS = 5
 DEPTH = 10

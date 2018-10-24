@@ -13,7 +13,7 @@ else:
 
 chart = Asset()
 #chart.load_mt4_history('MTDATA', 'BA', 1440)
-chart.load_av_history('AVHD', 'ADBE')
+chart.load_av_history('AVHD', 'AAPL')
 chart.range_from_last(750)
 
 

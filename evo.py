@@ -123,7 +123,7 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
 
     initial = kwargs.get('initial_params', TS.get_random_ts_params())
     initial_result = test_all(assets, initial, **kwargs)
-    if not initial_result:
+    if initial_result is None:
         initial_result = default_ir
     survivor = {'input': initial, 'output': initial_result}
     print(json.dumps(survivor['input'], sort_keys=True, indent=4))
