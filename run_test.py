@@ -12,7 +12,6 @@ else:
     params = load_settings_from_report('evo.txt')
 
 chart = Asset()
-#chart.load_mt4_history('MTDATA', 'BA', 1440)
 chart.load_av_history('AVHD', 'AAPL')
 chart.range_from_last(750)
 
