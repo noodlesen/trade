@@ -191,8 +191,8 @@ def get_random_ts_params():
         'open_BREAK': choice([True, False]),
         'use_PTC2': choice([True, False]),
         'ptc2_mix': randint(5, 90)/100,
-        'use_FLIP': choice([True, False]),
-        'trade_short': False,  # choice([True, False]),
+        #'use_FLIP': choice([True, False]),
+        #'trade_short': False,  # choice([True, False]),
     }
 
     params['max_pos'] = 100

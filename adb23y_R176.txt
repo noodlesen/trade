@@ -1,0 +1,96 @@
+{
+    "input": {
+        "FTP": 0.0512,
+        "cut_mix": 0.59,
+        "cut_period": 3,
+        "cut_treshold": 0.037,
+        "f_max_per": 290,
+        "f_max_th": 0.53,
+        "fia_dmax": 36,
+        "fia_dmin": 3,
+        "fia_treshold": 0.17,
+        "init_sl_k": 0.674,
+        "max_pos": 100,
+        "open_BREAK": true,
+        "open_C2": false,
+        "open_FRACTAL": true,
+        "open_HAMMER": false,
+        "open_TAIL": true,
+        "ptbf_mix": 0.19,
+        "ptc2_mix": 0.87,
+        "ptdj_mix": 0.38,
+        "pth_mix": 0.53,
+        "ptss_mix": 0.63,
+        "pttf_mix": 0.76,
+        "rel_tp_k": 0.137,
+        "tp_koef": 1.8,
+        "use_BREAKEVEN": false,
+        "use_CUT": false,
+        "use_FIA": false,
+        "use_FILTERS": false,
+        "use_FTP": false,
+        "use_PTBF": false,
+        "use_PTC2": false,
+        "use_PTDJ": true,
+        "use_PTH": false,
+        "use_PTSS": false,
+        "use_PTTF": false
+    },
+    "output": {
+        "ALL": {
+            "DAYS_MAX": 610,
+            "LOSES": 0,
+            "MAX_LOSES_IN_A_ROW": 0,
+            "MAX_LOSS_PER_TRADE": 0,
+            "MAX_PROFIT_PER_TRADE": 178.37,
+            "MAX_WINS_IN_A_ROW": 0,
+            "PROFIT": 11181.680000000002,
+            "ROI": 176.34702656241993,
+            "TRADES": 72,
+            "WINRATE": 1.0,
+            "WINS": 72,
+            "WINS_TO_LOSES": null
+        },
+        "PASSES": [
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 155.30111111111114,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        71,
+                        11042.620000000003
+                    ]
+                },
+                "DAYS_MAX": 610,
+                "DAYS_MIN": 569,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 178.37,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        8,
+                        1278.0299999999997
+                    ],
+                    "FRAC_BUY": [
+                        12,
+                        1849.6000000000004
+                    ],
+                    "TAIL_BUY": [
+                        49,
+                        7640.87
+                    ]
+                },
+                "PROFIT": 11181.680000000002,
+                "ROI": 1.7634702656241994,
+                "SYMBOL": "ADBE",
+                "TOTAL_INV": 6340.725,
+                "TRADES": 72,
+                "WINRATE": 1.0,
+                "WINS": 72,
+                "WINS_TO_LOSES": null
+            }
+        ]
+    }
+}

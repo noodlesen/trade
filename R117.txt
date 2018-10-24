@@ -1,0 +1,253 @@
+{
+    "input": {
+        "FTP": 0.276,
+        "cut_mix": 0.29,
+        "cut_period": 6,
+        "cut_treshold": 0.076,
+        "f_max_per": 136,
+        "f_max_th": 0.68,
+        "fia_dmax": 49,
+        "fia_dmin": 8,
+        "fia_treshold": 0.17,
+        "init_sl_k": 0.522,
+        "max_pos": 100,
+        "open_BREAK": true,
+        "open_C2": true,
+        "open_FRACTAL": false,
+        "open_HAMMER": true,
+        "open_TAIL": true,
+        "ptbf_mix": 0.45,
+        "ptc2_mix": 0.53,
+        "ptdj_mix": 0.63,
+        "pth_mix": 0.07,
+        "ptss_mix": 0.62,
+        "pttf_mix": 0.82,
+        "rel_tp_k": 0.22,
+        "tp_koef": 1.5,
+        "trade_short": false,
+        "use_BREAKEVEN": false,
+        "use_CUT": true,
+        "use_FIA": false,
+        "use_FILTERS": true,
+        "use_FLIP": false,
+        "use_FTP": false,
+        "use_PTBF": false,
+        "use_PTC2": false,
+        "use_PTDJ": false,
+        "use_PTH": false,
+        "use_PTSS": false,
+        "use_PTTF": false
+    },
+    "output": {
+        "ALL": {
+            "LOSES": 0,
+            "MAX_LOSES_IN_A_ROW": 0,
+            "MAX_LOSS_PER_TRADE": 0,
+            "MAX_PROFIT_PER_TRADE": 182.36,
+            "MAX_WINS_IN_A_ROW": 0,
+            "PROFIT": 15066.960000000003,
+            "ROI": 117.94094616099326,
+            "TRADES": 155,
+            "WINRATE": 1.0,
+            "WINS": 155,
+            "WINS_TO_LOSES": null
+        },
+        "PASSES": [
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 177.4090909090909,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        21,
+                        3729.2800000000007
+                    ]
+                },
+                "DAYS_MAX": 303,
+                "DAYS_MIN": 204,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 182.36,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "C2_BUY": [
+                        20,
+                        3551.3199999999997
+                    ],
+                    "TAIL_BUY": [
+                        0,
+                        0
+                    ]
+                },
+                "PROFIT": 3903.0,
+                "ROI": 1.1444077837791178,
+                "SYMBOL": "BA",
+                "TOTAL_INV": 3410.4975999999997,
+                "TRADES": 22,
+                "WINRATE": 1.0,
+                "WINS": 22,
+                "WINS_TO_LOSES": null
+            },
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 129.85724637681162,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        68,
+                        8847.590000000002
+                    ]
+                },
+                "DAYS_MAX": 358,
+                "DAYS_MIN": 310,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 145.1,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        13,
+                        1783.8200000000002
+                    ],
+                    "C2_BUY": [
+                        16,
+                        2088.46
+                    ],
+                    "HAMMER_BUY": [
+                        1,
+                        144.79
+                    ],
+                    "TAIL_BUY": [
+                        35,
+                        4484.19
+                    ]
+                },
+                "PROFIT": 8960.150000000001,
+                "ROI": 1.2103404025395113,
+                "SYMBOL": "ADBE",
+                "TOTAL_INV": 7402.999999999999,
+                "TRADES": 69,
+                "WINRATE": 1.0,
+                "WINS": 69,
+                "WINS_TO_LOSES": null
+            },
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 82.2918181818182,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        10,
+                        818.11
+                    ]
+                },
+                "DAYS_MAX": 301,
+                "DAYS_MIN": 261,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 90.14,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        0,
+                        0
+                    ],
+                    "C2_BUY": [
+                        9,
+                        736.25
+                    ]
+                },
+                "PROFIT": 905.2100000000002,
+                "ROI": 0.9394668117711028,
+                "SYMBOL": "CAT",
+                "TOTAL_INV": 963.5359,
+                "TRADES": 11,
+                "WINRATE": 1.0,
+                "WINS": 11,
+                "WINS_TO_LOSES": null
+            },
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 13.967999999999998,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        4,
+                        53.38
+                    ]
+                },
+                "DAYS_MAX": 309,
+                "DAYS_MIN": 2,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 16.8,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        0,
+                        0
+                    ],
+                    "C2_BUY": [
+                        0,
+                        0
+                    ],
+                    "TAIL_BUY": [
+                        2,
+                        20.5
+                    ]
+                },
+                "PROFIT": 69.83999999999999,
+                "ROI": 0.9761006289308175,
+                "SYMBOL": "ATI",
+                "TOTAL_INV": 71.55,
+                "TRADES": 5,
+                "WINRATE": 1.0,
+                "WINS": 5,
+                "WINS_TO_LOSES": null
+            },
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 25.599166666666665,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        47,
+                        1211.91
+                    ]
+                },
+                "DAYS_MAX": 363,
+                "DAYS_MIN": 141,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 31.01,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        1,
+                        26.7
+                    ],
+                    "C2_BUY": [
+                        13,
+                        342.56
+                    ],
+                    "HAMMER_BUY": [
+                        0,
+                        0
+                    ],
+                    "TAIL_BUY": [
+                        30,
+                        791.9700000000001
+                    ]
+                },
+                "PROFIT": 1228.76,
+                "ROI": 1.3263530580082468,
+                "SYMBOL": "MYGN",
+                "TOTAL_INV": 926.42,
+                "TRADES": 48,
+                "WINRATE": 1.0,
+                "WINS": 48,
+                "WINS_TO_LOSES": null
+            }
+        ]
+    }
+}

@@ -52,9 +52,10 @@ def test_all(assets, params, **kwargs):
             'WINS_TO_LOSES': wins_to_loses,
             'WINRATE': winrate,
             'MAX_PROFIT_PER_TRADE': max([r['MAX_PROFIT_PER_TRADE'] for r in results]),
-            'MAX_LOSS_PER_TRADE': max([r['MAX_LOSS_PER_TRADE'] for r in results]),
+            'MAX_LOSS_PER_TRADE': min([r['MAX_LOSS_PER_TRADE'] for r in results]),
             'MAX_WINS_IN_A_ROW': max([r['MAX_WINS_IN_A_ROW'] for r in results]),
             'MAX_LOSES_IN_A_ROW': max([r['MAX_LOSES_IN_A_ROW'] for r in results]),
+            'DAYS_MAX': max([r['DAYS_MAX'] for r in results]),
         }
         return {
             'ALL': output,
@@ -76,23 +77,62 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
 
         assets[s] = a
 
-    tr = 0
-    tries = 0
-    while tr == 0:
-        if tries:
-            print ("RANDOM")
-            initial = TS.get_random_ts_params()
-        else:
-            print ("INITIAL")
-            initial = kwargs.get('initial_params', TS.get_random_ts_params())
+##################
 
-        initial_result = test_all(assets, initial, **kwargs)
-        tr = initial_result['ALL']['TRADES']
-        tries += 1
-        print(tries)
-        print('trades:', tr)
+    # tr = 0
+    # tries = 0
+    # while tr == 0:
+    #     if tries:
+    #         print ("RANDOM")
+    #         initial = TS.get_random_ts_params()
+    #     else:
+    #         print ("INITIAL")
+    #         initial = kwargs.get('initial_params', TS.get_random_ts_params())
+
+    #     initial_result = test_all(assets, initial, **kwargs)
+    #     if tr:
+    #         tr = initial_result['ALL']['TRADES']
+    #     else:
+    #         tr = 0
+    #     tries += 1
+    #     print(tries)
+    #     print('trades:', tr)
+    # survivor = {'input': initial, 'output': initial_result}
+    # print(json.dumps(survivor['input'], sort_keys=True, indent=4))
+
+################################
+
+    default_ir = {
+
+        "ALL": {
+            "DAYS_MAX": 0,
+            "LOSES": 0,
+            "MAX_LOSES_IN_A_ROW": 0,
+            "MAX_LOSS_PER_TRADE": 0,
+            "MAX_PROFIT_PER_TRADE": 0,
+            "MAX_WINS_IN_A_ROW": 0,
+            "PROFIT": 0,
+            "ROI": 0,
+            "TRADES": 1,
+            "WINRATE": 0,
+            "WINS": 0,
+            "WINS_TO_LOSES": 0
+        }
+
+    }
+
+    initial = kwargs.get('initial_params', TS.get_random_ts_params())
+    initial_result = test_all(assets, initial, **kwargs)
+    if not initial_result:
+        initial_result = default_ir
     survivor = {'input': initial, 'output': initial_result}
     print(json.dumps(survivor['input'], sort_keys=True, indent=4))
+
+################################
+
+
+
+
 
     for n in range(0, generations_count):
         print('GEN', n)
@@ -127,6 +167,13 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
 
                 elif strategy == 'MAX_ROI':
                     cond = off['output']['ALL']['ROI'] >= survivor['output']['ALL']['ROI']
+
+                elif strategy == 'MAX_ROI_MIN_LOSS':
+                    cond = off['output']['ALL']['ROI']/(off['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1) >= survivor['output']['ALL']['ROI']/(survivor['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1)
+
+                elif strategy == 'MAX_ROI_FAST_RETURN':
+                    d = 120
+                    cond = off['output']['ALL']['ROI']/(abs(d-off['output']['ALL']['DAYS_MAX'])+1) >= survivor['output']['ALL']['ROI']/(abs(d-survivor['output']['ALL']['DAYS_MAX'])+1)
 
                 elif strategy == 'EVERYTHING':
                     off_max_loses = off['output']['ALL']['MAX_LOSES_IN_A_ROW']
