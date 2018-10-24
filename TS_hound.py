@@ -141,6 +141,12 @@ def open(cc, c, trades, params):
                     high_filter_passed = 1
             passed_filters.append(high_filter_passed)
 
+        if params.get('use_CCI_FILTER', False):
+            cci_filter_passed = 0
+            per = params.get('cci_f_per', 14)
+            if CCI(c.last(per)) > CCI(c.last(per, -1)):
+                cci_filter_passed = 1     
+            passed_filters.append(cci_filter_passed)
 
 
         all_filters_passed = sum(passed_filters) == len(passed_filters)
@@ -197,6 +203,8 @@ def get_random_ts_params():
         'open_BREAK': choice([True, False]),
         'use_PTC2': choice([True, False]),
         'ptc2_mix': randint(5, 90)/100,
+        'use_CCI_FILTER': choice([True, False]),
+        'cci_f_per': randint(8,20)
         #'use_FLIP': choice([True, False]),
         #'trade_short': False,  # choice([True, False]),
     }
