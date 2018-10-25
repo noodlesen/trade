@@ -68,6 +68,9 @@ def test_all(assets, params, **kwargs):
 
 def generate(symbols, timeframe, generations_count, mutations, outsiders, depth, strategy, **kwargs):
 
+    now = datetime.now()
+    stamp = TS.ts_name()+"-%d-%d-%d-%d.txt" % (now.day, now.month, now.hour, now.minute)
+
     cut = kwargs.get('cut', False)
     assets = {}
     for s in symbols:
@@ -196,8 +199,7 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         print()
 
     if kwargs.get('report', False):
-        now = datetime.now()
-        stamp = "evo-%d-%d-%d-%d.txt" % (now.day, now.month, now.hour, now.minute)
+        
         with open('results/'+stamp, 'w') as f:
             f.write(json.dumps(survivor, sort_keys=True, indent=4))
 

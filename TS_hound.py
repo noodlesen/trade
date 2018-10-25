@@ -2,6 +2,10 @@ from trading import Trade #, close_all
 from random import randint, choice
 from indi import CCI
 
+TS_NAME = 'HOUND'
+
+def ts_name():
+    return (TS_NAME)
 
 def manage(cc, c, trades, params):
     for trade in trades:
@@ -116,6 +120,15 @@ def open(cc, c, trades, params):
                     has_buy_signal = True
                     open_reason = 'HAMMER_BUY'
 
+            #DOUBLE HAMMER
+            if params.get('open_DOUBLE_HAMMER', False):
+                pf = params.get('dh_fast', 2)
+                ps = params.get('dh_slow', 20)
+
+                if c.last(pf, figure=True).summary().is_hammer() and c.last(ps, figure=True).summary().is_hammer():
+                    has_buy_signal = True
+                    open_reason = 'DOUBLE_HAMMER'
+
             #FRACTAL
             if params.get('open_FRACTAL', False):
                 f = c.last(5, figure=True)
@@ -181,6 +194,8 @@ def get_random_ts_params():
         'cut_mix': randint(1, 100)/100,
         'cut_treshold': randint(1, 100)/1000,
         'cut_period': randint(1, 20),
+        'dh_fast': randint(1, 5),
+        'dh_slow': randint(8, 50),
         'FTP': randint(1, 3000)/10000,
         'use_PTH': choice([True, False]),
         'use_PTSS': choice([True, False]),
@@ -201,12 +216,12 @@ def get_random_ts_params():
         'open_HAMMER': choice([True, False]),
         'open_TAIL': choice([True, False]),
         'open_BREAK': choice([True, False]),
+        'open_DOUBLE_HAMMER': choice([True, False]),
         'use_PTC2': choice([True, False]),
         'ptc2_mix': randint(5, 90)/100,
         'use_CCI_FILTER': choice([True, False]),
         'cci_f_per': randint(8,20)
-        #'use_FLIP': choice([True, False]),
-        #'trade_short': False,  # choice([True, False]),
+
     }
 
     params['max_pos'] = 100
