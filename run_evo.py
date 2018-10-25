@@ -4,7 +4,7 @@ from evo import generate
 from reader import load_settings_from_report
 
 
-initial_params = load_settings_from_report('N101mod.txt')
+initial_params = load_settings_from_report('profit.txt')
 
 CHANNEL = ['DIS', 'WFC', 'VZ', 'T', 'KO']
 TRENDY = ['BA', 'ADBE', 'CAT', 'INTC', 'AAPL']
@@ -19,11 +19,11 @@ symbols.extend(OTHER1)
 symbols.extend(OTHER2)
 symbols.extend(NEW)
 
-GENERATIONS_COUNT = 50
+GENERATIONS_COUNT = 10
 MUTATIONS = 70
 OUTSIDERS = 5
 DEPTH = 10
-STRATEGY = 'MAX_PROFIT'
+STRATEGY = 'MAX_ROI'
 #STRATEGY = 'MAX_ROI_MIN_LOSS'
 #STRATEGY = 'MIN_TRADES_MAX_PROFIT'
 #STRATEGY = 'PROFIT_AND_WINRATE'

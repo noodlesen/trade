@@ -1,1261 +1,281 @@
 {
     "input": {
-        "FTP": 0.0438,
-        "cut_mix": 0.3,
-        "cut_period": 19,
-        "cut_treshold": 0.028,
-        "fia_dmax": 10,
-        "fia_dmin": 2,
-        "fia_treshold": 0.07,
-        "init_sl_k": 0.93,
-        "init_tp": 5,
-        "ptdj_mix": 0.07,
-        "ptf_mix": 0.36,
-        "pth_mix": 0.27,
-        "ptss_mix": 0.14,
-        "rel_tp_k": 0.51,
-        "tp_koef": 1.2,
-        "use_BREAK": false,
+        "FTP": 0.2678,
+        "cut_mix": 0.97,
+        "cut_period": 1,
+        "cut_treshold": 0.043,
+        "f_max_per": 20,
+        "f_max_th": 0.91,
+        "fia_dmax": 22,
+        "fia_dmin": 9,
+        "fia_treshold": 0.1,
+        "init_sl_k": 0.874,
+        "max_pos": 100,
+        "open_BREAK": true,
+        "open_C2": true,
+        "open_FRACTAL": true,
+        "open_HAMMER": true,
+        "open_TAIL": true,
+        "ptbf_mix": 0.76,
+        "ptc2_mix": 0.31,
+        "ptdj_mix": 0.58,
+        "pth_mix": 0.83,
+        "ptss_mix": 0.2,
+        "pttf_mix": 0.89,
+        "rel_tp_k": 0.623,
+        "tp_koef": 1.1,
+        "trade_short": false,
         "use_BREAKEVEN": false,
-        "use_CUT": false,
-        "use_FIA": true,
-        "use_FTP": true,
-        "use_GAP": false,
-        "use_PTDJ": true,
+        "use_CUT": true,
+        "use_FIA": false,
+        "use_FILTERS": false,
+        "use_FLIP": true,
+        "use_FTP": false,
+        "use_PTBF": false,
+        "use_PTC2": false,
+        "use_PTDJ": false,
         "use_PTH": false,
         "use_PTSS": false,
-        "use_REL_TP": false
+        "use_PTTF": false
     },
     "output": {
         "ALL": {
-            "LOSES": 2617,
-            "MAX_LOSES_IN_A_ROW": 16,
-            "MAX_LOSS_PER_TRADE": -1.38,
-            "MAX_PROFIT_PER_TRADE": 106.89,
-            "MAX_WINS_IN_A_ROW": 224,
-            "PROFIT": 45623.94999999998,
-            "TRADES": 10466,
-            "WINRATE": 0.6177145041085419,
-            "WINS": 6465,
-            "WINS_TO_LOSES": 2.4703859380970576
+            "LOSES": 0,
+            "MAX_LOSES_IN_A_ROW": 0,
+            "MAX_LOSS_PER_TRADE": 0,
+            "MAX_PROFIT_PER_TRADE": 55.18,
+            "MAX_WINS_IN_A_ROW": 0,
+            "PROFIT": 18825.530000000002,
+            "TRADES": 1018,
+            "WINRATE": 0.8467583497053045,
+            "WINS": 862,
+            "WINS_TO_LOSES": null
         },
         "PASSES": [
             {
-                "AVG_LOSS": -11.012222222222224,
-                "AVG_WIN": 36.53100737100734,
+                "AVG_LOSS": 0,
+                "AVG_WIN": 22.909891891891903,
                 "CLOSE_REASONS": {
-                    "FIA": [
-                        146,
-                        55.02
-                    ],
-                    "SL": [
-                        8,
-                        -87.34
-                    ],
                     "TP": [
-                        259,
-                        14758.049999999992
-                    ]
-                },
-                "DAYS_MAX": 241,
-                "DAYS_MIN": 2,
-                "LOSES": 9,
-                "MAX_LOSES_IN_A_ROW": 2,
-                "MAX_LOSS_PER_TRADE": -14.88,
-                "MAX_PROFIT_PER_TRADE": 106.89,
-                "MAX_WINS_IN_A_ROW": 23,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        91,
-                        3411.4700000000003
-                    ],
-                    "FRAC": [
-                        61,
-                        1940.7800000000004
-                    ],
-                    "HAM": [
-                        23,
-                        800.06
-                    ],
-                    "TAIL": [
-                        237,
-                        8430.540000000005
-                    ]
-                },
-                "PROFIT": 14769.009999999987,
-                "SYMBOL": "BA",
-                "TRADES": 435,
-                "WINRATE": 0.9356321839080459,
-                "WINS": 407,
-                "WINS_TO_LOSES": 45.22222222222222
-            },
-            {
-                "AVG_LOSS": -9.389183673469386,
-                "AVG_WIN": 23.101812865497074,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        141,
-                        39.51999999999999
-                    ],
-                    "FTP": [
-                        0,
-                        0
-                    ],
-                    "SL": [
-                        57,
-                        -435.2299999999999
-                    ],
-                    "TP": [
-                        189,
-                        7775.299999999997
-                    ]
-                },
-                "DAYS_MAX": 276,
-                "DAYS_MIN": 2,
-                "LOSES": 49,
-                "MAX_LOSES_IN_A_ROW": 11,
-                "MAX_LOSS_PER_TRADE": -15.7,
-                "MAX_PROFIT_PER_TRADE": 60.22,
-                "MAX_WINS_IN_A_ROW": 98,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        82,
-                        1513.7499999999993
-                    ],
-                    "FRAC": [
-                        56,
-                        1145.6200000000006
-                    ],
-                    "HAM": [
-                        31,
-                        801.84
-                    ],
-                    "TAIL": [
-                        218,
-                        3820.02
-                    ]
-                },
-                "PROFIT": 7440.749999999999,
-                "SYMBOL": "ADBE",
-                "TRADES": 442,
-                "WINRATE": 0.7737556561085973,
-                "WINS": 342,
-                "WINS_TO_LOSES": 6.979591836734694
-            },
-            {
-                "AVG_LOSS": -4.41982456140351,
-                "AVG_WIN": 16.162719033232623,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        131,
-                        26.359999999999996
-                    ],
-                    "SL": [
-                        123,
-                        249.1699999999997
-                    ],
-                    "TP": [
-                        131,
-                        4763.81
-                    ]
-                },
-                "DAYS_MAX": 230,
-                "DAYS_MIN": 2,
-                "LOSES": 57,
-                "MAX_LOSES_IN_A_ROW": 5,
-                "MAX_LOSS_PER_TRADE": -8.22,
-                "MAX_PROFIT_PER_TRADE": 47.73,
-                "MAX_WINS_IN_A_ROW": 119,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        59,
-                        562.99
-                    ],
-                    "FRAC": [
-                        65,
-                        828.4699999999999
-                    ],
-                    "HAM": [
-                        30,
-                        343.91
-                    ],
-                    "TAIL": [
-                        230,
-                        3291.6600000000017
-                    ]
-                },
-                "PROFIT": 5097.929999999998,
-                "SYMBOL": "CAT",
-                "TRADES": 434,
-                "WINRATE": 0.7626728110599078,
-                "WINS": 331,
-                "WINS_TO_LOSES": 5.807017543859649
-            },
-            {
-                "AVG_LOSS": -2.0624242424242416,
-                "AVG_WIN": 2.6579928315412173,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        152,
-                        11.80999999999999
-                    ],
-                    "FTP": [
-                        0,
-                        0
-                    ],
-                    "SL": [
-                        152,
-                        -124.4
-                    ],
-                    "TP": [
-                        70,
-                        634.5099999999999
-                    ]
-                },
-                "DAYS_MAX": 257,
-                "DAYS_MIN": 2,
-                "LOSES": 99,
-                "MAX_LOSES_IN_A_ROW": 11,
-                "MAX_LOSS_PER_TRADE": -4.23,
-                "MAX_PROFIT_PER_TRADE": 11.93,
-                "MAX_WINS_IN_A_ROW": 62,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        50,
-                        41.08999999999999
-                    ],
-                    "FRAC": [
-                        66,
-                        110.78000000000003
-                    ],
-                    "HAM": [
-                        31,
-                        42.25
-                    ],
-                    "TAIL": [
-                        227,
-                        337.34999999999997
-                    ]
-                },
-                "PROFIT": 537.3999999999997,
-                "SYMBOL": "INTC",
-                "TRADES": 438,
-                "WINRATE": 0.636986301369863,
-                "WINS": 279,
-                "WINS_TO_LOSES": 2.8181818181818183
-            },
-            {
-                "AVG_LOSS": -8.223521126760561,
-                "AVG_WIN": 11.624166666666664,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        111,
-                        26.409999999999993
-                    ],
-                    "SL": [
-                        182,
-                        1354.9799999999996
-                    ],
-                    "TP": [
-                        27,
-                        945.35
-                    ]
-                },
-                "DAYS_MAX": 175,
-                "DAYS_MIN": 2,
-                "LOSES": 71,
-                "MAX_LOSES_IN_A_ROW": 14,
-                "MAX_LOSS_PER_TRADE": -13.39,
-                "MAX_PROFIT_PER_TRADE": 50.63,
-                "MAX_WINS_IN_A_ROW": 110,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        63,
-                        334.48999999999995
-                    ],
-                    "FRAC": [
-                        48,
-                        333.73999999999995
-                    ],
-                    "HAM": [
-                        24,
-                        225.71
-                    ],
-                    "TAIL": [
                         184,
-                        1443.4899999999993
+                        4212.160000000001
                     ]
                 },
-                "PROFIT": 2345.4199999999996,
-                "SYMBOL": "AAPL",
-                "TRADES": 420,
-                "WINRATE": 0.6,
-                "WINS": 252,
-                "WINS_TO_LOSES": 3.5492957746478875
-            },
-            {
-                "AVG_LOSS": -7.573442622950818,
-                "AVG_WIN": 4.9207608695652105,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        144,
-                        30.519999999999985
-                    ],
-                    "SL": [
-                        251,
-                        395.63000000000045
-                    ],
-                    "TP": [
-                        0,
-                        0
-                    ]
-                },
-                "DAYS_MAX": 493,
-                "DAYS_MIN": 2,
-                "LOSES": 122,
-                "MAX_LOSES_IN_A_ROW": 11,
-                "MAX_LOSS_PER_TRADE": -9.56,
-                "MAX_PROFIT_PER_TRADE": 17.3,
-                "MAX_WINS_IN_A_ROW": 76,
+                "DAYS_MAX": 133,
+                "DAYS_MIN": 12,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 33.81,
+                "MAX_WINS_IN_A_ROW": 0,
                 "OPEN_REASONS": {
-                    "B_UP": [
-                        52,
-                        -50.48000000000002
-                    ],
-                    "FRAC": [
-                        64,
-                        41.260000000000005
-                    ],
-                    "HAM": [
-                        31,
-                        20.759999999999998
-                    ],
-                    "TAIL": [
-                        247,
-                        394.3400000000002
-                    ]
-                },
-                "PROFIT": 434.16999999999825,
-                "SYMBOL": "DIS",
-                "TRADES": 408,
-                "WINRATE": 0.6764705882352942,
-                "WINS": 276,
-                "WINS_TO_LOSES": 2.262295081967213
-            },
-            {
-                "AVG_LOSS": -3.1374999999999993,
-                "AVG_WIN": 1.1232984293193722,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        138,
-                        14.919999999999991
-                    ],
-                    "FTP": [
-                        0,
-                        0
-                    ],
-                    "SL": [
-                        218,
-                        -333.0100000000002
-                    ]
-                },
-                "DAYS_MAX": 171,
-                "DAYS_MIN": 3,
-                "LOSES": 168,
-                "MAX_LOSES_IN_A_ROW": 16,
-                "MAX_LOSS_PER_TRADE": -5.3,
-                "MAX_PROFIT_PER_TRADE": 11.13,
-                "MAX_WINS_IN_A_ROW": 42,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        41,
-                        -26.3
-                    ],
-                    "FRAC": [
-                        66,
-                        -48.58999999999999
-                    ],
-                    "HAM": [
-                        27,
-                        -48.00999999999999
-                    ],
-                    "TAIL": [
-                        221,
-                        -185.71999999999994
-                    ]
-                },
-                "PROFIT": -312.54999999999984,
-                "SYMBOL": "WFC",
-                "TRADES": 420,
-                "WINRATE": 0.45476190476190476,
-                "WINS": 191,
-                "WINS_TO_LOSES": 1.1369047619047619
-            },
-            {
-                "AVG_LOSS": -3.197836257309942,
-                "AVG_WIN": 0.458040201005025,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        150,
-                        15.769999999999998
-                    ],
-                    "SL": [
-                        218,
-                        -473.22999999999985
-                    ]
-                },
-                "DAYS_MAX": 203,
-                "DAYS_MIN": 3,
-                "LOSES": 171,
-                "MAX_LOSES_IN_A_ROW": 12,
-                "MAX_LOSS_PER_TRADE": -4.63,
-                "MAX_PROFIT_PER_TRADE": 4.22,
-                "MAX_WINS_IN_A_ROW": 20,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        52,
-                        -70.52
-                    ],
-                    "FRAC": [
-                        57,
-                        -76.05000000000001
-                    ],
-                    "HAM": [
-                        34,
-                        -35.66
-                    ],
-                    "TAIL": [
-                        223,
-                        -275.60000000000014
-                    ]
-                },
-                "PROFIT": -455.68000000000006,
-                "SYMBOL": "VZ",
-                "TRADES": 418,
-                "WINRATE": 0.47607655502392343,
-                "WINS": 199,
-                "WINS_TO_LOSES": 1.1637426900584795
-            },
-            {
-                "AVG_LOSS": -1.9626011560693637,
-                "AVG_WIN": 0.41483146067415755,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        129,
-                        10.179999999999993
-                    ],
-                    "SL": [
-                        220,
-                        -277.66999999999985
-                    ]
-                },
-                "DAYS_MAX": 147,
-                "DAYS_MIN": 3,
-                "LOSES": 173,
-                "MAX_LOSES_IN_A_ROW": 13,
-                "MAX_LOSS_PER_TRADE": -3.83,
-                "MAX_PROFIT_PER_TRADE": 5.22,
-                "MAX_WINS_IN_A_ROW": 29,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        47,
-                        -38.67
-                    ],
-                    "FRAC": [
-                        59,
-                        -38.410000000000004
-                    ],
-                    "HAM": [
-                        24,
-                        -15.330000000000002
-                    ],
-                    "TAIL": [
-                        217,
-                        -176.37999999999997
-                    ]
-                },
-                "PROFIT": -265.6899999999999,
-                "SYMBOL": "T",
-                "TRADES": 389,
-                "WINRATE": 0.45758354755784064,
-                "WINS": 178,
-                "WINS_TO_LOSES": 1.0289017341040463
-            },
-            {
-                "AVG_LOSS": -0.9308823529411764,
-                "AVG_WIN": 0.6059672131147549,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        188,
-                        15.919999999999991
-                    ],
-                    "SL": [
-                        183,
-                        103.95999999999994
-                    ]
-                },
-                "DAYS_MAX": 172,
-                "DAYS_MIN": 3,
-                "LOSES": 68,
-                "MAX_LOSES_IN_A_ROW": 5,
-                "MAX_LOSS_PER_TRADE": -3.64,
-                "MAX_PROFIT_PER_TRADE": 3.71,
-                "MAX_WINS_IN_A_ROW": 141,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        58,
-                        4.759999999999999
-                    ],
-                    "FRAC": [
-                        65,
-                        24.730000000000004
-                    ],
-                    "HAM": [
-                        19,
-                        2.09
-                    ],
-                    "TAIL": [
-                        227,
-                        87.21000000000001
-                    ]
-                },
-                "PROFIT": 121.52000000000025,
-                "SYMBOL": "KO",
-                "TRADES": 408,
-                "WINRATE": 0.7475490196078431,
-                "WINS": 305,
-                "WINS_TO_LOSES": 4.485294117647059
-            },
-            {
-                "AVG_LOSS": -2.7972955974842786,
-                "AVG_WIN": 5.119071729957799,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        84,
-                        6.959999999999996
-                    ],
-                    "FTP": [
-                        2,
-                        6.34
-                    ],
-                    "SL": [
-                        219,
-                        -311.6200000000002
-                    ],
-                    "TP": [
-                        87,
-                        1042.1499999999999
-                    ]
-                },
-                "DAYS_MAX": 169,
-                "DAYS_MIN": 2,
-                "LOSES": 159,
-                "MAX_LOSES_IN_A_ROW": 16,
-                "MAX_LOSS_PER_TRADE": -5.56,
-                "MAX_PROFIT_PER_TRADE": 17.73,
-                "MAX_WINS_IN_A_ROW": 47,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        60,
-                        118.83999999999996
-                    ],
-                    "FRAC": [
-                        62,
-                        141.24
-                    ],
-                    "HAM": [
-                        29,
-                        67.20000000000002
-                    ],
-                    "TAIL": [
-                        241,
-                        421.0299999999998
-                    ]
-                },
-                "PROFIT": 768.4499999999982,
-                "SYMBOL": "AA",
-                "TRADES": 420,
-                "WINRATE": 0.5642857142857143,
-                "WINS": 237,
-                "WINS_TO_LOSES": 1.490566037735849
-            },
-            {
-                "AVG_LOSS": -1.8331481481481484,
-                "AVG_WIN": 2.5272555205047293,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        168,
-                        25.83000000000001
-                    ],
-                    "SL": [
-                        200,
-                        658.8300000000002
-                    ],
-                    "TP": [
-                        0,
-                        0
-                    ]
-                },
-                "DAYS_MAX": 126,
-                "DAYS_MIN": 2,
-                "LOSES": 54,
-                "MAX_LOSES_IN_A_ROW": 6,
-                "MAX_LOSS_PER_TRADE": -5.34,
-                "MAX_PROFIT_PER_TRADE": 19.26,
-                "MAX_WINS_IN_A_ROW": 70,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        64,
-                        80.95000000000003
-                    ],
-                    "FRAC": [
-                        59,
-                        97.24000000000001
-                    ],
-                    "HAM": [
-                        20,
-                        16.92
-                    ],
-                    "TAIL": [
-                        224,
-                        477.55
-                    ]
-                },
-                "PROFIT": 702.1499999999992,
-                "SYMBOL": "AXP",
-                "TRADES": 421,
-                "WINRATE": 0.7529691211401425,
-                "WINS": 317,
-                "WINS_TO_LOSES": 5.87037037037037
-            },
-            {
-                "AVG_LOSS": -3.868392857142857,
-                "AVG_WIN": 9.006081081081073,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        119,
-                        14.740000000000002
-                    ],
-                    "SL": [
-                        55,
-                        -213.68
-                    ],
-                    "TP": [
-                        101,
-                        1965.179999999999
-                    ]
-                },
-                "DAYS_MAX": 285,
-                "DAYS_MIN": 2,
-                "LOSES": 56,
-                "MAX_LOSES_IN_A_ROW": 7,
-                "MAX_LOSS_PER_TRADE": -4.99,
-                "MAX_PROFIT_PER_TRADE": 27.37,
-                "MAX_WINS_IN_A_ROW": 112,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        47,
-                        226.4
-                    ],
-                    "FRAC": [
-                        45,
-                        232.51999999999995
-                    ],
-                    "HAM": [
-                        20,
-                        248.74
-                    ],
-                    "TAIL": [
-                        162,
-                        1044.73
-                    ]
-                },
-                "PROFIT": 1782.719999999998,
-                "SYMBOL": "C",
-                "TRADES": 425,
-                "WINRATE": 0.5223529411764706,
-                "WINS": 222,
-                "WINS_TO_LOSES": 3.9642857142857144
-            },
-            {
-                "AVG_LOSS": -1.137051282051282,
-                "AVG_WIN": 1.9185314685314674,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        165,
-                        10.459999999999996
-                    ],
-                    "SL": [
-                        162,
-                        95.32000000000006
-                    ],
-                    "TP": [
-                        34,
-                        339.2
-                    ]
-                },
-                "DAYS_MAX": 169,
-                "DAYS_MIN": 3,
-                "LOSES": 78,
-                "MAX_LOSES_IN_A_ROW": 7,
-                "MAX_LOSS_PER_TRADE": -2.73,
-                "MAX_PROFIT_PER_TRADE": 11.62,
-                "MAX_WINS_IN_A_ROW": 68,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        42,
-                        45.83000000000001
-                    ],
-                    "FRAC": [
-                        57,
-                        72.22
-                    ],
-                    "HAM": [
-                        32,
-                        36.33999999999999
-                    ],
-                    "TAIL": [
-                        229,
-                        287.11999999999995
-                    ]
-                },
-                "PROFIT": 460.0099999999997,
-                "SYMBOL": "CSCO",
-                "TRADES": 424,
-                "WINRATE": 0.6745283018867925,
-                "WINS": 286,
-                "WINS_TO_LOSES": 3.6666666666666665
-            },
-            {
-                "AVG_LOSS": -7.573442622950818,
-                "AVG_WIN": 4.9207608695652105,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        144,
-                        30.519999999999985
-                    ],
-                    "SL": [
-                        251,
-                        395.63000000000045
-                    ],
-                    "TP": [
-                        0,
-                        0
-                    ]
-                },
-                "DAYS_MAX": 493,
-                "DAYS_MIN": 2,
-                "LOSES": 122,
-                "MAX_LOSES_IN_A_ROW": 11,
-                "MAX_LOSS_PER_TRADE": -9.56,
-                "MAX_PROFIT_PER_TRADE": 17.3,
-                "MAX_WINS_IN_A_ROW": 76,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        52,
-                        -50.48000000000002
-                    ],
-                    "FRAC": [
-                        64,
-                        41.260000000000005
-                    ],
-                    "HAM": [
-                        31,
-                        20.759999999999998
-                    ],
-                    "TAIL": [
-                        247,
-                        394.3400000000002
-                    ]
-                },
-                "PROFIT": 434.16999999999825,
-                "SYMBOL": "DIS",
-                "TRADES": 408,
-                "WINRATE": 0.6764705882352942,
-                "WINS": 276,
-                "WINS_TO_LOSES": 2.262295081967213
-            },
-            {
-                "AVG_LOSS": -1.4081818181818175,
-                "AVG_WIN": 2.1611494252873555,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        115,
-                        7.779999999999997
-                    ],
-                    "FTP": [
-                        1,
-                        5.8
-                    ],
-                    "SL": [
-                        228,
-                        21.05000000000001
-                    ],
-                    "TP": [
-                        45,
-                        335.15999999999985
-                    ]
-                },
-                "DAYS_MAX": 146,
-                "DAYS_MIN": 2,
-                "LOSES": 132,
-                "MAX_LOSES_IN_A_ROW": 12,
-                "MAX_LOSS_PER_TRADE": -3.15,
-                "MAX_PROFIT_PER_TRADE": 11.79,
-                "MAX_WINS_IN_A_ROW": 21,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        48,
-                        16.990000000000006
-                    ],
-                    "FRAC": [
-                        69,
-                        40.08
-                    ],
-                    "HAM": [
-                        29,
-                        30.349999999999994
-                    ],
-                    "TAIL": [
-                        243,
-                        285.3000000000001
-                    ]
-                },
-                "PROFIT": 378.17999999999995,
-                "SYMBOL": "EBAY",
-                "TRADES": 414,
-                "WINRATE": 0.6304347826086957,
-                "WINS": 261,
-                "WINS_TO_LOSES": 1.9772727272727273
-            },
-            {
-                "AVG_LOSS": -0.6166850828729278,
-                "AVG_WIN": 0.257511111111111,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        128,
-                        3.189999999999996
-                    ],
-                    "SL": [
-                        276,
-                        -58.90000000000003
-                    ]
-                },
-                "DAYS_MAX": 87,
-                "DAYS_MIN": 2,
-                "LOSES": 181,
-                "MAX_LOSES_IN_A_ROW": 15,
-                "MAX_LOSS_PER_TRADE": -1.38,
-                "MAX_PROFIT_PER_TRADE": 2.01,
-                "MAX_WINS_IN_A_ROW": 51,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        46,
-                        -11.740000000000009
-                    ],
-                    "FRAC": [
-                        74,
-                        -12.099999999999998
-                    ],
-                    "HAM": [
-                        32,
-                        -7.0600000000000005
-                    ],
-                    "TAIL": [
-                        250,
-                        -25.570000000000032
-                    ]
-                },
-                "PROFIT": -53.67999999999994,
-                "SYMBOL": "F",
-                "TRADES": 410,
-                "WINRATE": 0.5487804878048781,
-                "WINS": 225,
-                "WINS_TO_LOSES": 1.2430939226519337
-            },
-            {
-                "AVG_LOSS": -8.166410256410257,
-                "AVG_WIN": 14.337549295774656,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        137,
-                        40.79999999999998
-                    ],
-                    "SL": [
-                        209,
-                        2627.0999999999985
-                    ],
-                    "TP": [
-                        45,
-                        2074.88
-                    ]
-                },
-                "DAYS_MAX": 186,
-                "DAYS_MIN": 2,
-                "LOSES": 39,
-                "MAX_LOSES_IN_A_ROW": 8,
-                "MAX_LOSS_PER_TRADE": -13.94,
-                "MAX_PROFIT_PER_TRADE": 56.07,
-                "MAX_WINS_IN_A_ROW": 224,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        68,
-                        668.7399999999998
-                    ],
-                    "FRAC": [
-                        58,
-                        651.6500000000001
-                    ],
-                    "HAM": [
-                        40,
-                        378.43000000000006
-                    ],
-                    "TAIL": [
-                        224,
-                        3029.9200000000005
-                    ]
-                },
-                "PROFIT": 4771.340000000003,
-                "SYMBOL": "FB",
-                "TRADES": 436,
-                "WINRATE": 0.8142201834862385,
-                "WINS": 355,
-                "WINS_TO_LOSES": 9.102564102564102
-            },
-            {
-                "AVG_LOSS": -15.154479166666668,
-                "AVG_WIN": 15.164630541871917,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        108,
-                        51.05
-                    ],
-                    "SL": [
-                        95,
-                        -1443.7100000000003
-                    ],
-                    "TP": [
-                        93,
-                        3022.1099999999997
-                    ]
-                },
-                "DAYS_MAX": 189,
-                "DAYS_MIN": 2,
-                "LOSES": 96,
-                "MAX_LOSES_IN_A_ROW": 12,
-                "MAX_LOSS_PER_TRADE": -21.73,
-                "MAX_PROFIT_PER_TRADE": 66.77,
-                "MAX_WINS_IN_A_ROW": 85,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        48,
-                        157.00000000000003
-                    ],
-                    "FRAC": [
-                        47,
-                        157.08000000000004
-                    ],
-                    "HAM": [
-                        21,
-                        224.44000000000003
-                    ],
-                    "TAIL": [
-                        179,
-                        1059.7100000000003
-                    ]
-                },
-                "PROFIT": 1623.589999999999,
-                "SYMBOL": "GS",
-                "TRADES": 417,
-                "WINRATE": 0.486810551558753,
-                "WINS": 203,
-                "WINS_TO_LOSES": 2.1145833333333335
-            },
-            {
-                "AVG_LOSS": -10.36983606557377,
-                "AVG_WIN": 21.794711864406768,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        164,
-                        46.46
-                    ],
-                    "SL": [
-                        60,
-                        -622.56
-                    ],
-                    "TP": [
-                        129,
-                        6325.33
-                    ]
-                },
-                "DAYS_MAX": 449,
-                "DAYS_MIN": 2,
-                "LOSES": 61,
-                "MAX_LOSES_IN_A_ROW": 6,
-                "MAX_LOSS_PER_TRADE": -13.25,
-                "MAX_PROFIT_PER_TRADE": 60.34,
-                "MAX_WINS_IN_A_ROW": 141,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        60,
-                        1040.5
-                    ],
-                    "FRAC": [
-                        53,
-                        967.8699999999999
-                    ],
-                    "HAM": [
-                        31,
-                        485.18999999999994
-                    ],
-                    "TAIL": [
-                        208,
-                        3148.190000000001
-                    ]
-                },
-                "PROFIT": 5796.879999999997,
-                "SYMBOL": "HD",
-                "TRADES": 426,
-                "WINRATE": 0.6924882629107981,
-                "WINS": 295,
-                "WINS_TO_LOSES": 4.836065573770492
-            },
-            {
-                "AVG_LOSS": -3.9298999999999977,
-                "AVG_WIN": 2.5303311258278147,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        111,
-                        13.23
-                    ],
-                    "SL": [
-                        208,
-                        -763.6699999999996
-                    ],
-                    "TP": [
-                        29,
-                        333.06000000000006
-                    ]
-                },
-                "DAYS_MAX": 274,
-                "DAYS_MIN": 2,
-                "LOSES": 200,
-                "MAX_LOSES_IN_A_ROW": 15,
-                "MAX_LOSS_PER_TRADE": -7.01,
-                "MAX_PROFIT_PER_TRADE": 18.24,
-                "MAX_WINS_IN_A_ROW": 15,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        52,
-                        -95.85999999999999
-                    ],
-                    "FRAC": [
-                        58,
-                        -96.56
-                    ],
-                    "HAM": [
+                    "BREAKUP_BUY": [
                         30,
-                        -49.14999999999999
+                        672.91
                     ],
-                    "TAIL": [
-                        207,
-                        -223.54999999999995
-                    ]
-                },
-                "PROFIT": -403.8999999999995,
-                "SYMBOL": "HOG",
-                "TRADES": 396,
-                "WINRATE": 0.3813131313131313,
-                "WINS": 151,
-                "WINS_TO_LOSES": 0.755
-            },
-            {
-                "AVG_LOSS": -0.897934782608696,
-                "AVG_WIN": 1.0877824267782423,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        97,
-                        3.5799999999999983
+                    "C2_BUY": [
+                        40,
+                        918.6899999999998
                     ],
-                    "SL": [
-                        232,
-                        170.67999999999998
-                    ]
-                },
-                "DAYS_MAX": 196,
-                "DAYS_MIN": 2,
-                "LOSES": 92,
-                "MAX_LOSES_IN_A_ROW": 8,
-                "MAX_LOSS_PER_TRADE": -1.73,
-                "MAX_PROFIT_PER_TRADE": 4.53,
-                "MAX_WINS_IN_A_ROW": 48,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        54,
-                        18.769999999999996
-                    ],
-                    "FRAC": [
-                        59,
-                        47.34999999999999
-                    ],
-                    "HAM": [
+                    "FRAC_BUY": [
                         22,
-                        5.49
+                        505.18
                     ],
-                    "TAIL": [
-                        192,
-                        98.82000000000002
+                    "HAMMER_BUY": [
+                        4,
+                        89.19999999999999
+                    ],
+                    "TAIL_BUY": [
+                        84,
+                        1924.34
                     ]
                 },
-                "PROFIT": 177.3699999999999,
-                "SYMBOL": "HPQ",
-                "TRADES": 407,
-                "WINRATE": 0.5872235872235873,
-                "WINS": 239,
-                "WINS_TO_LOSES": 2.597826086956522
+                "PROFIT": 4238.330000000002,
+                "SYMBOL": "ADBE",
+                "TRADES": 212,
+                "WINRATE": 0.8726415094339622,
+                "WINS": 185,
+                "WINS_TO_LOSES": null
             },
             {
-                "AVG_LOSS": -7.474180327868853,
-                "AVG_WIN": 2.806844444444448,
+                "AVG_LOSS": 0,
+                "AVG_WIN": 23.514017857142864,
                 "CLOSE_REASONS": {
-                    "FIA": [
-                        150,
-                        40.71000000000001
-                    ],
-                    "SL": [
-                        192,
-                        -369.8999999999998
-                    ],
                     "TP": [
+                        111,
+                        2609.0300000000007
+                    ]
+                },
+                "DAYS_MAX": 164,
+                "DAYS_MIN": 36,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 30.22,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        17,
+                        407.39000000000004
+                    ],
+                    "C2_BUY": [
+                        27,
+                        632.82
+                    ],
+                    "FRAC_BUY": [
+                        17,
+                        403.77
+                    ],
+                    "HAMMER_BUY": [
                         2,
-                        10.0
+                        50.72
+                    ],
+                    "TAIL_BUY": [
+                        44,
+                        1009.9800000000001
                     ]
                 },
-                "DAYS_MAX": 190,
-                "DAYS_MIN": 2,
-                "LOSES": 122,
-                "MAX_LOSES_IN_A_ROW": 14,
-                "MAX_LOSS_PER_TRADE": -13.67,
-                "MAX_PROFIT_PER_TRADE": 33.57,
-                "MAX_WINS_IN_A_ROW": 35,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        49,
-                        -87.19999999999999
-                    ],
-                    "FRAC": [
-                        57,
-                        -12.530000000000005
-                    ],
-                    "HAM": [
-                        23,
-                        -23.979999999999993
-                    ],
-                    "TAIL": [
-                        214,
-                        -242.25000000000006
-                    ]
-                },
-                "PROFIT": -280.30999999999926,
-                "SYMBOL": "IBM",
-                "TRADES": 411,
-                "WINRATE": 0.5474452554744526,
-                "WINS": 225,
-                "WINS_TO_LOSES": 1.8442622950819672
+                "PROFIT": 2633.5700000000006,
+                "SYMBOL": "AAPL",
+                "TRADES": 180,
+                "WINRATE": 0.6222222222222222,
+                "WINS": 112,
+                "WINS_TO_LOSES": null
             },
             {
-                "AVG_LOSS": -2.0538297872340423,
-                "AVG_WIN": 0.35445544554455477,
+                "AVG_LOSS": 0,
+                "AVG_WIN": 4.274999999999999,
                 "CLOSE_REASONS": {
-                    "FIA": [
-                        149,
-                        10.080000000000002
-                    ],
-                    "SL": [
-                        239,
-                        -325.94999999999993
-                    ]
-                },
-                "DAYS_MAX": 248,
-                "DAYS_MIN": 2,
-                "LOSES": 188,
-                "MAX_LOSES_IN_A_ROW": 12,
-                "MAX_LOSS_PER_TRADE": -3.17,
-                "MAX_PROFIT_PER_TRADE": 3.83,
-                "MAX_WINS_IN_A_ROW": 19,
-                "OPEN_REASONS": {
-                    "B_UP": [
-                        50,
-                        -58.93
-                    ],
-                    "FRAC": [
-                        68,
-                        -60.61
-                    ],
-                    "HAM": [
-                        45,
-                        -47.19
-                    ],
-                    "TAIL": [
-                        223,
-                        -150.17999999999992
-                    ]
-                },
-                "PROFIT": -314.51999999999987,
-                "SYMBOL": "ITX",
-                "TRADES": 414,
-                "WINRATE": 0.48792270531400966,
-                "WINS": 202,
-                "WINS_TO_LOSES": 1.074468085106383
-            },
-            {
-                "AVG_LOSS": -4.6690000000000005,
-                "AVG_WIN": 1.4344549763033165,
-                "CLOSE_REASONS": {
-                    "FIA": [
-                        178,
-                        36.889999999999986
-                    ],
-                    "SL": [
-                        79,
-                        5.83000000000005
-                    ],
                     "TP": [
-                        1,
-                        5.0
+                        167,
+                        714.9099999999997
                     ]
                 },
-                "DAYS_MAX": 148,
-                "DAYS_MIN": 2,
-                "LOSES": 50,
-                "MAX_LOSES_IN_A_ROW": 7,
-                "MAX_LOSS_PER_TRADE": -10.58,
-                "MAX_PROFIT_PER_TRADE": 16.41,
-                "MAX_WINS_IN_A_ROW": 45,
+                "DAYS_MAX": 167,
+                "DAYS_MIN": 8,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 9.21,
+                "MAX_WINS_IN_A_ROW": 0,
                 "OPEN_REASONS": {
-                    "B_UP": [
-                        33,
-                        -23.42
+                    "BREAKUP_BUY": [
+                        21,
+                        86.19
                     ],
-                    "FRAC": [
-                        41,
-                        3.2800000000000136
+                    "C2_BUY": [
+                        44,
+                        197.46000000000004
                     ],
-                    "HAM": [
-                        13,
-                        -0.32999999999999996
+                    "FRAC_BUY": [
+                        20,
+                        81.63000000000001
                     ],
-                    "TAIL": [
-                        170,
-                        72.44999999999999
+                    "HAMMER_BUY": [
+                        3,
+                        12.31
+                    ],
+                    "TAIL_BUY": [
+                        75,
+                        323.9
                     ]
                 },
-                "PROFIT": 69.21999999999977,
-                "SYMBOL": "JNJ",
-                "TRADES": 425,
-                "WINRATE": 0.4964705882352941,
-                "WINS": 211,
-                "WINS_TO_LOSES": 4.22
+                "PROFIT": 718.1999999999998,
+                "SYMBOL": "INTC",
+                "TRADES": 178,
+                "WINRATE": 0.9438202247191011,
+                "WINS": 168,
+                "WINS_TO_LOSES": null
+            },
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 36.685631067961154,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        205,
+                        7521.589999999998
+                    ]
+                },
+                "DAYS_MAX": 94,
+                "DAYS_MIN": 4,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 55.18,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        48,
+                        1600.82
+                    ],
+                    "C2_BUY": [
+                        49,
+                        1846.88
+                    ],
+                    "FRAC_BUY": [
+                        27,
+                        995.0800000000002
+                    ],
+                    "HAMMER_BUY": [
+                        1,
+                        45.45
+                    ],
+                    "TAIL_BUY": [
+                        76,
+                        2902.0599999999986
+                    ]
+                },
+                "PROFIT": 7557.239999999997,
+                "SYMBOL": "BA",
+                "TRADES": 225,
+                "WINRATE": 0.9155555555555556,
+                "WINS": 206,
+                "WINS_TO_LOSES": null
+            },
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 19.257539267015716,
+                "CLOSE_REASONS": {
+                    "TP": [
+                        190,
+                        3665.720000000001
+                    ]
+                },
+                "DAYS_MAX": 99,
+                "DAYS_MIN": 7,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 29.76,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        24,
+                        465.06000000000006
+                    ],
+                    "C2_BUY": [
+                        56,
+                        1082.13
+                    ],
+                    "FRAC_BUY": [
+                        30,
+                        599.4000000000001
+                    ],
+                    "HAMMER_BUY": [
+                        3,
+                        72.94
+                    ],
+                    "TAIL_BUY": [
+                        73,
+                        1400.81
+                    ]
+                },
+                "PROFIT": 3678.1900000000014,
+                "SYMBOL": "CAT",
+                "TRADES": 223,
+                "WINRATE": 0.8565022421524664,
+                "WINS": 191,
+                "WINS_TO_LOSES": null
             }
         ]
     }
