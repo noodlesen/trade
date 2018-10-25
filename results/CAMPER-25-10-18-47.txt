@@ -1,0 +1,70 @@
+{
+    "input": {
+        "FTP": 0.2928,
+        "cci_f_per": 10,
+        "dh_fast": 3,
+        "dh_slow": 38,
+        "hf_max_per": 100,
+        "hf_max_th": 0.64,
+        "init_sl_k": 0.865,
+        "max_pos": 100,
+        "open_BREAK": false,
+        "open_C2": false,
+        "open_DOUBLE_HAMMER": true,
+        "open_FRACTAL": false,
+        "open_HAMMER": false,
+        "open_TAIL": false,
+        "use_CCI_FILTER": true,
+        "use_HIGH_FILTER": true
+    },
+    "output": {
+        "ALL": {
+            "DAYS_MAX": 1,
+            "INST_USED": 1.0,
+            "LOSES": 0,
+            "MAX_LOSES_IN_A_ROW": 0,
+            "MAX_LOSS_PER_TRADE": 0,
+            "MAX_PROFIT_PER_TRADE": 1.0,
+            "MAX_WINS_IN_A_ROW": 0,
+            "PROFIT": 1.0,
+            "ROI": 0.9192021325489473,
+            "TRADES": 1,
+            "WINRATE": 1.0,
+            "WINS": 1,
+            "WINS_TO_LOSES": null
+        },
+        "PASSES": [
+            {
+                "AVG_LOSS": 0,
+                "AVG_WIN": 1.0,
+                "CLOSE_REASONS": {
+                    "SHOT": [
+                        0,
+                        0
+                    ]
+                },
+                "DAYS_MAX": 1,
+                "DAYS_MIN": 1,
+                "LOSES": 0,
+                "MAX_LOSES_IN_A_ROW": 0,
+                "MAX_LOSS_PER_TRADE": 0,
+                "MAX_PROFIT_PER_TRADE": 1.0,
+                "MAX_WINS_IN_A_ROW": 0,
+                "OPEN_REASONS": {
+                    "DOUBLE_HAMMER": [
+                        0,
+                        0
+                    ]
+                },
+                "PROFIT": 1.0,
+                "ROI": 0.009192021325489474,
+                "SYMBOL": "ADBE",
+                "TOTAL_INV": 108.79,
+                "TRADES": 1,
+                "WINRATE": 1.0,
+                "WINS": 1,
+                "WINS_TO_LOSES": null
+            }
+        ]
+    }
+}

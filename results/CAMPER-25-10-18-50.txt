@@ -1,0 +1,78 @@
+{
+    "input": {
+        "FTP": 0.2248,
+        "cci_f_per": 13,
+        "dh_fast": 4,
+        "dh_slow": 10,
+        "hf_max_per": 108,
+        "hf_max_th": 0.53,
+        "init_sl_k": 0.612,
+        "max_pos": 100,
+        "open_BREAK": true,
+        "open_C2": false,
+        "open_DOUBLE_HAMMER": false,
+        "open_FRACTAL": true,
+        "open_HAMMER": false,
+        "open_TAIL": true,
+        "use_CCI_FILTER": false,
+        "use_HIGH_FILTER": false
+    },
+    "output": {
+        "ALL": {
+            "DAYS_MAX": 1,
+            "INST_USED": 1.0,
+            "LOSES": 196,
+            "MAX_LOSES_IN_A_ROW": 6,
+            "MAX_LOSS_PER_TRADE": -16.25,
+            "MAX_PROFIT_PER_TRADE": 22.66,
+            "MAX_WINS_IN_A_ROW": 8,
+            "PROFIT": 125.32,
+            "ROI": 0.1628471905481059,
+            "TRADES": 437,
+            "WINRATE": 0.551487414187643,
+            "WINS": 241,
+            "WINS_TO_LOSES": 1.2295918367346939
+        },
+        "PASSES": [
+            {
+                "AVG_LOSS": -1.9041326530612244,
+                "AVG_WIN": 2.068589211618257,
+                "CLOSE_REASONS": {
+                    "SHOT": [
+                        436,
+                        126.22000000000003
+                    ]
+                },
+                "DAYS_MAX": 1,
+                "DAYS_MIN": 1,
+                "LOSES": 196,
+                "MAX_LOSES_IN_A_ROW": 6,
+                "MAX_LOSS_PER_TRADE": -16.25,
+                "MAX_PROFIT_PER_TRADE": 22.66,
+                "MAX_WINS_IN_A_ROW": 8,
+                "OPEN_REASONS": {
+                    "BREAKUP_BUY": [
+                        97,
+                        5.529999999999998
+                    ],
+                    "FRAC_BUY": [
+                        65,
+                        27.839999999999996
+                    ],
+                    "TAIL_BUY": [
+                        272,
+                        93.76000000000002
+                    ]
+                },
+                "PROFIT": 125.32,
+                "ROI": 0.0016284719054810589,
+                "SYMBOL": "ADBE",
+                "TOTAL_INV": 76955.57999999996,
+                "TRADES": 437,
+                "WINRATE": 0.551487414187643,
+                "WINS": 241,
+                "WINS_TO_LOSES": 1.2295918367346939
+            }
+        ]
+    }
+}
