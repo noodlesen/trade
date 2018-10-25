@@ -114,3 +114,18 @@ def ask_av_history(stocks):
                 print('.')
             print()
 
+
+def ask_av_indi(s,i):
+    url="https://www.alphavantage.co/query?function=%s&symbol=%s&interval=daily&time_period=10&apikey=" % (i,s)
+    response = requests.request('GET',url+AV_API_KEY)
+    print(response.status_code)
+    if response.status_code == requests.codes.ok:
+        print ('OK')
+        with open('INDI/'+s+i+'.json', 'w') as f:
+            f.write(response.text)
+
+
+
+
+
+
