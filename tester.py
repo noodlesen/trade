@@ -27,6 +27,7 @@ def test(c, params, **kwargs):
 
         c.next()
 
+    inst_used = []
     closed_trades = []
     for t in trades:
         # if t.is_open and not t.is_closed:

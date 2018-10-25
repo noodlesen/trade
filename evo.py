@@ -30,10 +30,13 @@ def mutate(p, nm):
 
 def test_all(assets, params, **kwargs):
     results = []
+    inst_used = 0
     for an, a in assets.items():
             test_res = test(a, params, **kwargs)
             if test_res:
                 results.append(test_res)
+                if test_res['TRADES']:
+                    inst_used +=1
 
     if results:
         wins = sum([r['WINS'] for r in results])
@@ -57,6 +60,7 @@ def test_all(assets, params, **kwargs):
             'MAX_WINS_IN_A_ROW': max([r['MAX_WINS_IN_A_ROW'] for r in results]),
             'MAX_LOSES_IN_A_ROW': max([r['MAX_LOSES_IN_A_ROW'] for r in results]),
             'DAYS_MAX': max([r['DAYS_MAX'] for r in results]),
+            'INST_USED': inst_used/len(assets)
         }
         return {
             'ALL': output,
@@ -171,6 +175,9 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
 
                 elif strategy == 'MAX_ROI':
                     cond = off['output']['ALL']['ROI'] >= survivor['output']['ALL']['ROI']
+
+                elif strategy == 'MAX_ROI_MAX_DIV':
+                    cond = off['output']['ALL']['ROI']*off['output']['ALL']['INST_USED'] >= survivor['output']['ALL']['ROI']*survivor['output']['ALL']['INST_USED']
 
                 elif strategy == 'MAX_ROI_MIN_LOSS':
                     cond = off['output']['ALL']['ROI']/(off['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1) >= survivor['output']['ALL']['ROI']/(survivor['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1)
