@@ -15,17 +15,17 @@ NEW = ['FE', 'SCI', 'GTN', 'MSGN', 'USM', 'DISCA', 'OGE', 'AROW', 'EXPO', 'TLP',
 symbols = []
 symbols.extend(TRENDY)
 symbols.extend(CHANNEL)
-# symbols.extend(OTHER1)
-# symbols.extend(OTHER2)
+symbols.extend(OTHER1)
+symbols.extend(OTHER2)
 symbols.extend(NEW)
 
-GENERATIONS_COUNT = 10
+GENERATIONS_COUNT = 50
 MUTATIONS = 70
 OUTSIDERS = 5
 DEPTH = 10
-STRATEGY = 'MAX_ROI'
+STRATEGY = 'MAX_PROFIT'
 #STRATEGY = 'MAX_ROI_MIN_LOSS'
 #STRATEGY = 'MIN_TRADES_MAX_PROFIT'
 #STRATEGY = 'PROFIT_AND_WINRATE'
 
-generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, initial_params=initial_params, cut=500, report=True)
+generate(symbols, 1440, GENERATIONS_COUNT, MUTATIONS, OUTSIDERS, DEPTH, STRATEGY, initial_params=initial_params, cut=750, report=True)
