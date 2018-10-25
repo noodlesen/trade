@@ -4,7 +4,7 @@ from evo import generate
 from reader import load_settings_from_report
 
 
-initial_params = load_settings_from_report('profit.txt')
+initial_params = load_settings_from_report('results/R33SL.txt')
 
 CHANNEL = ['DIS', 'WFC', 'VZ', 'T', 'KO']
 TRENDY = ['BA', 'ADBE', 'CAT', 'INTC', 'AAPL']
@@ -19,7 +19,7 @@ symbols.extend(OTHER1)
 symbols.extend(OTHER2)
 symbols.extend(NEW)
 
-GENERATIONS_COUNT = 10
+GENERATIONS_COUNT = 1
 MUTATIONS = 70
 OUTSIDERS = 5
 DEPTH = 10

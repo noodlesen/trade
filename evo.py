@@ -6,6 +6,7 @@ import json
 from tester import test
 from assets import Asset
 from config import TS
+from datetime import datetime
 
 
 def mutate(p, nm):
@@ -195,7 +196,9 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         print()
 
     if kwargs.get('report', False):
-        with open('evo.txt', 'w') as f:
+        now = datetime.now()
+        stamp = "evo-%d-%d-%d-%d.txt" % (now.day, now.month, now.hour, now.minute)
+        with open('results/'+stamp, 'w') as f:
             f.write(json.dumps(survivor, sort_keys=True, indent=4))
 
         kwargs['draw'] = True

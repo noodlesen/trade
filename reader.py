@@ -1,8 +1,9 @@
 # DATA READING LIBRARY
 
 import json
-#from time import sleep
-
+from keys import AV_API_KEY
+import requests
+from time import sleep
 
 def load_settings_from_report(path):
     with open(path, 'r') as f:
@@ -97,15 +98,19 @@ def read_mt_csv(path, symbol, timeframe=1440, **kwargs):
         return data[-cut:]
 
 
-# def watcher(fname):
-#     d = read_multi_csv(fname)
+def ask_av_history(stocks):
+    SLEEP = 10
+    for symbol in stocks:
+        print ('requesting '+symbol)
+        url='https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=%s&outputsize=full&apikey=' % symbol
+        response = requests.request('GET',url+AV_API_KEY)
+        print(response.status_code)
+        if response.status_code == requests.codes.ok:
+            print ('OK')
+            with open('AVHD/'+symbol+'.json', 'w') as f:
+                f.write(response.text)
+            for n in range(SLEEP):
+                sleep(1)
+                print('.')
+            print()
 
-#     while True:
-#         sleep(5)
-#         n = read_multi_csv(fname)
-#         for k in d.keys():
-#             if d[k][-1] != n[k][-1]:
-#                 print (k, "HAS CHANGED!")
-#             else:
-#                 print('...')
-#         d = n
