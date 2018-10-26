@@ -10,7 +10,7 @@ def ts_name():
 def manage(cc, c, trades, params):
     for trade in trades:
         trade.update_trade(cc)
-        if trade.is_open:
+        if trade.is_open add trade.days==1:
             trade.close_trade(cc, cc.close_price, 'SHOT')
 
 

@@ -60,7 +60,8 @@ def test_all(assets, params, **kwargs):
             'MAX_WINS_IN_A_ROW': max([r['MAX_WINS_IN_A_ROW'] for r in results]),
             'MAX_LOSES_IN_A_ROW': max([r['MAX_LOSES_IN_A_ROW'] for r in results]),
             'DAYS_MAX': max([r['DAYS_MAX'] for r in results]),
-            'INST_USED': inst_used/len(assets)
+            'INST_USED': inst_used/len(assets),
+            'TOTAL_INV': total_inv
         }
         return {
             'ALL': output,
@@ -124,7 +125,9 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
             "TRADES": 1,
             "WINRATE": 0,
             "WINS": 0,
-            "WINS_TO_LOSES": 0
+            "WINS_TO_LOSES": 0,
+            'INST_USED': 0,
+            'TOTAL_INV': 0
         }
 
     }
@@ -161,39 +164,54 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         for off in offs:
 
             if off['output']['ALL']['TRADES'] > 0:
-                off_wr = (off['output']['ALL']['WINS'])/off['output']['ALL']['TRADES']
-                survivor_wr = (survivor['output']['ALL']['WINS'])/survivor['output']['ALL']['TRADES']
+                o_wr = (off['output']['ALL']['WINS'])/off['output']['ALL']['TRADES']
+                s_wr = (survivor['output']['ALL']['WINS'])/survivor['output']['ALL']['TRADES']
+                o_roi = off['output']['ALL']['ROI']
+                s_roi = survivor['output']['ALL']['ROI']
+                o_p = off['output']['ALL']['PROFIT']
+                o_ti = off['output']['ALL']['TOTAL_INV']
+                o_iu = off['output']['ALL']['INST_USED']
+                s_p = survivor['output']['ALL']['PROFIT']
+                s_ti = survivor['output']['ALL']['TOTAL_INV']
+                s_iu = survivor['output']['ALL']['INST_USED']
 
                 if strategy == 'PROFIT_AND_WINRATE':
-                    cond = off['output']['ALL']['PROFIT']*off_wr > survivor['output']['ALL']['PROFIT']*survivor_wr and off_wr > 0.5
+                    cond = off['output']['ALL']['PROFIT']*o_wr > survivor['output']['ALL']['PROFIT']*s_wr and o_wr > 0.5
 
                 elif strategy == 'MAX_PROFIT':
-                    cond = off['output']['ALL']['PROFIT'] > survivor['output']['ALL']['PROFIT'] and off_wr > 0.5
+                    cond = off['output']['ALL']['PROFIT'] > survivor['output']['ALL']['PROFIT'] and o_wr > 0.5
 
-                elif strategy == 'MIN_TRADES_MAX_PROFIT':
-                    cond = off['output']['ALL']['PROFIT']/off['output']['ALL']['TRADES'] > survivor['output']['ALL']['PROFIT']/survivor['output']['ALL']['TRADES']
+                elif strategy == 'WEIGHTED':
+
+                    cond = o_p > s_p and o_ti<50000 and o_iu>0.3
+
+                # elif strategy == 'MIN_TRADES_MAX_PROFIT':
+                #     cond = off['output']['ALL']['PROFIT']/off['output']['ALL']['TRADES'] > survivor['output']['ALL']['PROFIT']/survivor['output']['ALL']['TRADES']
 
                 elif strategy == 'MAX_ROI':
-                    cond = off['output']['ALL']['ROI'] >= survivor['output']['ALL']['ROI']
+                    cond = o_roi >= s_roi
 
                 elif strategy == 'MAX_ROI_MAX_DIV':
-                    cond = off['output']['ALL']['ROI']*off['output']['ALL']['INST_USED'] >= survivor['output']['ALL']['ROI']*survivor['output']['ALL']['INST_USED']
+                    cond = o_roi*off['output']['ALL']['INST_USED'] >= s_roi*survivor['output']['ALL']['INST_USED']
 
-                elif strategy == 'MAX_ROI_MIN_LOSS':
-                    cond = off['output']['ALL']['ROI']/(off['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1) >= survivor['output']['ALL']['ROI']/(survivor['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1)
+                elif strategy == 'MAX_ROI_WR_MIN_LOSS':
+                    cond = o_roi/(off['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1) > s_roi/(survivor['output']['ALL']['MAX_LOSS_PER_TRADE']*-1+1) and o_wr>=s_wr
 
-                elif strategy == 'MAX_ROI_FAST_RETURN':
-                    d = 120
-                    cond = off['output']['ALL']['ROI']/(abs(d-off['output']['ALL']['DAYS_MAX'])+1) >= survivor['output']['ALL']['ROI']/(abs(d-survivor['output']['ALL']['DAYS_MAX'])+1)
+                # elif strategy == 'MAX_ROI_FAST_RETURN':
+                #     d = 120
+                #     cond = o_roi/(abs(d-off['output']['ALL']['DAYS_MAX'])+1) >= s_roi/(abs(d-survivor['output']['ALL']['DAYS_MAX'])+1)
+                elif strategy == 'MAX_ROI_TIME_LIMIT':
+                    d = 250
+                    cond = o_roi > s_roi and off['output']['ALL']['DAYS_MAX']<=d
 
-                elif strategy == 'EVERYTHING':
-                    off_max_loses = off['output']['ALL']['MAX_LOSES_IN_A_ROW']
-                    off_max_loses = 0.01 if off_max_loses == 0 else off_max_loses
-                    sur_max_loses = survivor['output']['ALL']['MAX_LOSES_IN_A_ROW']
-                    sur_max_loses = 0.01 if sur_max_loses == 0 else sur_max_loses
-                    off_max_wins = off['output']['ALL']['MAX_WINS_IN_A_ROW']
-                    sur_max_wins = survivor['output']['ALL']['MAX_WINS_IN_A_ROW']
-                    cond = off['output']['ALL']['PROFIT']/off_max_loses*off_wr*off_max_wins > survivor['output']['ALL']['PROFIT']/sur_max_loses*survivor_wr*sur_max_wins
+                # elif strategy == 'EVERYTHING':
+                #     off_max_loses = off['output']['ALL']['MAX_LOSES_IN_A_ROW']
+                #     off_max_loses = 0.01 if off_max_loses == 0 else off_max_loses
+                #     sur_max_loses = survivor['output']['ALL']['MAX_LOSES_IN_A_ROW']
+                #     sur_max_loses = 0.01 if sur_max_loses == 0 else sur_max_loses
+                #     off_max_wins = off['output']['ALL']['MAX_WINS_IN_A_ROW']
+                #     sur_max_wins = survivor['output']['ALL']['MAX_WINS_IN_A_ROW']
+                #     cond = off['output']['ALL']['PROFIT']/off_max_loses*o_wr*off_max_wins > survivor['output']['ALL']['PROFIT']/sur_max_loses*survivor_wr*sur_max_wins
 
                 if cond:
                     survivor = deepcopy(off)
@@ -206,9 +224,10 @@ def generate(symbols, timeframe, generations_count, mutations, outsiders, depth,
         print()
 
     if kwargs.get('report', False):
-        
-        with open('results/'+stamp, 'w') as f:
-            f.write(json.dumps(survivor, sort_keys=True, indent=4))
+        fnames = [stamp, 'recent.txt']
+        for fn in fnames:
+            with open('results/'+fn, 'w') as f:
+                f.write(json.dumps(survivor, sort_keys=True, indent=4))
 
         kwargs['draw'] = True
         kwargs['verbose'] = True
